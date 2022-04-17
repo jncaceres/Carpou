@@ -8,6 +8,7 @@ AllCops:
     - '**/rails'
     - '**/vendor/**/*'
     - '**/spec_helper.rb'
+    - '**/config/**/*'
     - 'node_modules/**/*'
     - 'bin/*'
 

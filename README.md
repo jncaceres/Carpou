@@ -15,3 +15,24 @@ Tambien se puede entrar directamente a la bash del contenedor para poder utiliza
 
 ## Bajar los contenedores
 Al terminar de trabajar, se puede correr el comando ```docker-compose down``` para bajar los contenedores que se estaban utilizando.
+
+# Variables de entorno
+Para poder correr la aplicación y levantar de forma correcta los contenedores, es necesario crear 2 archivos, uno llamado .env.development y otro llamado .env.test con el siguiente contenido. Notar que la DB, el usuario y la contraseña puede ser cualquiera, solo es importante que se reemplacen los valores de forma correcta en la url.
+
+.env.development:
+
+```
+POSTGRES_DB=database
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
+DATABASE_URL=postgres://user:password@db:5432/database
+```
+
+.env.test:
+
+```
+POSTGRES_DB=database
+POSTGRES_USER=user
+POSTGRES_PASSWORD=password
+DATABASE_URL=postgres://user:password@db-test:5432/database
+```

@@ -9,5 +9,9 @@ RUN apt-get update -qq \
 ADD . /app
 WORKDIR /app
 RUN bundle install
+RUN rails webpacker:install
+RUN rails webpacker:install:react
+RUN rails generate react:install
+RUN yarn install
 EXPOSE 3000
 CMD ["bash"]

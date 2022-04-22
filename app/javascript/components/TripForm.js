@@ -25,9 +25,9 @@ const TripForm = () => {
           <input className="input" type="date" placeholder="Hoy" />
         </div>
       </div>
-      <div class="field">
-      <div class="control">
-        <button class="button is-primary is-fullwidth">Buscar viajes</button>
+      <div className="field">
+      <div className="control">
+        <button className="button is-primary is-fullwidth">Buscar viajes</button>
       </div>
       </div>
     </div>

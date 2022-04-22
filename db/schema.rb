@@ -10,26 +10,58 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_422_170_651) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+ActiveRecord::Schema.define(version: 2022_04_22_173947) do
 
-  create_table 'users', force: :cascade do |t|
-    t.string('name', null: false)
-    t.string('last_name', null: false)
-    t.string('rut', null: false)
-    t.string('phone', null: false)
-    t.string('gender')
-    t.datetime('birthdate', null: false)
-    t.boolean('admin')
-    t.string('email', default: '', null: false)
-    t.string('encrypted_password', default: '', null: false)
-    t.string('reset_password_token')
-    t.datetime('reset_password_sent_at')
-    t.datetime('remember_created_at')
-    t.datetime('created_at', precision: 6, null: false)
-    t.datetime('updated_at', precision: 6, null: false)
-    t.index(['email'], name: 'index_users_on_email', unique: true)
-    t.index(['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true)
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "passenger_requests", force: :cascade do |t|
+    t.text "comments"
+    t.string "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
+
+  create_table "places", force: :cascade do |t|
+    t.string "name"
+    t.float "lat"
+    t.float "long"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string "from_address"
+    t.string "to_address"
+    t.integer "available_seats"
+    t.datetime "leaving_at"
+    t.integer "price"
+    t.text "comments"
+    t.string "car_license_plate"
+    t.string "car_brand"
+    t.string "car_model"
+    t.string "car_color"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "last_name", null: false
+    t.string "rut", null: false
+    t.string "phone", null: false
+    t.string "gender"
+    t.datetime "birthdate", null: false
+    t.boolean "admin"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
 end

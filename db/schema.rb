@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_22_182717) do
+ActiveRecord::Schema.define(version: 2022_04_22_184435) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(version: 2022_04_22_182717) do
     t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.bigint "trip_id"
+    t.index ["trip_id"], name: "index_passenger_requests_on_trip_id"
+    t.index ["user_id"], name: "index_passenger_requests_on_user_id"
   end
 
   create_table "places", force: :cascade do |t|
@@ -43,7 +47,7 @@ ActiveRecord::Schema.define(version: 2022_04_22_182717) do
     t.string "car_color"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
@@ -66,4 +70,7 @@ ActiveRecord::Schema.define(version: 2022_04_22_182717) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "passenger_requests", "trips"
+  add_foreign_key "passenger_requests", "users"
+  add_foreign_key "trips", "users"
 end

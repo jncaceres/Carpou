@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   has_many :trips
+  has_many :passenger_requests
+  has_many :trips, through: :passenger_requests
 end

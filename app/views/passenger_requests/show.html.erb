@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @passenger_request.comments %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @passenger_request.status %>
+</p>
+
+<%= link_to 'Edit', edit_passenger_request_path(@passenger_request) %> |
+<%= link_to 'Back', passenger_requests_path %>

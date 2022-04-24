@@ -1,0 +1,67 @@
+<%= form_with(model: trip) do |form| %>
+  <% if trip.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(trip.errors.count, "error") %> prohibited this trip from being saved:</h2>
+
+      <ul>
+        <% trip.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :from_address %>
+    <%= form.text_field :from_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :to_address %>
+    <%= form.text_field :to_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :available_seats %>
+    <%= form.text_field :available_seats %>
+  </div>
+
+  <div class="field">
+    <%= form.label :leaving_at %>
+    <%= form.datetime_select :leaving_at %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comments %>
+    <%= form.text_area :comments %>
+  </div>
+
+  <div class="field">
+    <%= form.label :car_license_plate %>
+    <%= form.text_field :car_license_plate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :car_brand %>
+    <%= form.text_field :car_brand %>
+  </div>
+
+  <div class="field">
+    <%= form.label :car_model %>
+    <%= form.text_field :car_model %>
+  </div>
+
+  <div class="field">
+    <%= form.label :car_color %>
+    <%= form.text_field :car_color %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

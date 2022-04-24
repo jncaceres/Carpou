@@ -3,6 +3,7 @@ AllCops:
   TargetRailsVersion: 6.0
   Exclude:
     - '**/db/migrate/*'
+    - '**/db/schema.rb'
     - '**/Gemfile.lock'
     - '**/Rakefile'
     - '**/rails'

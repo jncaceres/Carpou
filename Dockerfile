@@ -12,6 +12,7 @@ RUN bundle install
 RUN rails webpacker:install
 RUN rails webpacker:install:react
 RUN rails generate react:install
+RUN rails generate devise:install
 RUN yarn install
 EXPOSE 3000
 CMD ["bash"]

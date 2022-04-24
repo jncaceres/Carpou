@@ -3,14 +3,20 @@
 # Preview all emails at http://localhost:3000/rails/mailers/admin_mailer
 class AdminMailerPreview < ActionMailer::Preview
   def welcome_email
-    passenger = OpenStruct.new({ name: 'Fake User', email: 'fake@fake.com' })
+    passenger = User.new
+    passenger.name = 'Fake User'
+    passenger.email = 'fake@fake.com'
     AdminMailer.with(user: passenger).welcome_email
   end
 
   def request_accepted
-    passenger = OpenStruct.new({ name: 'Fake Passenger', email: 'fake@fake.com' })
+    passenger = User.new
+    passenger.name = 'Fake User'
+    passenger.email = 'fake@fake.com'
     trip = OpenStruct.new({ leaving_at: 'REVISAR FORMATO', from_address: 'La Esquina', price: 10_000 })
-    driver = OpenStruct.new({ name: 'Fake Driver', email: 'fake@fake.com' })
+    driver = User.new
+    driver.name = 'Fake Drive'
+    driver.email = 'fake@fake.com'
     origin_place = OpenStruct.new({ name: 'Mi Casa' })
     destination_place = OpenStruct.new({ name: 'Tu Casa' })
     AdminMailer.with({
@@ -24,9 +30,13 @@ class AdminMailerPreview < ActionMailer::Preview
   end
 
   def request_rejected
-    passenger = OpenStruct.new({ name: 'Fake Passenger', email: 'fake@fake.com' })
+    passenger = User.new
+    passenger.name = 'Fake User'
+    passenger.email = 'fake@fake.com'
     trip = OpenStruct.new({ leaving_at: 'REVISAR FORMATO', from_address: 'La Esquina', price: 10_000 })
-    driver = OpenStruct.new({ name: 'Fake Driver', email: 'fake@fake.com' })
+    driver = User.new
+    driver.name = 'Fake Drive'
+    driver.email = 'fake@fake.com'
     origin_place = OpenStruct.new({ name: 'Mi Casa' })
     destination_place = OpenStruct.new({ name: 'Tu Casa' })
     AdminMailer.with({

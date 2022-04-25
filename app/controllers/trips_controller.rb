@@ -77,4 +77,8 @@ class TripsController < ApplicationController
                                  :car_model, :car_color
     )
   end
+
+  def list_query_params
+    params.permit(:from, :to, :date)
+  end
 end

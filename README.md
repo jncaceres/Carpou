@@ -32,7 +32,6 @@ POSTGRES_DB=database
 POSTGRES_USER=user
 POSTGRES_PASSWORD=password
 DATABASE_URL=postgres://user:password@db:5432/database
-URL=http://localhost:3000
 ```
 
 .env.test:

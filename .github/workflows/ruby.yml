@@ -94,4 +94,4 @@ jobs:
           bundle exec rails db:create
           bundle exec rails db:schema:load
       - name: Run tests
-        run: bundle exec rails test
+        run: bundle exec rspec

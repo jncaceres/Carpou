@@ -5,14 +5,7 @@ class TripsController < ApplicationController
 
   # GET /trips or /trips.json
   def index
-    from_place = list_query_params[:from]
-    to_place = list_query_params[:to]
-    date = list_query_params[:date]
-    if (from_place && to_place && date)
-      @trips = Trip.where(from_id: from_place, to_id: to_place, leaving_at: date)
-    else
-      @trips = Trip.all
-    end
+    @trips = Trip.all
   end
 
   # GET /trips/1 or /trips/1.json
@@ -76,9 +69,5 @@ class TripsController < ApplicationController
     params.require(:trip).permit(:from_address, :to_address, :available_seats, :leaving_at, :price, :comments, :car_license_plate, :car_brand,
                                  :car_model, :car_color
     )
-  end
-
-  def list_query_params
-    params.permit(:from, :to, :date)
   end
 end

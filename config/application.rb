@@ -29,5 +29,13 @@ module Carpou
       end if File.exists?(env_file)
     end
 
+    config.generators do |g|
+      g.test_framework(
+        :rspec,
+        fixtures: false,
+        routing_specs: false,
+        view_specs: false,
+      )
+    end
   end
 end

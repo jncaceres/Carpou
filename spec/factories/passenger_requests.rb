@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :trip do
+  factory :passenger_request do
     
   end
 end

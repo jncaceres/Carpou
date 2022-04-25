@@ -8,11 +8,11 @@ class TripsController < ApplicationController
     from_place = list_query_params[:from]
     to_place = list_query_params[:to]
     date = list_query_params[:date]
-    if (from_place && to_place && date)
-      @trips = Trip.where(from_id: from_place, to_id: to_place, leaving_at: date)
-    else
-      @trips = Trip.all
-    end
+    @trips = if from_place && to_place && date
+               Trip.where(from_id: from_place, to_id: to_place, leaving_at: date)
+             else
+               Trip.all
+             end
   end
 
   # GET /trips/1 or /trips/1.json

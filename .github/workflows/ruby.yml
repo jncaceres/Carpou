@@ -95,3 +95,5 @@ jobs:
           bundle exec rails db:schema:load
       - name: Run tests
         run: bundle exec rails test
+      - name: Run js tests
+        run: yarn run test

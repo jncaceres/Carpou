@@ -20,7 +20,7 @@ module Carpou
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-
+    config.i18n.default_locale = :es
     # Set enviroments varibles in config/local_env.yml
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')

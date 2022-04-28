@@ -1,9 +1,73 @@
 # frozen_string_literal: true
 
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'csv'
+require 'date'
+
+puts 'comunas'
+CSV.foreach(Rails.root.join('lib/comunas.csv'), headers: true) do |row|
+  Place.create({ name: row[1], lat: row[2], long: row[3] })
+end
+
+puts 'users'
+CSV.foreach(Rails.root.join('lib/users.csv'), headers: true, col_sep: ';') do |row|
+  birthday_year = Integer(row[4].split('-')[0])
+  birthday_month = Integer(row[4].split('-')[1])
+  birthday_day = Integer(row[4].split('-')[2])
+  User.create({
+    name: row[0],
+    last_name: row[2],
+    rut: row[1],
+    phone: row[7].gsub('-', ''),
+    gender: row[13],
+    birthdate: DateTime.new(birthday_year,
+                            birthday_month,
+                            birthday_day
+                           ),
+    admin: row[11],
+    email: row[9],
+    password: row[10]
+  }
+             )
+end
+
+puts 'trips'
+CSV.foreach(Rails.root.join('lib/trips.csv'), headers: true, col_sep: ';') do |row|
+  leaving_at_year = Integer(row[3].split('-')[0])
+  leaving_at_month = Integer(row[3].split('-')[1])
+  leaving_at_day = Integer(row[3].split('-')[2])
+  leaving_at_hour = Integer(row[3].split('-')[3])
+  leaving_at_minute = Integer(row[3].split('-')[4])
+  Trip.create({
+    from_address: row[0],
+    to_address: row[1],
+    available_seats: row[2],
+    leaving_at: DateTime.new(leaving_at_year,
+                             leaving_at_month,
+                             leaving_at_day,
+                             leaving_at_hour,
+                             leaving_at_minute,
+                             0
+                            ),
+    price: row[4],
+    comments: row[5],
+    car_license_plate: row[6],
+    car_brand: row[7],
+    car_model: row[8],
+    car_color: row[9],
+    user_id: row[10],
+    from_id: row[11],
+    to_id: row[12]
+  }
+             )
+end
+
+puts 'passenger_requests'
+CSV.foreach(Rails.root.join('lib/passenger_requests.csv'), headers: true, col_sep: ';') do |row|
+  PassengerRequest.create({
+    comments: row[0],
+    status: row[1],
+    user_id: row[2],
+    trip_id: row[3]
+  }
+                         )
+end

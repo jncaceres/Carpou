@@ -329,7 +329,6 @@ ol li {
 .es-wrapper {
     width: 100%;
     height: 100%;
-    background-image: ;
     background-repeat: repeat;
     background-position: center top;
 }
@@ -340,7 +339,6 @@ ol li {
 
 .es-header {
     background-color: #ffa73b;
-    background-image: ;
     background-repeat: repeat;
     background-position: center top;
 }
@@ -379,7 +377,6 @@ ol li {
 
 .es-footer {
     background-color: transparent;
-    background-image: ;
     background-repeat: repeat;
     background-position: center top;
 }

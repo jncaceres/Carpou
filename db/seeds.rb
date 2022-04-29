@@ -25,7 +25,8 @@ CSV.foreach(Rails.root.join('lib/users.csv'), headers: true, col_sep: ';') do |r
                            ),
     admin: row[11],
     email: row[9],
-    password: row[10]
+    password: row[10],
+    confirmed_at: DateTime.now
   }
              )
 end
@@ -49,14 +50,14 @@ CSV.foreach(Rails.root.join('lib/trips.csv'), headers: true, col_sep: ';') do |r
                              0
                             ),
     price: row[4],
-    comments: row[5],
-    car_license_plate: row[6],
-    car_brand: row[7],
-    car_model: row[8],
-    car_color: row[9],
-    user_id: row[10],
-    from_id: row[11],
-    to_id: row[12]
+    comments: 'comentario',
+    car_license_plate: row[5],
+    car_brand: row[6],
+    car_model: row[7],
+    car_color: row[8],
+    user_id: row[9],
+    from_id: row[10],
+    to_id: row[11]
   }
              )
 end

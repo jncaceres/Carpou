@@ -2,7 +2,7 @@
 <% if resource.errors.any? %>
   </div>
       <% resource.errors.full_messages.each do |message| %>
-        <%= react_component("devise/passwords/new_error", {message_error: message}) %>
+        <%= react_component("devise/auth/sign-upForm", {message_error: message}) %>
       <% end %>
   </div>
 <% end %>

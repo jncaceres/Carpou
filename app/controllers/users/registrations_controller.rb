@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  #before_action :configure_sign_up_params, only: [:create]
+  before_action :configure_sign_up_params, only: [:create]
   before_action :authenticate_user!
   # before_action :configure_account_update_params, only: [:update]
 
@@ -11,14 +11,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    @user = User.new(sign_up_params)
-    if @user.save
-      render json: {status: "SUCCESS", message: "Added a new user!", data: @user}, status: 200
-    else
-      render json: {status: "ERROR", message: "couldn't add a user", data: @user.errors}, status: 500
-    end  
-  end
+  #def create
+  # @user = User.new(sign_up_params)
+  #  if @user.save
+   #   render json: {status: "SUCCESS", message: "Added a new user!", data: @user}, status: 200
+    #else
+    #  render json: {status: "ERROR", message: "couldn't add a user", data: @user.errors}, status: 500
+    #end  
+  #end
 
   # GET /resource/edit
   # def edit
@@ -50,9 +50,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def configure_sign_up_params
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
   # end
-  def sign_up_params
-    params.permit(:name, :last_name, :rut, :email, :phone,
-                     :gender, :birthdate, :password, :password_confirmation)
+ # def sign_up_params
+ #   params.permit(:name, :last_name, :rut, :email, :phone,
+        #             :gender, :birthdate, :password, :password_confirmation)
+ # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:mail])
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up) do |user_params|
+      user_params.permit(:name, :last_name, :rut, :email, :phone,
+      :gender, :birthdate, :password, :password_confirmation)
+    end
   end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params

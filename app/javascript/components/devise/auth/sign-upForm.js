@@ -1,12 +1,14 @@
 import React from "react";
 import background from "../../../assets/background.jpg";
 
+
 const RegistrationForm = (props) => {
     return (
-        <form name="users" action = {props.registration_path} 
+        <form name="users" 
+        action = {props.registration_path} 
         method= "post" 
         acceptCharset="UTF-8" 
-        style={{border: "1px solid #f5efef", padding: 10,
+        style={{border: "1px solid #f5efef", padding: 5,
         borderRadius: 10, backgroundColor: "#ffff"}}>
           <div className="field">
             <div className="control">
@@ -18,6 +20,8 @@ const RegistrationForm = (props) => {
                 </input>
             </div>      
           </div>
+      
+
 
           <div className="field">
             <div className="control">

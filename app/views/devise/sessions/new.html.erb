@@ -1,4 +1,10 @@
 <%= react_component("devise/auth/sign-inForm", {user_session_path: user_session_path(resource)}) %>
-
+<% if resource.errors.any? %>
+  </div>
+      <% resource.errors.full_messages.each do |message| %>
+        <%= react_component("devise/auth/error", {error: message}) %>
+      <% end %>
+  </div>
+<% end %>
 
 

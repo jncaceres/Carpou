@@ -3,7 +3,11 @@ import background from "../../../assets/background.jpg";
 
 const RegistrationForm = (props) => {
     return (
-        <form action = {props.registration_path} method= "post" acceptCharset="UTF-8" style={{border: "1px solid #f5efef", padding: 10, borderRadius: 10, backgroundColor: "#ffff"}}>
+        <form name="users" action = {props.registration_path} 
+        method= "post" 
+        acceptCharset="UTF-8" 
+        style={{border: "1px solid #f5efef", padding: 10,
+        borderRadius: 10, backgroundColor: "#ffff"}}>
           <div className="field">
             <div className="control">
                 <input 
@@ -17,29 +21,29 @@ const RegistrationForm = (props) => {
 
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='name' placeholder='Nombre' required/>
+              <input className="input" type='text' name='user[name]' placeholder='Nombre' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='last_name' placeholder='Apellido' required/>
+              <input className="input" type='text' name='user[last_name]' placeholder='Apellido' required/>
             </div>
           </div> 
           <div className="field">
             <div className="control">
-              <input className="input" type='rut' name='rut' placeholder='RUT' required/>
+              <input className="input" type='rut' name='user[rut]' placeholder='RUT' required/>
             </div>  
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='phone' placeholder='Telefono' required/>
+              <input className="input" type='text' name='user[phone]' placeholder='Telefono' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
               <label>
                 Género
-                <select className="input" required>    
+                <select name= "user[gender]" className="input" required>    
                 <option value= "Femenino">Femenino</option>
                 <option value= "Masculino">Masculino</option>
                 </select>
@@ -51,24 +55,24 @@ const RegistrationForm = (props) => {
             <div className="control">
               <label>
                 Fecha de nacimiento
-                <input className="input" type='date' name='birthdate' placeholder='Fecha de cumpleaños' required/>
+                <input className="input" type='date' name='user[birthdate]' placeholder='Fecha de cumpleaños' required/>
               </label>
               
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='email' name='email' placeholder='Email' required/>
+              <input className="input" type='email' name='user[email]' placeholder='Email' required/>
             </div>  
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='password' name='password' placeholder='Contraseña' required/>
+              <input className="input" type='password' name='user[password]' placeholder='Contraseña' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='password' name='password_confirmation' placeholder='Confirmar contraseña' required/>
+              <input className="input" type='password' name='user[password_confirmation]' placeholder='Confirmar contraseña' required/>
             </div>
           </div>
           <div className="field">

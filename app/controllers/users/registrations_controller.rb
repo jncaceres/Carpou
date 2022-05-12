@@ -12,14 +12,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  #def create
+  # def create
   # @user = User.new(sign_up_params)
   #  if @user.save
   #    render json: {status: "SUCCESS", message: "Added a new user!", data: @user}, status: 200
   #  else
   #    render json: {status: "ERROR", message: "couldn't add a user", data: @user.errors}, status: 500
-  #  end  
- # end
+  #  end
+  # end
 
   # GET /resource/edit
   # def edit
@@ -47,10 +47,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # protected
 
-  #def sign_up_params
+  # def sign_up_params
   #  params.permit(:name, :last_name, :rut, :email, :phone,
-   #                  :gender, :birthdate, :password, :password_confirmation)
-  #end
+  #                  :gender, :birthdate, :password, :password_confirmation)
+  # end
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up, keys: [:email])
   end
@@ -58,9 +58,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
       user_params.permit(:email, :name, :last_name, :rut, :phone,
-      :gender, :birthdate, :password, :password_confirmation)
+                         :gender, :birthdate, :password, :password_confirmation
+      )
     end
-  
   end
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
@@ -77,4 +77,3 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
-

@@ -41,7 +41,7 @@ const TripForm = (props) => {
       </div>
       <div className="field">
         <div className="control">
-          <input className="input" type="date" placeholder="Hoy" value={date} onChange={handleDateChange} />
+          <input className="input" type="date" placeholder="Hoy" min={new Date().toLocaleDateString('en-CA')} value={date} onChange={handleDateChange} />
         </div>
       </div>
       <div className="field">

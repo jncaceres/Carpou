@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-const options = [
-  { value: 1, label: 'Chocolate' },
-  { value: 2, label: 'Strawberry' },
-  { value: 3, label: 'Vanilla' }
-]
-
-const TripForm = () => {
-  const [from, setFrom] = useState({value: 1, label: 'Chocolate'});
-  const [to, setTo] = useState({ value: 2, label: 'Strawberry' });
+const TripForm = (props) => {
+  const { places } = props;
+  const options = places.map((place) => ({
+    value: place.id,
+    label: place.name,
+  }))
+  const [from, setFrom] = useState(options[0]);
+  const [to, setTo] = useState(options[options.length - 1]);
   const [date, setDate] = useState(new Date().toLocaleDateString('en-CA'));
 
   const handleFromChange = (e) => {

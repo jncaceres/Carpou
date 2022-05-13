@@ -1,0 +1,101 @@
+from_address;to_address;available_seats;leaving_at;price;car_license_plate;car_brand;car_model;car_color;user_id;from_id;to_id
+9 Johnson Plaza;79 Heffernan Parkway;4;2022-8-5-10-9;3228;OP-4159;Chevrolet;G-Series 2500;Fuscia;17;60;242
+70805 Maywood Circle;9 Parkside Center;3;2022-9-2-18-24;8291;RVXH-22;GMC;Savana 3500;Purple;15;343;277
+1 Westport Court;2 Gerald Crossing;3;2022-7-6-9-56;8961;CA-3412;Chevrolet;G-Series G30;Indigo;18;7;50
+32 Melrose Hill;242 Ludington Junction;1;2022-9-7-13-34;8185;CB-8437;Toyota;TundraMax;Violet;5;300;312
+091 Golf View Drive;842 Vera Drive;3;2022-9-8-16-9;9096;AN-3113;Mercedes-Benz;190E;Maroon;10;213;229
+786 Transport Lane;35933 Anthes Place;1;2022-7-2-14-52;1148;BLRO-70;Volvo;240;Purple;2;44;344
+598 Roxbury Avenue;594 International Plaza;3;2022-8-28-17-30;1463;YP-7401;Audi;R8;Puce;7;315;126
+1215 Scott Road;4 Eliot Parkway;3;2022-8-3-6-36;5678;MEKB-49;Mazda;MX-5;Pink;17;229;42
+7542 Pine View Center;77 Scofield Terrace;4;2022-7-20-20-32;3597;UM-6553;Jensen;Interceptor;Turquoise;5;47;92
+4227 Trailsway Crossing;56314 Brickson Park Park;3;2022-10-16-11-19;5189;ODWO-48;Pontiac;Grand Am;Aquamarine;3;145;222
+8596 Almo Lane;26288 Esker Way;1;2022-8-4-7-55;2277;JS-2965;Chevrolet;Express 1500;Green;2;242;165
+92 Birchwood Street;7607 Russell Trail;3;2022-7-18-18-23;1634;KB-6193;Saturn;Astra;Indigo;1;142;77
+82311 Mallard Avenue;795 Spohn Pass;3;2022-9-18-9-51;8741;CW-2147;Land Rover;Discovery;Mauv;13;19;73
+22752 Burning Wood Park;4 Northland Trail;3;2022-7-12-12-29;7502;DL-1005;Toyota;Xtra;Aquamarine;10;211;68
+03348 Fair Oaks Park;44 Fieldstone Lane;4;2022-9-16-15-2;8678;ONKW-50;Pontiac;Sunbird;Purple;19;133;258
+113 School Hill;0 Golden Leaf Alley;4;2022-10-30-7-22;1950;OD-1548;Toyota;Avalon;Fuscia;20;126;255
+2872 Del Sol Hill;5319 Novick Road;2;2022-9-28-9-34;4753;EQ-2454;Oldsmobile;Ciera;Maroon;17;187;168
+3 Quincy Crossing;84 Village Green Plaza;1;2022-7-17-21-47;6267;RZXF-17;Ford;Tempo;Goldenrod;13;118;141
+74 Anthes Circle;49 Sutherland Circle;3;2022-7-19-14-49;9376;XKXJ-16;Nissan;Murano;Indigo;8;124;69
+3 Anthes Park;152 Knutson Hill;4;2022-9-30-21-49;5537;NP-1508;Toyota;Matrix;Puce;19;85;326
+26757 Prairieview Crossing;9979 Kings Street;2;2022-7-29-6-42;1725;WOYB-27;Chevrolet;Venture;Orange;15;179;98
+22 Esch Trail;639 3rd Junction;2;2022-8-7-17-35;6028;AI-5549;Ford;Probe;Purple;7;166;28
+74292 3rd Parkway;803 Petterle Center;4;2022-7-7-10-14;2783;NSZG-73;Mercedes-Benz;SL-Class;Turquoise;20;125;187
+076 Logan Circle;93908 John Wall Junction;1;2022-9-5-8-18;1517;NV-7123;Nissan;NX;Mauv;2;220;305
+0269 Scott Park;5 Warner Circle;3;2022-10-3-15-15;7884;HVUN-37;Chrysler;Grand Voyager;Indigo;18;203;307
+42279 Waywood Circle;98 Mandrake Alley;3;2022-8-10-17-30;5363;LZYN-12;Lincoln;Continental;Orange;16;99;234
+2657 Graceland Terrace;2424 Northfield Park;4;2022-7-14-8-23;7966;GCCI-84;Audi;Q7;Maroon;5;153;331
+7 Utah Road;9402 Dennis Plaza;4;2022-7-7-13-4;9570;DO-3157;Plymouth;Voyager;Fuscia;18;218;228
+80 Armistice Trail;01 Schlimgen Plaza;3;2022-8-17-13-36;4720;LOYJ-12;Saab;09-mar;Fuscia;5;35;99
+395 Dunning Plaza;2 Mosinee Junction;3;2022-8-28-20-50;3412;SY-7894;Ford;Ranger;Violet;15;219;192
+7 Tomscot Avenue;8 Golf View Lane;1;2022-7-3-20-37;1993;IH-8120;Infiniti;QX;Mauv;19;29;238
+43 Waxwing Alley;5 Roxbury Lane;4;2022-8-24-7-28;6851;NUXK-84;Volkswagen;CC;Blue;3;40;105
+06 Maple Wood Terrace;8287 Blue Bill Park Hill;4;2022-10-27-17-54;5580;MY-1408;Alfa Romeo;164;Crimson;10;133;126
+8 Columbus Center;72 Farragut Lane;1;2022-8-13-7-58;2648;VWRR-59;Oldsmobile;Aurora;Orange;15;207;203
+728 Londonderry Circle;51 Cascade Avenue;1;2022-9-17-6-18;2791;ISPN-16;Mercury;Mystique;Khaki;14;246;256
+1468 Anthes Junction;20903 Bellgrove Avenue;1;2022-10-10-20-49;4278;QUII-47;Lincoln;Continental;Fuscia;15;342;189
+555 Huxley Center;646 Sutteridge Street;4;2022-9-12-7-32;9901;AA-1023;Dodge;Ram Van 1500;Green;7;6;259
+96 Melvin Parkway;96217 Darwin Road;3;2022-9-29-19-12;6262;LE-3484;Porsche;944;Pink;1;127;107
+83 Sloan Hill;90 Rockefeller Street;2;2022-10-23-6-49;6348;HBDD-16;Nissan;Frontier;Pink;12;130;79
+7955 Anderson Trail;3 Claremont Terrace;4;2022-8-21-19-23;8444;SNGC-61;Lexus;GS;Violet;7;167;211
+5 Clove Circle;6 Granby Way;1;2022-7-20-11-34;9274;JQ-2260;Chevrolet;Silverado 1500;Indigo;11;1;317
+5993 Crescent Oaks Hill;0 Roxbury Circle;1;2022-8-13-7-44;2545;NI-3975;Volkswagen;Golf;Indigo;3;144;102
+639 Blue Bill Park Plaza;6 Spaight Center;3;2022-9-30-18-53;8387;RR-8798;Ford;Escape;Goldenrod;11;5;14
+12202 Northridge Court;36002 Crest Line Way;1;2022-8-2-13-58;2072;CMFL-58;Lexus;LS Hybrid;Red;19;28;71
+6 Blaine Crossing;96 Golf Course Lane;2;2022-7-28-8-13;9423;VOLV-14;Chevrolet;Corvette;Red;8;285;249
+67 Rieder Avenue;254 Northridge Plaza;4;2022-8-10-7-10;3079;OK-5870;Chevrolet;3500;Mauv;10;256;44
+61 Hudson Terrace;02186 7th Way;4;2022-9-13-20-5;2713;QSFS-87;Honda;Accord;Khaki;12;247;77
+113 Welch Street;9509 Randy Court;2;2022-8-7-9-7;8930;HWDF-63;GMC;Sierra 3500;Goldenrod;6;211;314
+791 Canary Street;9 Manley Plaza;4;2022-10-17-13-18;4497;ZB-3271;Oldsmobile;Achieva;Indigo;10;266;120
+3 Evergreen Plaza;2059 Cherokee Parkway;4;2022-7-20-15-11;2512;NY-5697;Maserati;Spyder;Pink;8;265;59
+60565 David Hill;025 Prairieview Court;4;2022-8-3-20-50;3629;WQ-3842;Volvo;S60;Yellow;6;228;262
+00 Florence Point;88 Bonner Trail;2;2022-10-8-13-29;3244;HYHM-77;Chevrolet;Corvette;Green;7;340;99
+44819 Gulseth Street;5 Westend Crossing;3;2022-10-6-9-54;3325;VZ-4889;Ford;Escort;Mauv;8;333;2
+17481 Di Loreto Lane;5453 Dapin Drive;3;2022-9-30-6-13;5685;DV-4811;Mercury;Mariner;Yellow;3;167;90
+0 Milwaukee Crossing;79 Caliangt Point;2;2022-7-4-13-32;1511;JL-4552;GMC;Savana;Aquamarine;13;277;116
+2681 Walton Plaza;1608 6th Drive;4;2022-9-10-15-22;6487;ZPPS-60;Mercedes-Benz;M-Class;Indigo;13;282;182
+4 Melrose Pass;5 Mosinee Hill;2;2022-10-18-18-23;3442;IHNL-25;Dodge;Caravan;Teal;9;37;291
+05 Corscot Junction;6 Sage Parkway;1;2022-7-4-13-33;2663;LN-8896;Pontiac;6000;Turquoise;19;96;36
+6 Texas Trail;20 Talmadge Plaza;1;2022-7-4-13-44;8492;TH-8165;Subaru;Loyale;Green;7;252;86
+65 Melrose Junction;2 Nova Avenue;4;2022-10-30-18-38;4655;KR-3387;Toyota;Avalon;Purple;3;195;52
+1 Marcy Way;9662 Welch Avenue;1;2022-7-29-8-47;7830;QCTP-30;Aston Martin;Vantage;Goldenrod;7;13;51
+1 Glacier Hill Avenue;71 Ridge Oak Crossing;3;2022-7-14-11-2;2893;FG-4587;Buick;Coachbuilder;Goldenrod;10;69;69
+935 Katie Road;50226 Bay Trail;1;2022-9-10-10-29;3524;IYQG-87;Porsche;928;Green;1;286;341
+81 Sauthoff Drive;2441 Cambridge Way;4;2022-8-27-13-4;3172;BAJB-37;Volvo;XC90;Yellow;8;16;33
+28 Declaration Point;817 Comanche Alley;1;2022-10-3-6-39;8851;TXDB-17;Volkswagen;Touareg;Yellow;4;73;344
+9522 Haas Drive;124 Hollow Ridge Road;4;2022-7-18-19-16;7914;NR-2912;Lincoln;MKT;Aquamarine;4;150;247
+25 Lakeland Court;24683 Red Cloud Circle;4;2022-10-10-11-51;3359;XZ-7153;Infiniti;I;Pink;15;22;78
+888 Florence Drive;58292 Swallow Street;2;2022-8-19-19-10;3246;DA-8041;Audi;Quattro;Blue;14;320;289
+37740 Dahle Pass;02 Lerdahl Point;3;2022-8-4-9-31;1161;LS-3275;Nissan;Maxima;Maroon;15;326;195
+387 La Follette Lane;12 Pond Street;3;2022-10-3-14-53;9797;IJNJ-64;Toyota;Land Cruiser;Yellow;4;8;108
+6857 Scoville Lane;91341 Shoshone Street;1;2022-7-18-17-40;1493;EV-7844;Mercedes-Benz;SLS AMG;Violet;19;135;67
+38 Lakewood Gardens Drive;67 Trailsway Circle;4;2022-8-23-7-20;1532;HWOQ-45;Jaguar;S-Type;Mauv;3;147;90
+4 Redwing Lane;082 Redwing Alley;1;2022-10-14-18-47;9952;PE-5416;Ferrari;F430;Khaki;14;85;331
+91552 Daystar Way;5 Lukken Circle;1;2022-8-25-6-17;9064;OAEZ-27;Mitsubishi;Pajero;Red;15;105;172
+617 Redwing Place;21 Birchwood Pass;2;2022-8-6-9-44;7734;UZHV-53;Mercedes-Benz;300CE;Maroon;5;155;69
+6937 Walton Court;3943 Crownhardt Circle;4;2022-7-27-13-20;7470;KMVH-78;Pontiac;Montana;Teal;10;57;153
+29 David Court;74 Spaight Plaza;4;2022-9-4-15-20;1075;ZQUI-35;Audi;TT;Turquoise;4;111;87
+2 Holmberg Court;815 Twin Pines Crossing;3;2022-7-27-19-27;6946;BUBH-73;GMC;Vandura G3500;Crimson;11;6;209
+3182 Maple Wood Circle;21 Nevada Lane;4;2022-9-30-19-33;2323;QI-2649;Mazda;MX-6;Goldenrod;16;124;147
+127 Goodland Drive;07828 Brentwood Court;2;2022-9-4-8-0;5208;KPXU-28;Acura;Integra;Maroon;3;223;252
+903 Farragut Trail;87935 American Center;2;2022-8-7-9-8;6918;GTMO-57;Lexus;SC;Khaki;8;202;264
+299 Elmside Place;4126 Reinke Road;4;2022-10-8-18-37;2809;JCHA-80;Nissan;350Z;Turquoise;14;22;293
+511 Oakridge Street;5 Marcy Way;2;2022-7-13-17-8;6651;KDCG-61;Dodge;Ram 1500;Maroon;3;341;184
+9 Di Loreto Road;4 Marquette Lane;2;2022-9-9-12-5;5038;LRAI-13;Acura;NSX;Mauv;4;123;48
+795 Becker Drive;74 Trailsway Way;4;2022-7-27-13-13;5634;YLPG-88;Infiniti;G;Fuscia;7;131;339
+4819 4th Point;3118 Anhalt Plaza;4;2022-9-13-9-59;4866;DV-7055;Dodge;Caravan;Fuscia;8;257;16
+915 Onsgard Park;500 Rutledge Lane;2;2022-8-19-11-54;2858;LGAM-43;Mercedes-Benz;R-Class;Teal;4;253;32
+08568 Stang Parkway;5649 Sunnyside Place;3;2022-7-27-8-56;6825;CX-1581;Mazda;626;Pink;8;292;214
+5 Rutledge Park;6 Main Crossing;4;2022-10-29-9-11;9773;NC-8291;Pontiac;Grand Am;Maroon;7;167;160
+06473 Delaware Court;7204 John Wall Center;4;2022-10-20-18-0;8286;ANBP-28;Hyundai;Tiburon;Blue;17;74;118
+5301 Forest Dale Lane;53825 Cordelia Lane;4;2022-9-10-7-40;1501;SDCL-27;Mazda;Mazda6 5-Door;Maroon;1;225;106
+6507 Grover Parkway;77 Prairieview Circle;4;2022-9-20-17-0;1708;TFKH-68;Mazda;Protege;Maroon;10;32;171
+1184 Graedel Alley;7 Elgar Way;4;2022-9-7-19-38;8076;BK-6420;Jeep;Grand Cherokee;Violet;3;37;233
+1 Anniversary Point;34 Hansons Center;4;2022-10-6-14-15;8449;UIUV-31;Ford;Five Hundred;Indigo;14;321;150
+52354 Sommers Parkway;3313 Beilfuss Drive;1;2022-10-13-20-51;6409;NMPW-10;Suzuki;Forenza;Yellow;14;278;138
+7 Mayfield Hill;38 Veith Point;2;2022-10-23-15-7;3083;AI-2178;Ford;Mustang;Fuscia;11;139;228
+322 Forest Avenue;6 Delladonna Street;2;2022-9-4-9-53;9830;WR-3768;Pontiac;Vibe;Goldenrod;18;56;94
+156 Delaware Point;2 Logan Crossing;1;2022-9-24-6-43;6431;HM-1946;Dodge;Intrepid;Orange;16;260;243
+061 Longview Center;4141 Mccormick Trail;3;2022-9-16-11-10;3461;XO-6473;Mitsubishi;Starion;Fuscia;19;176;296
+7 Southridge Place;71 Upham Terrace;3;2022-10-23-19-56;8537;UOWD-39;Dodge;Intrepid;Khaki;19;267;149

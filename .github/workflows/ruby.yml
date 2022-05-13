@@ -94,4 +94,7 @@ jobs:
           bundle exec rails db:create
           bundle exec rails db:schema:load
       - name: Run tests
-        run: bundle exec rails test
+        env:
+          GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
+          GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
+        run: bundle exec rspec

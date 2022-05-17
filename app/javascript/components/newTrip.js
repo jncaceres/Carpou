@@ -1,7 +1,7 @@
 import React from "react";
-import background from "../assets/background.jpg";
+import Select from "react-select";
 
-const newTripForm = (props) =>{
+const newTrip = (props) =>{
   const {user, new_trip_path, places} = props;
   return (
       <form action = {new_trip_path}
@@ -81,27 +81,14 @@ const newTripForm = (props) =>{
           </div>
           <div className="field">
             <div className="control">
-              <label>
-                Lugar de origen
-                <select name= "from_id" className="input" required>    
-                
-                </select>
-              </label>
-              
-            </div> 
+              <Select options={places} name="from_id" placeholder="Viajo desde..."/>
+            </div>
           </div>
           <div className="field">
             <div className="control">
-              <label>
-                Lugar de destino
-                <select name= "to_id" className="input" required>    
-                
-                </select>
-              </label>
-              
-            </div> 
+              <Select options={places} name="to_id" placeholder="Viajo hacia..."  />
+            </div>
           </div>
-
           <div className="field">
            <div className="control">
              <button className="button is-primary is-fullwidth" type='submit'>Crear viaje</button>
@@ -115,3 +102,5 @@ const newTripForm = (props) =>{
 
   ); 
 }
+
+export default newTrip;

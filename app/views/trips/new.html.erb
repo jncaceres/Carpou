@@ -1,5 +1,1 @@
-<h1>New Trip</h1>
-
-<%= render 'form', trip: @trip %>
-
-<%= link_to 'Back', trips_path %>
+<%= react_component("newTrip", {user: current_user, new_trip_path: trips_path, places: @places}) %>

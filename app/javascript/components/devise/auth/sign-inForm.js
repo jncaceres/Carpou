@@ -34,6 +34,12 @@ const LoginForm = (props) => {
                     <button className="button is-primary is-fullwidth" type='submit'>Ingresar</button>
                 </div>
             </div>
+            <div className="field">
+                <div className="control">
+                  <a href={props.user_registration_path}>¿Aún no tienes cuenta? Regístrate acá</a>
+                </div>
+            </div>
+           
         </form>
 
     );
@@ -60,7 +66,7 @@ const loginIndex = (props) => {
           </div>
         </div>
         <div className="section" style={{ marginTop: -120 }}>
-          <LoginForm user_session_path={props.user_session_path}/>
+          <LoginForm user_session_path={props.user_session_path} user_registration_path= {props.user_registration_path}/>
           
         </div>
       </>

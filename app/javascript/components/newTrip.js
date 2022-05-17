@@ -3,6 +3,7 @@ import Select from "react-select";
 
 const newTrip = (props) =>{
   const {user, new_trip_path, places,notice} = props;
+
   return (
       <form action = {new_trip_path}
       method="post"

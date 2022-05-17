@@ -1,5 +1,4 @@
 import React from "react";
-import Select from "react-select";
 
 const newTrip = (props) =>{
   const {user, new_trip_path, places,notice} = props;
@@ -79,20 +78,33 @@ const newTrip = (props) =>{
             <div className="control">
                 <input 
                 type="hidden" 
-                name="user_id" 
-                value={user.id}
-                autoComplete="off">
+                name='user_id' 
+                value={user.id}>
                 </input>
+  
+
             </div>      
           </div>
           <div className="field">
             <div className="control">
-              <Select options={places} name="from_id" placeholder="Viajo desde..."/>
+              <label>Viajo desde...</label>
+              <select className="input" name='from_id'>
+                {places.map((option)=>(
+                  // eslint-disable-next-line react/jsx-key
+                  <option value={option.id}>{option.name}</option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <Select options={places} name="to_id" placeholder="Viajo hacia..."  />
+              <label>Viajo hacia...</label>
+            <select className="input" name = 'to_id'>
+                {places.map((option)=>(
+                  // eslint-disable-next-line react/jsx-key
+                  <option value={option.id}>{option.name}</option>
+                ))}
+              </select>
             </div>
           </div>
           <div className="field">

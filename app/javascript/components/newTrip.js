@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 
 const newTrip = (props) =>{
-  const {user, new_trip_path, places} = props;
+  const {user, new_trip_path, places,notice} = props;
   return (
       <form action = {new_trip_path}
       method="post"
@@ -18,6 +18,11 @@ const newTrip = (props) =>{
                 autoComplete="off">
                 </input>
             </div>      
+          </div>
+          <div className="field">
+            <div className="control">
+              <p>{notice}</p>
+            </div>
           </div>
           <div className="field">
             <div className="control">
@@ -94,9 +99,6 @@ const newTrip = (props) =>{
              <button className="button is-primary is-fullwidth" type='submit'>Crear viaje</button>
            </div>           
           </div>
-
-        
-
       </form>
 
 

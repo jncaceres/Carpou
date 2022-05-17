@@ -20,7 +20,7 @@ class TripsController < ApplicationController
 
   # GET /trips/new
   def new
-    @trip = Trip.new
+    #@trip = Trip.new
     @places = Place.all
   end
 
@@ -29,18 +29,11 @@ class TripsController < ApplicationController
 
   # POST /trips or /trips.json
   def create
-    puts trip_params
     @trip = Trip.new(trip_params)
-    
-
-    respond_to do |format|
-      if @trip.save
-        format.html { redirect_to(trip_url(@trip), notice: 'Trip was successfully created.') }
-        format.json { render(:show, status: :created, location: @trip) }
-      else
-        format.html { render(:new, status: :unprocessable_entity) }
-        format.json { render(json: @trip.errors, status: :unprocessable_entity) }
-      end
+    if @trip.save
+      redirect_to(trip_url(@trip), notice: "El viaje fue creado correctamente")
+    else
+      redirect_to(new_trip_path, notice: "¡Error al crear el viaje!")      
     end
   end
 

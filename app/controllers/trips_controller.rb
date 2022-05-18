@@ -8,26 +8,19 @@ class TripsController < ApplicationController
     from_place = list_query_params[:from]
     to_place = list_query_params[:to]
     date = list_query_params[:date]
-    @trips = if from_place && to_place && date
-               obtained_trips = Trip.where(from_id: from_place, to_id: to_place)
-               filtered_trips = []
-               obtained_trips.each do |trip|
-                if trip.leaving_at.to_date == Date.parse(date)
-                  filtered_trips.push(trip)
-                end
-               end
-               filtered_trips
-             else
-               obtained_trips = Trip.all
-               filtered_trips = []
-               obtained_trips.each do |trip|
-                if trip.leaving_at.to_date >= Date.today
-                  filtered_trips.push(trip)
-                end
-               end
-               filtered_trips
-             end
-    @trips = @trips.as_json(include: [:user, :to, :from])
+    filtered_trips = []
+    if from_place && to_place && date
+      obtained_trips = Trip.where(from_id: from_place, to_id: to_place)
+      obtained_trips.each do |trip|
+        filtered_trips.push(trip) if trip.leaving_at.to_date == Date.parse(date)
+      end
+    else
+      obtained_trips = Trip.all
+      obtained_trips.each do |trip|
+        filtered_trips.push(trip) if trip.leaving_at.to_date >= Date.today
+      end
+    end
+    @trips = filtered_trips.as_json(include: %i[user to from])
   end
 
   # GET /trips/1 or /trips/1.json

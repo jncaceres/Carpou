@@ -4,7 +4,6 @@ import { Map, Marker, ZoomControl } from "pigeon-maps"
 
 const TripIndex = (props) => {
     const { trips } = props;
-    console.log(trips)
     return(
         <div className="container is-mobile p-4">
         <div className="columns is-multiline is-mobile is-variable is-8 is-centered">

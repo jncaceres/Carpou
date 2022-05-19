@@ -12,7 +12,7 @@ const EmailForm = (props) => {
         <div className="field">
             <div className="control">
                 <label htmlFor="email"> Correo: </label>
-                <input className="input" id="user_email" name="user[email]" type="email" autoFocus="autofocus" autoComplete="email"/>
+                <input className="input" id="user_email" name="user[email]" type="email" autoFocus="autofocus" autoComplete="email" required/>
             </div>
         </div>
         <div className="field">

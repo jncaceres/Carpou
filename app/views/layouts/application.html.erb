@@ -13,7 +13,14 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= react_component("Header") %>
+    <%= react_component("Header", 
+      {
+        user: current_user,
+        logout_route: destroy_user_session_path,
+        root_path: root_path,
+        login_route: new_user_session_path
+      })
+    %>
     <%= yield %>
 
   </body>

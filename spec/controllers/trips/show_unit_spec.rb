@@ -4,12 +4,12 @@ require 'rails_helper'
 
 RSpec.describe(TripsController) do
   before(:each) do
-    @user_1 = FactoryBot.create(:user)
-    @user_2 = FactoryBot.create(:user, name: 'second_user')
+    @first_user = FactoryBot.create(:user)
+    @second_user = FactoryBot.create(:user, name: 'second_user')
     @from = FactoryBot.create(:place)
     @to = FactoryBot.create(:place)
-    @user_1.save
-    @user_2.save
+    @first_user.save
+    @second_user.save
     @from.save
     @to.save
   end
@@ -20,13 +20,13 @@ RSpec.describe(TripsController) do
   end
   describe 'GET show' do
     it 'should display info of correct trip' do
-      first_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user_1.id)
-      second_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user_2.id)
+      first_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @first_user.id)
+      second_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @second_user.id)
       first_trip.save
       second_trip.save
       json_trip = first_trip.as_json(include: %i[user to from])
       json_trip2 = second_trip.as_json(include: %i[user to from])
-      get :show, params: { id: first_trip.id}
+      get :show, params: { id: first_trip.id }
       controller_trip = controller.view_assigns['trip']
       expect(controller_trip).to(eq(json_trip))
       expect(controller_trip).not_to(eq(json_trip2))

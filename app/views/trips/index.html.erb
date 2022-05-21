@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
+<%= react_component("TripIndex", {trips: @trips}) %>
 
-<h1>Trips</h1>
+
+<%
+=begin%>
+ <h1>Trips</h1>
 
 <table>
   <thead>
@@ -38,8 +42,10 @@
       </tr>
     <% end %>
   </tbody>
-</table>
+</table> 
 
 <br>
 
 <%= link_to 'New Trip', new_trip_path %>
+<%
+=end%>

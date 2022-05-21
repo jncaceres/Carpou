@@ -98,3 +98,5 @@ jobs:
           GMAIL_USERNAME: ${{ secrets.GMAIL_USERNAME }}
           GMAIL_PASSWORD: ${{ secrets.GMAIL_PASSWORD }}
         run: bundle exec rspec
+      - name: Run js tests
+        run: yarn run test

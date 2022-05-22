@@ -2,7 +2,7 @@
 
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[new create]
 
   # GET /trips or /trips.json
   def index

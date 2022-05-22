@@ -45,4 +45,8 @@ RSpec.describe(TripsController) do
       expect(controller_trips).to(eq([json_first_trip]))
     end
   end
+
+  
+
+
 end

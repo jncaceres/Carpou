@@ -41,7 +41,7 @@ const newTrip = (props) =>{
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='time' name='leaving_at' placeholder='Hora de salida' required/>
+              <input className="input" type='datetime-local' name='leaving_at' placeholder='Hora de salida' required/>
             </div>
           </div>
           <div className="field">

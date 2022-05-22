@@ -2,7 +2,23 @@
   "name": "carpou",
   "private": true,
   "scripts": {
-    "lint": "eslint 'app/javascript/components/**/*.{js,jsx}'"
+    "lint": "eslint 'app/javascript/components/**/*.{js,jsx}'",
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/javascript/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/test/javascript/__mocks__/styleMock.js"
+    },
+    "roots": [
+      "app/javascript/packs",
+      "test/javascript"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "app/javascript/packs"
+    ]
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.17.0",
@@ -14,6 +30,7 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "bulma": "^0.9.3",
     "dotenv": "^16.0.0",
+    "pigeon-maps": "^0.21.0",
     "prop-types": "^15.8.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -25,9 +42,15 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.1.1",
+    "babel-jest": "^28.0.0",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.29.4",
+    "jest": "^28.0.0",
+    "jest-environment-jsdom": "^28.0.0",
+    "regenerator-runtime": "^0.13.9",
     "webpack-dev-server": "^3"
   }
 }

@@ -2,7 +2,7 @@
 
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
-  before_action :authenticate_user!, :only => [:trips_from_user]
+  before_action :authenticate_user!, only: [:trips_from_user]
 
   # GET /trips or /trips.json
   def index
@@ -75,8 +75,8 @@ class TripsController < ApplicationController
 
   def trips_from_user
     user_id = params[:id]
-    if (user_id).to_i != (current_user.id).to_i
-      redirect_to root_path
+    if Integer(user_id, 10) != Integer(current_user.id, 10)
+      redirect_to(root_path)
     else
       today_trips = []
       future_trips = []

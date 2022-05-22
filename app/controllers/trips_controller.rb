@@ -37,15 +37,12 @@ class TripsController < ApplicationController
 
   # POST /trips or /trips.json
   def create
-
- 
     @trip = current_user.trips.create(trip_params)
     if @trip.save
       redirect_to(trip_url(@trip), notice: 'El viaje fue creado correctamente')
     else
       redirect_to(new_trip_path, notice: '¡Error al crear el viaje!')
-    end 
-  
+    end
   end
 
   # PATCH/PUT /trips/1 or /trips/1.json

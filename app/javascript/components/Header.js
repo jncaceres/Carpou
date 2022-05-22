@@ -2,7 +2,7 @@ import React from "react";
 import logo from "../assets/logo.png";
 
 const Header = (props) => {
-  const { user, logout_route, root_path, login_route, register_route } = props;
+  const { user, mytrips_route, logout_route, root_path, login_route, register_route } = props;
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-brand">
@@ -15,6 +15,10 @@ const Header = (props) => {
         <div className="navbar-item">
           <h5 className="title is-5">Bienvenido {user.name} {user.last_name}!</h5>
         </div>
+
+        <a className="navbar-item"  data-method="get" href={mytrips_route}>
+          Mis viajes
+        </a>
 
         <a className="navbar-item"  data-method="delete" href={logout_route}>
           Cerrar sesión

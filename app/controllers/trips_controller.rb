@@ -2,6 +2,7 @@
 
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
+  before_action :authenticate_user!, :only => [:trips_from_user]
 
   # GET /trips or /trips.json
   def index
@@ -69,6 +70,30 @@ class TripsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to(trips_url, notice: 'Trip was successfully destroyed.') }
       format.json { head(:no_content) }
+    end
+  end
+
+  def trips_from_user
+    user_id = params[:id]
+    if (user_id).to_i != (current_user.id).to_i
+      redirect_to root_path
+    else
+      today_trips = []
+      future_trips = []
+      previous_trips = []
+      obtained_trips = Trip.where(user_id: user_id)
+      obtained_trips.each do |trip|
+        if trip.leaving_at.to_date >= Date.today
+          future_trips.push(trip)
+        elsif trip.leaving_at.to_date == Date.today
+          today_trips.push(trip)
+        else
+          previous_trips.push(trip)
+        end
+      end
+      @today_trips = today_trips.as_json(include: %i[user to from])
+      @future_trips = future_trips.as_json(include: %i[user to from])
+      @previous_trips = previous_trips.as_json(include: %i[user to from])
     end
   end
 

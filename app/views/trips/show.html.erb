@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
+<%= react_component("TripShow", {trip: @trip, passenger_request_path: new_passenger_request_path}) %>
 
-<p>
+<%
+=begin%>
+ <p>
   <strong>From address:</strong>
   <%= @trip.from_address %>
 </p>
@@ -51,4 +54,6 @@
 </p>
 
 <%= link_to 'Edit', edit_trip_path(@trip) %> |
-<%= link_to 'Back', trips_path %>
+<%= link_to 'Back', trips_path %> 
+<%
+=end%>

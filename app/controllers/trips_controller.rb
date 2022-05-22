@@ -25,7 +25,9 @@ class TripsController < ApplicationController
   end
 
   # GET /trips/1 or /trips/1.json
-  def show; end
+  def show
+    @trip = @trip.as_json(include: %i[user to from])
+  end
 
   # GET /trips/new
   def new

@@ -26,6 +26,14 @@ RSpec.describe(TripsController) do
       expect(controller_trips).to(eq([json_trip]))
     end
 
+    it 'should not get trips if trip is from past' do
+      trip = FactoryBot.create(:trip, :skip_validate, from_id: @from.id, to_id: @to.id, user_id: @user.id, leaving_at: '2021-09-02T18:24:00.000Z')
+      trip.save
+      get :index
+      controller_trips = controller.view_assigns['trips']
+      expect(controller_trips).to(eq([]))
+    end
+
     it 'should only get trips which matches the parameters' do
       first_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user.id, leaving_at: '2022-09-02T18:24:00.000Z')
       second_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user.id, leaving_at: '2022-10-02T18:24:00.000Z')

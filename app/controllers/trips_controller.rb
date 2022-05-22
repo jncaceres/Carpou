@@ -21,7 +21,6 @@ class TripsController < ApplicationController
 
   # GET /trips/new
   def new
-    
     @places = Place.all
   end
 
@@ -30,12 +29,11 @@ class TripsController < ApplicationController
 
   # POST /trips or /trips.json
   def create
-    
     @trip = current_user.trips.create(trip_params)
     if @trip.save
-      redirect_to(trip_url(@trip), notice: "El viaje fue creado correctamente")
+      redirect_to(trip_url(@trip), notice: 'El viaje fue creado correctamente')
     else
-      redirect_to(new_trip_path, notice: "¡Error al crear el viaje!")      
+      redirect_to(new_trip_path, notice: '¡Error al crear el viaje!')
     end
   end
 
@@ -72,7 +70,8 @@ class TripsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def trip_params
     params.permit(:from_address, :to_address, :available_seats, :leaving_at, :price, :comments, :car_license_plate, :car_brand,
-                                 :car_model, :car_color, :user_id, :from_id, :to_id)
+                  :car_model, :car_color, :user_id, :from_id, :to_id
+    )
   end
 
   def list_query_params

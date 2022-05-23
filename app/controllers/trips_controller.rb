@@ -77,7 +77,7 @@ class TripsController < ApplicationController
 
   def trips_from_user
     user_id = params[:id]
-    if Integer(user_id, 10) != Integer(current_user.id, 10)
+    if Integer(user_id, 10) != current_user.id
       redirect_to(root_path)
     else
       today_trips = []

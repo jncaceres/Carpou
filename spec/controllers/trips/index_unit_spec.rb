@@ -12,6 +12,7 @@ RSpec.describe(TripsController) do
     @to.save
   end
   after(:each) do
+    PassengerRequest.delete_all
     Trip.delete_all
     Place.delete_all
     User.delete_all
@@ -43,6 +44,47 @@ RSpec.describe(TripsController) do
       json_first_trip = first_trip.as_json(include: %i[user to from])
       controller_trips = controller.view_assigns['trips']
       expect(controller_trips).to(eq([json_first_trip]))
+    end
+  end
+  describe 'GET my_trips' do
+    before(:each) do
+      @user = FactoryBot.create(:user)
+      @user.confirm
+      @user.save
+      sign_in @user
+      @user2 = FactoryBot.create(:user)
+      @user2.save
+      @from = FactoryBot.create(:place)
+      @to = FactoryBot.create(:place)
+      @from.save
+      @to.save
+    end
+    it 'get a 200 response if connected and ask for its trips' do
+      get :trips_from_user, params: { id: @user.id }
+      expect(response).to(have_http_status(:success))
+    end
+    it 'get a 302 response if connected and ask for trips of other users' do
+      get :trips_from_user, params: { id: @user2.id }
+      expect(response).to(have_http_status(:redirect))
+    end
+    it 'should only get trips which matches the owner with the user' do
+      first_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user.id, leaving_at: '2022-09-02T18:24:00.000Z')
+      second_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user2.id, leaving_at: '2022-10-02T18:24:00.000Z')
+      first_trip.save
+      second_trip.save
+      # get "/users/#{@user.id}/trips"
+      get :trips_from_user, params: { id: @user.id }
+      json_first_trip = first_trip.as_json(include: %i[user to from])
+      controller_trips = controller.view_assigns['future_trips']
+      expect(controller_trips).to(eq([json_first_trip]))
+    end
+    it 'should not get trips which matches the owner with other user' do
+      second_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user2.id, leaving_at: '2022-10-02T18:24:00.000Z')
+      second_trip.save
+      # get "/users/#{@user.id}/trips"
+      get :trips_from_user, params: { id: @user.id }
+      controller_trips = controller.view_assigns['future_trips']
+      expect(controller_trips).to(eq([]))
     end
   end
 end

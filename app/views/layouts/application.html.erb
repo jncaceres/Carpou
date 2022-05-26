@@ -14,7 +14,7 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <% if !current_user %>
-      <%= react_component("Header", 
+      <%= react_component("Header",
         {
           user: current_user,
           mytrips_route: nil,
@@ -25,7 +25,7 @@
         })
       %>
     <% else %>
-      <%= react_component("Header", 
+      <%= react_component("Header",
         {
           user: current_user,
           mytrips_route: trips_from_user_path(current_user.id),

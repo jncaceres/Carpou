@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import logo from "../assets/logo.png";
 
 const Header = (props) => {
-  const { user, mytrips_route, logout_route, root_path, login_route, register_route } = props;
+  const { user, mytrips_route, logout_route, root_path, login_route, register_route, new_trip_route } = props;
   const [showNav, setShowNav] = useState(false);
   return (
     <>
@@ -31,6 +31,9 @@ const Header = (props) => {
 
           <a className="navbar-item"  data-method="get" href={mytrips_route}>
             Mis viajes
+          </a>
+          <a className="navbar-item"  data-method="get" href={ new_trip_route}>
+            Crear viaje
           </a>
 
           <a className="navbar-item"  data-method="delete" href={logout_route}>

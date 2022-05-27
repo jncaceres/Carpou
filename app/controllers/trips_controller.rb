@@ -35,7 +35,11 @@ class TripsController < ApplicationController
   end
 
   # GET /trips/1/edit
-  def edit; end
+  def edit
+    @trip = Trip.find(params[:id])
+    @places = Place.all
+
+  end
 
   # POST /trips or /trips.json
   def create
@@ -49,14 +53,13 @@ class TripsController < ApplicationController
 
   # PATCH/PUT /trips/1 or /trips/1.json
   def update
-    respond_to do |format|
-      if @trip.update(trip_params)
-        format.html { redirect_to(trip_url(@trip), notice: 'Trip was successfully updated.') }
-        format.json { render(:show, status: :ok, location: @trip) }
-      else
-        format.html { render(:edit, status: :unprocessable_entity) }
-        format.json { render(json: @trip.errors, status: :unprocessable_entity) }
-      end
+    puts "HOLAAAA"
+    puts trip_params
+    @trip = Trip.find(params[:id])
+    if @trip.update(trip_params)
+      redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente')
+    else
+      redirect_to(edit_trip_path(@trip.id), notice: '¡Error al editar el viaje!')
     end
   end
 

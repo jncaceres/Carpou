@@ -36,6 +36,12 @@ const LoginForm = (props) => {
                     <button className="button is-primary is-fullwidth" type='submit'>Ingresar</button>
                 </div>
             </div>
+            <div className="field">
+                <div className="control">
+                  <a href={props.user_registration_path}>¿Aún no tienes cuenta? Regístrate acá</a>
+                </div>
+            </div>
+           
         </form>
         <div className="columns is-mobile is-centered">
           <div className="column is-half">
@@ -50,7 +56,7 @@ const LoginForm = (props) => {
 };
 
 const loginIndex = (props) => {
-  const {user_session_path,  forgot_password_path} = props;
+  const {user_session_path,  forgot_password_path, user_registration_path} = props;
     return (
         <>
         <div
@@ -70,7 +76,9 @@ const loginIndex = (props) => {
           </div>
         </div>
         <div className="section" style={{ marginTop: -120 }}>
-          <LoginForm user_session_path={user_session_path} forgot_password_path={forgot_password_path} />
+        
+          <LoginForm user_session_path={user_session_path} forgot_password_path={forgot_password_path} user_registration_path= {user_registration_path}/>
+
           
         </div>
       </>

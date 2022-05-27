@@ -38,7 +38,6 @@ class TripsController < ApplicationController
   def edit
     @trip = Trip.find(params[:id])
     @places = Place.all
-
   end
 
   # POST /trips or /trips.json
@@ -53,8 +52,6 @@ class TripsController < ApplicationController
 
   # PATCH/PUT /trips/1 or /trips/1.json
   def update
-    puts "HOLAAAA"
-    puts trip_params
     @trip = Trip.find(params[:id])
     if @trip.update(trip_params)
       redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente')

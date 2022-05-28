@@ -9,5 +9,6 @@ FactoryBot.define do
     phone { '12345678' }
     birthdate { '2000-02-02' }
     password { 'password' }
+    confirmed_at { '2000-02-02' }
   end
 end

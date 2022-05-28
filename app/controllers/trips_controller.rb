@@ -36,7 +36,8 @@ class TripsController < ApplicationController
 
   # GET /trips/1/edit
   def edit
-    @trip = Trip.find(params[:id])
+    @trip = @trip.as_json(include: %i[user to from])
+
     @places = Place.all
   end
 
@@ -103,8 +104,8 @@ class TripsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def trip_params
-    params.permit(:from_address, :to_address, :available_seats, :leaving_at, :price, :comments, :car_license_plate, :car_brand,
-                  :car_model, :car_color, :user_id, :from_id, :to_id
+    params.require(:trip).permit(:from_address, :to_address, :available_seats, :leaving_at, :price, :comments, :car_license_plate, :car_brand,
+                                 :car_model, :car_color, :user_id, :from_id, :to_id
     )
   end
 

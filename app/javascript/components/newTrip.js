@@ -26,59 +26,59 @@ const newTrip = (props) =>{
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='from_address' placeholder='Dirección de origen' required/>
+              <input className="input" type='text' name='trip[from_address]' placeholder='Dirección de origen' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='to_address' placeholder='Dirección de destino' required/>
+              <input className="input" type='text' name='trip[to_address]' placeholder='Dirección de destino' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='number' name='available_seats' placeholder='Número de asientos disponibles' required/>
+              <input className="input" type='number' name='trip[available_seats]' placeholder='Número de asientos disponibles' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='datetime-local' name='leaving_at' placeholder='Hora de salida' required/>
+              <input className="input" type='datetime-local' name='trip[leaving_at]' placeholder='Hora de salida' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='price' placeholder='Monto a pagar' required/>
+              <input className="input" type='text' name='trip[price]' placeholder='Monto a pagar' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='comments' placeholder='Comentario' required/>
+              <input className="input" type='text' name='trip[comments]' placeholder='Comentario' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='car_license_plate' placeholder='Patente' required/>
+              <input className="input" type='text' name='trip[car_license_plate]' placeholder='Patente' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='car_brand' placeholder='Marca del auto' required/>
+              <input className="input" type='text' name='trip[car_brand]' placeholder='Marca del auto' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='car_model' placeholder='Modelo del auto' required/>
+              <input className="input" type='text' name='trip[car_model]' placeholder='Modelo del auto' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
-              <input className="input" type='text' name='car_color' placeholder='Color del auto' required/>
+              <input className="input" type='text' name='trip[car_color]' placeholder='Color del auto' required/>
             </div>
           </div>
           <div className="field">
             <div className="control">
                 <input 
                 type="hidden" 
-                name='user_id' 
+                name='trip[user_id]' 
                 value={user.id}>
                 </input>
   
@@ -88,7 +88,7 @@ const newTrip = (props) =>{
           <div className="field">
             <div className="control">
               <label>Viajo desde...</label>
-              <select className="input" name='from_id'>
+              <select className="input" name='trip[from_id]'>
                 {places.map((option)=>(
                   // eslint-disable-next-line react/jsx-key
                   <option value={option.id}>{option.name}</option>
@@ -99,7 +99,7 @@ const newTrip = (props) =>{
           <div className="field">
             <div className="control">
               <label>Viajo hacia...</label>
-            <select className="input" name = 'to_id'>
+            <select className="input" name = 'trip[to_id]'>
                 {places.map((option)=>(
                   // eslint-disable-next-line react/jsx-key
                   <option value={option.id}>{option.name}</option>

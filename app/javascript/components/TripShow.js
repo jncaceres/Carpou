@@ -5,7 +5,7 @@ import { routes } from "../api";
 import { TripPassengerRequests } from "./TripPassengerRequests";
 import { TripButton } from "./TripButton";
 
-const passengerRequests = [
+const passengerRequestsAux = [
   {
     name: "John Smith",
     phone: "987766201",
@@ -23,7 +23,7 @@ const passengerRequests = [
 ];
 
 const TripShow = (props) => {
-  const { trip, user } = props;
+  const { trip, user, passengerRequests } = props;
 
   return (
     <>

@@ -11,7 +11,7 @@ export const TripPassengerRequests = (props) => {
     passengerRequests.filter((pr) => pr.status == "pending")
   );
   const [answeredRequests, setAnsweredRequests] = useState(
-    passengerRequests.filter((pr) => pr.status == "accepted")
+    passengerRequests.filter((pr) => pr.status != "pending")
   );
 
   const csrf = document

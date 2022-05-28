@@ -36,13 +36,32 @@ class PassengerRequestsController < ApplicationController
 
   # PATCH/PUT /passenger_requests/1 or /passenger_requests/1.json
   def update
+    if @passenger_request.trip.user == current_user
+      @passenger_request.assign_attributes(status: params[:status])
+    elsif @passenger_request.user == current_user
+      @passenger_request.assign_attributes(comment: params[:comments])
+    end
     respond_to do |format|
-      if @passenger_request.update(passenger_request_params)
+      if @passenger_request.save
         format.html { redirect_to(passenger_request_url(@passenger_request), notice: 'Passenger request was successfully updated.') }
         format.json { render(:show, status: :ok, location: @passenger_request) }
       else
         format.html { render(:edit, status: :unprocessable_entity) }
         format.json { render(json: @passenger_request.errors, status: :unprocessable_entity) }
+      end
+    end
+  end
+
+  def driver_update
+    if @passenger_request.trip.user == current_user
+      respond_to do |format|
+        if @passenger_request.update(passenger_request_params)
+          format.html { redirect_to(passenger_request_url(@passenger_request), notice: 'Passenger request was successfully updated.') }
+          format.json { render(:show, status: :ok, location: @passenger_request) }
+        else
+          format.html { render(:edit, status: :unprocessable_entity) }
+          format.json { render(json: @passenger_request.errors, status: :unprocessable_entity) }
+        end
       end
     end
   end

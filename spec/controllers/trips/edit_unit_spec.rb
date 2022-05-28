@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe(TripsController) do
@@ -34,9 +36,9 @@ RSpec.describe(TripsController) do
         trip: {
           from_address: 'address1 #2',
           to_address: 'address2',
-          available_seats: '5',
+          available_seats: 5,
           leaving_at: '2022-06-20T20:00',
-          price: '2000',
+          price: 2000,
           comments: 'comments',
           car_license_plate: 'AA-5656',
           car_brand: 'Volvo',
@@ -44,10 +46,10 @@ RSpec.describe(TripsController) do
           car_color: 'rojo',
           user_id: @user.id,
           from_id: @from.id,
-          to_id: @to_id
+          to_id: @to.id
         }
       }
-      expect(response).to be_redirect
+      expect(response).to(redirect_to(trip_url(trip_bot)))
     end
     it 'update specific trip and redirects to #edit because attribute is missing' do
       trip_bot = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user.id)
@@ -55,10 +57,10 @@ RSpec.describe(TripsController) do
       put :update, params: {
         id: trip_bot.id,
         trip: {
-          from_address: 'address1 #2',
-          to_address: 'address2',
-          available_seats: '5',
-          price: '2000',
+          from_address: 'address1',
+          to_address: '',
+          available_seats: 5,
+          price: 2000,
           comments: 'comments',
           car_license_plate: 'AA-5656',
           car_brand: 'Volvo',
@@ -66,10 +68,10 @@ RSpec.describe(TripsController) do
           car_color: 'rojo',
           user_id: @user.id,
           from_id: @from.id,
-          to_id: @to_id
+          to_id: @to.id
         }
       }
-      expect(response).to be_redirect
+      expect(response).to(redirect_to(edit_trip_path(trip_bot.id)))
     end
   end
 end

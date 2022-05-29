@@ -2,7 +2,7 @@
 
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: [:trips_from_user]
+  before_action :authenticate_user!, only: %i[new create trips_from_user]
 
   # GET /trips or /trips.json
   def index
@@ -26,12 +26,26 @@ class TripsController < ApplicationController
 
   # GET /trips/1 or /trips/1.json
   def show
+    @passenger_requests = if @trip.user == current_user
+                            @trip.passenger_requests.as_json(methods: %i[formatted_created_at], include: {
+                              user: {
+                                only: %i[
+                                  name last_name phone email
+                                  gender
+                                ],
+                                methods: %i[age]
+                              }
+                            }
+                            )
+                          else
+                            []
+                          end
     @trip = @trip.as_json(include: %i[user to from])
   end
 
   # GET /trips/new
   def new
-    @trip = Trip.new
+    @places = Place.all
   end
 
   # GET /trips/1/edit
@@ -39,16 +53,11 @@ class TripsController < ApplicationController
 
   # POST /trips or /trips.json
   def create
-    @trip = Trip.new(trip_params)
-
-    respond_to do |format|
-      if @trip.save
-        format.html { redirect_to(trip_url(@trip), notice: 'Trip was successfully created.') }
-        format.json { render(:show, status: :created, location: @trip) }
-      else
-        format.html { render(:new, status: :unprocessable_entity) }
-        format.json { render(json: @trip.errors, status: :unprocessable_entity) }
-      end
+    @trip = current_user.trips.create(trip_params)
+    if @trip.save
+      redirect_to(trip_url(@trip), notice: 'El viaje fue creado correctamente')
+    else
+      redirect_to(new_trip_path, notice: '¡Error al crear el viaje!')
     end
   end
 
@@ -108,8 +117,8 @@ class TripsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def trip_params
-    params.require(:trip).permit(:from_address, :to_address, :available_seats, :leaving_at, :price, :comments, :car_license_plate, :car_brand,
-                                 :car_model, :car_color
+    params.permit(:from_address, :to_address, :available_seats, :leaving_at, :price, :comments, :car_license_plate, :car_brand,
+                  :car_model, :car_color, :user_id, :from_id, :to_id
     )
   end
 

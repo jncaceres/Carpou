@@ -2,6 +2,7 @@
 
 class PassengerRequestsController < ApplicationController
   before_action :set_passenger_request, only: %i[show edit update destroy]
+  before_action :authenticate_user!, only: [:new, :create]
 
   # GET /passenger_requests or /passenger_requests.json
   def index
@@ -13,7 +14,9 @@ class PassengerRequestsController < ApplicationController
 
   # GET /passenger_requests/new
   def new
-    @passenger_request = PassengerRequest.new
+    trip_id = Integer(params[:trip_id], 10)
+    @trip = Trip.where(id: trip_id)
+    @trip = @trip.as_json(include: %i[user to from])
   end
 
   # GET /passenger_requests/1/edit
@@ -21,17 +24,19 @@ class PassengerRequestsController < ApplicationController
 
   # POST /passenger_requests or /passenger_requests.json
   def create
-    @passenger_request = PassengerRequest.new(passenger_request_params)
+    puts passenger_request_params
+    
+    #@passenger_request = PassengerRequest.new(passenger_request_params)
 
-    respond_to do |format|
-      if @passenger_request.save
-        format.html { redirect_to(passenger_request_url(@passenger_request), notice: 'Passenger request was successfully created.') }
-        format.json { render(:show, status: :created, location: @passenger_request) }
-      else
-        format.html { render(:new, status: :unprocessable_entity) }
-        format.json { render(json: @passenger_request.errors, status: :unprocessable_entity) }
-      end
-    end
+    #respond_to do |format|
+    #  if @passenger_request.save
+    #    format.html { redirect_to(passenger_request_url(@passenger_request), notice: 'Passenger request was successfully created.') }
+    #    format.json { render(:show, status: :created, location: @passenger_request) }
+    #  else
+    #    format.html { render(:new, status: :unprocessable_entity) }
+    #    format.json { render(json: @passenger_request.errors, status: :unprocessable_entity) }
+    #  end
+    #end
   end
 
   # PATCH/PUT /passenger_requests/1 or /passenger_requests/1.json
@@ -66,6 +71,6 @@ class PassengerRequestsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def passenger_request_params
-    params.require(:passenger_request).permit(:comments, :status)
+    params.require(:passenger_request).permit(:comments, :trip_id)
   end
 end

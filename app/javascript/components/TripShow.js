@@ -41,7 +41,7 @@ const TripShow = (props) => {
                       <p className="subtitle is-5"><strong>Salida:</strong> {new Date(trip.leaving_at).toLocaleString('es-CL')}</p>
                   </div>
                   <div className="column is-full is-mobile is-centered pb-5 has-text-centered-mobile	">
-                    <button className="button is-primary" onClick={() => window.location.href = passenger_request_path}>Solicitar unirme al viaje</button>
+                    <button className="button is-primary" onClick={() => window.location.href = passenger_request_path + "?trip_id=" + trip.id}>Solicitar unirme al viaje</button>
                   </div>
               </div>
             </div>

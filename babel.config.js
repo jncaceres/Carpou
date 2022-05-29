@@ -16,11 +16,6 @@ module.exports = function(api) {
   }
 
   return {
-    env: {
-      test: {
-        presets: [['@babel/preset-env'], '@babel/preset-react']
-      }
-    },
     presets: [
       isTestEnv && [
         '@babel/preset-env',
@@ -28,7 +23,7 @@ module.exports = function(api) {
           targets: {
             node: 'current'
           },
-          modules: false
+          modules: 'commonjs'
         },
         '@babel/preset-react'
       ],

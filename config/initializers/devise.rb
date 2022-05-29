@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'b2b1ea23e16ac76a790e9e96c9146e32cd31acd9396139bc55cce7c4658c4c15a8671c21fe6bf8b14054c23d88a0199d7430de12aac06d1d896a5e087cb7cd06'
+  # config.secret_key = '16b229e6190abbd05985c325c11e59a1005cc5e491ae351f31697d154aeaf472067bba40aa9d1ea747605075e13a6bd143232c7f06d70aa044f97c2e68bc4a86'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -27,7 +27,7 @@ Devise.setup do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
-  config.mailer = 'CarpouDeviseMailer'
+  # config.mailer = 'Devise::Mailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
@@ -126,7 +126,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'e3f7e4bf54d15e9379cf2fce706f8047278da618bca966c2552979335ef5e74591121b9887301ef7671b278141c0d8e38cf3fab25912e706012903a5cbabd36e'
+  # config.pepper = '5df4010f8c97d9b9f3328dfc220e456b38e34b08f16fa2a08df17c7b31c812a90e513b0a9a696d31bc15c640cb4ea114c9e8d4618344735897ce26fc646e013e'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -244,7 +244,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  config.scoped_views = true
+  # config.scoped_views = false
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

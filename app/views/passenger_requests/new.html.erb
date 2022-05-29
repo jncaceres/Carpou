@@ -1,5 +1,2 @@
-<h1>New Passenger Request</h1>
-
-<%= render 'form', passenger_request: @passenger_request %>
-
-<%= link_to 'Back', passenger_requests_path %>
+<p id="notice"><%= notice %></p>
+<%= react_component("RequestNew", {trip: @trip, passenger_request_path: passenger_requests_path}) %>

@@ -10,4 +10,15 @@ class User < ApplicationRecord
   has_many :trips
   has_many :passenger_requests
   has_many :trips, through: :passenger_requests
+
+  def age
+    today = Date.today
+    out = today.year - birthdate
+          .year
+    out -= 1 if
+         birthdate.month >  today.month ||
+           (birthdate.month >= today.month && birthdate.day > today.day)
+
+    out
+  end
 end

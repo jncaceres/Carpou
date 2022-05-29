@@ -1,76 +1,45 @@
 import React from "react";
-import { Map, Marker, ZoomControl } from "pigeon-maps";
+import { TripData } from "./TripData";
+import { TripMap } from "./TripMap";
 import { routes } from "../api";
+import { TripPassengerRequests } from "./TripPassengerRequests";
+import { TripButton } from "./TripButton";
 
 const TripShow = (props) => {
-  const { trip } = props;
+  const { trip, user, passengerRequests } = props;
+
   return (
-    <div className="columns is-multiline is-mobile is-centered m-4">
-      <div className="column is-mobile is-full has-text-centered has-text-primary is-size-3 has-text-weight-semibold">
-        Viaje desde {`${trip.from.name} a ${trip.to.name}`}
-      </div>
-      <div className="columns is-mobile is-centered is-multiline">
-        <div className="column is-half-desktop is-half-tablet is-full-mobile is-mobile">
-          <Map
-            height={500}
-            defaultCenter={[trip.from.lat, trip.from.long]}
-            defaultZoom={4}
-          >
-            <ZoomControl />
-            <Marker width={40} anchor={[trip.from.lat, trip.from.long]} />
-            <Marker width={40} anchor={[trip.to.lat, trip.to.long]} />
-          </Map>
-        </div>
-        <div className="column is-full-mobile is-half-tablet is-half-desktop is-mobile">
-          <div className="columns is-multiline is-mobile pt-5">
-            <div className="column is-full pb-5 has-text-centered-mobile	">
-              <p className="subtitle is-5">
-                <strong>Usuario:</strong>{" "}
-                {`${trip.user.name} ${trip.user.last_name}`}
-              </p>
-            </div>
-            <div className="column is-full pb-5 has-text-centered-mobile	">
-              <p className="subtitle is-5">
-                <strong>Email usuario:</strong> {trip.user.email}
-              </p>
-            </div>
-            <div className="column is-full pb-5 has-text-centered-mobile	">
-              <p className="subtitle is-5">
-                <strong>Telefono usuario:</strong> {trip.user.phone}
-              </p>
-            </div>
-            <div className="column is-full pb-5 has-text-centered-mobile	">
-              <p className="subtitle is-5">
-                <strong>Dirección de salida: </strong>: {trip.from_address}
-              </p>
-            </div>
-            <div className="column is-full pb-5 has-text-centered-mobile	">
-              <p className="subtitle is-5">
-                <strong>Dirección de llegada:</strong> {trip.to_address}
-              </p>
-            </div>
-            <div className="column is-full pb-5 has-text-centered-mobile	">
-              <p className="subtitle is-5">
-                <strong>Asientos disponibles:</strong> {trip.available_seats}
-              </p>
-            </div>
-            <div className="column is-full pb-5 has-text-centered-mobile	">
-              <p className="subtitle is-5">
-                <strong>Salida:</strong>{" "}
-                {new Date(trip.leaving_at).toLocaleString("es-CL")}
-              </p>
-            </div>
-            <div className="column is-full is-mobile is-centered pb-5 has-text-centered-mobile	">
-              <a href={routes.passenger_requests.new()}>
-                <button className="button is-primary">
-                  Solicitar unirme al viaje
-                </button>
-              </a>
+    <>
+      {user && user.id == trip.user.id ? (
+        <>
+          <div className="columns is-mobile">
+            <div className="column is-full-mobile">
+              <div className="title mb-1">
+                Mi viaje desde {`${trip.from.name} a ${trip.to.name}`}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+          <TripData trip={trip} showUser={false} />
+          <TripPassengerRequests passengerRequests={passengerRequests} />
+        </>
+      ) : (
+        <>
+          <div className="columns is-multiline is-mobile">
+            <div className="column is-full-mobile title mb-1">
+              Viaje desde {`${trip.from.name} a ${trip.to.name}`}
+            </div>
+            <div className="column is-full-mobile">
+              <TripMap trip={trip} />
+            </div>
+          </div>
+          <TripData trip={trip} />
+          <TripButton
+            buttonText="Solicitar unirme al viaje"
+            route={routes.passenger_requests.new()}
+          />
+        </>
+      )}
+    </>
   );
 };
 

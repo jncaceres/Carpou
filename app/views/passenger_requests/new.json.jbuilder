@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-json.partial!('passenger_requests/passenger_request', trip: @trip)
+json.partial!('trips/trip', trip: @trip)

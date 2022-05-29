@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2022_04_22_192442) do
 
   create_table "passenger_requests", force: :cascade do |t|
     t.text "comments"
-    t.integer "status", default: 0, null: false
+    t.string "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id"

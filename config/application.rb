@@ -18,15 +18,17 @@ module Carpou
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
+    config.time_zone = 'America/Santiago'
     # config.eager_load_paths << Rails.root.join("extras")
     config.i18n.default_locale = :es
     # Set enviroments varibles in config/local_env.yml
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
-      YAML.load(File.open(env_file)).each do |key, value|
-        ENV[key.to_s] = value
-      end if File.exists?(env_file)
+      if File.exist?(env_file)
+        YAML.load(File.open(env_file)).each do |key, value|
+          ENV[key.to_s] = value
+        end
+      end
     end
 
     config.generators do |g|
@@ -34,7 +36,7 @@ module Carpou
         :rspec,
         fixtures: false,
         routing_specs: false,
-        view_specs: false,
+        view_specs: false
       )
     end
   end

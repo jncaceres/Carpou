@@ -4,8 +4,8 @@ import { TripMap } from "./TripMap";
 import { routes } from "../api";
 
 const RequestNew = (props) => {
-  const {trip}  = props;
-
+  let {trip}  = props;
+  trip = trip[0];
   return (
           <>
             <div className="columns is-multiline is-mobile">
@@ -20,10 +20,10 @@ const RequestNew = (props) => {
               <TripData trip={trip} />
             </div>
             <div>
-              <div className="column is-full-mobile is-half-tablet is-half-desktop is-mobile">
+              <div className="column is-full-mobile is-mobile">
                 <div className="columns is-multiline is-mobile pt-5">
                   <div className="column is-full pb-5 has-text-centered-mobile	">
-                    <form id="request_trip" action={routes.passenger_requests.prCreate} acceptCharset="UTF-8" method="post" style={{border: "1px solid #f5efef", padding: 10, borderRadius: 10, backgroundColor: "#ffff"}}>
+                    <form id="request_trip" action={routes.passenger_requests.create()} acceptCharset="UTF-8" method="post" style={{border: "1px solid #f5efef", padding: 10, borderRadius: 10, backgroundColor: "#ffff"}}>
                       <div className="field">
                         <div className="control">
                           <input type="hidden" name="authenticity_token" value={document.getElementsByName("csrf-token")[0].getAttribute("content")} autoComplete="off"></input>

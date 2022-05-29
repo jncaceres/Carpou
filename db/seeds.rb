@@ -66,9 +66,91 @@ puts 'passenger_requests'
 CSV.foreach(Rails.root.join('lib/passenger_requests.csv'), headers: true, col_sep: ';') do |row|
   PassengerRequest.create({
     comments: row[0],
-    status: row[1],
+    status: Integer(row[1], 10),
     user_id: row[2],
     trip_id: row[3]
   }
                          )
 end
+
+# Happy path test data
+test_driver = User.new({
+  name: 'Carpou',
+  last_name: 'Driver',
+  rut: '11.111.111-1',
+  phone: '987664421',
+  gender: 'Male',
+  birthdate: Date.today - 21.years,
+  admin: false,
+  email: 'driver@carpou.com',
+  password: 'password',
+  confirmed_at: Date.today - 2.days
+}
+                      )
+
+test_passenger = User.new({
+  name: 'Carpou',
+  last_name: 'Passenger',
+  rut: '22.111.111-1',
+  phone: '987664421',
+  gender: 'Female',
+  birthdate: Date.today - 21.years,
+  admin: false,
+  email: 'pass@carpou.com',
+  password: 'password',
+  confirmed_at: Date.today - 2.days
+}
+                         )
+
+test_passenger2 = User.new({
+  name: 'Carpou',
+  last_name: 'Passenger2222',
+  rut: '22.111.111-2',
+  phone: '987664421',
+  gender: 'Female',
+  birthdate: Date.today - 21.years,
+  admin: false,
+  email: 'pass2@carpou.com',
+  password: 'password',
+  confirmed_at: Date.today - 2.days
+}
+                          )
+
+driver_trip = Trip.new({
+  from_address: 'test',
+  to_address: 'test',
+  available_seats: '3',
+  leaving_at: DateTime.now + 3.days,
+  price: 1000,
+  comments: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.',
+  car_license_plate: 'JJS420',
+  car_brand: 'BMW',
+  car_model: 'M1',
+  car_color: 'negro',
+  user: test_driver,
+  from_id: 295,
+  to_id: 100
+}
+                      )
+
+pr1 = PassengerRequest.new({
+  comments: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.',
+  user: test_passenger,
+  trip: driver_trip
+}
+                          )
+
+pr2 = PassengerRequest.new({
+  comments: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.',
+  user: test_passenger2,
+  trip: driver_trip
+}
+                          )
+
+print "Test driver created successfully.\n" if test_driver.save
+print "Test passenger created successfully.\n" if test_passenger.save
+print "Test passenger 2 created successfully.\n" if test_passenger2.save
+print "Driver Trip created successfully.\n" if driver_trip.save
+print "PR1 creado correctamente \n" if pr1.save
+print "PR2 creado correctamente \n" if pr2.save
+print 'Done'

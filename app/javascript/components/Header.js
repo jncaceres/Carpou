@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
-
+import { routes } from "../api";
 const Header = (props) => {
-
-
   const {
     user,
     mytrips_route,
     logout_route,
     root_path,
-    login_route,
-    register_route,
   } = props;
 
   const [showNav, setShowNav] = useState(false);
@@ -49,7 +45,7 @@ const Header = (props) => {
           <a className="navbar-item"  data-method="get" href={mytrips_route}>
             Mis viajes
           </a>
-          <a className="navbar-item"  data-method="get" href={ register_route}>
+          <a className="navbar-item"  data-method="get" href={routes.trips.new()}>
             Crear viaje
           </a>
 
@@ -64,10 +60,10 @@ const Header = (props) => {
             </>
           ) : (
             <>
-              <a className="navbar-item" href={login_route}>
+              <a className="navbar-item" href={routes.users.session()}>
                 Iniciar sesión
               </a>
-              <a className="navbar-item" href={register_route}>
+              <a className="navbar-item" href={routes.users.registration()}>
                 Registrarme
               </a>
             </>

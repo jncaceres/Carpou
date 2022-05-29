@@ -1,10 +1,10 @@
 import React from "react";
-
+import { routes } from "../api";
 const newTrip = (props) =>{
-  const {user, new_trip_path, places,notice} = props;
+  const {user,  places,notice} = props;
 
   return (
-      <form action = {new_trip_path}
+      <form action = {routes.trips.post()}
       method="post"
       acceptCharset="UTF-8" 
       style={{border: "1px solid #f5efef", padding: 5,

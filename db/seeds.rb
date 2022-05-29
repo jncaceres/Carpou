@@ -66,7 +66,7 @@ puts 'passenger_requests'
 CSV.foreach(Rails.root.join('lib/passenger_requests.csv'), headers: true, col_sep: ';') do |row|
   PassengerRequest.create({
     comments: row[0],
-    status: row[1].to_i,
+    status: Integer(row[1], 10),
     user_id: row[2],
     trip_id: row[3]
   }

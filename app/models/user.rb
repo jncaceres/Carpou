@@ -16,10 +16,9 @@ class User < ApplicationRecord
     out = today.year - birthdate
           .year
     out -= 1 if
-         birthdate.month >  today.month or
-           (birthdate.month >= today.month and birthdate.day > today.day)
+         birthdate.month >  today.month ||
+           (birthdate.month >= today.month && birthdate.day > today.day)
 
     out
   end
-
 end

@@ -53,15 +53,15 @@ class PassengerRequestsController < ApplicationController
   end
 
   def driver_update
-    if @passenger_request.trip.user == current_user
-      respond_to do |format|
-        if @passenger_request.update(passenger_request_params)
-          format.html { redirect_to(passenger_request_url(@passenger_request), notice: 'Passenger request was successfully updated.') }
-          format.json { render(:show, status: :ok, location: @passenger_request) }
-        else
-          format.html { render(:edit, status: :unprocessable_entity) }
-          format.json { render(json: @passenger_request.errors, status: :unprocessable_entity) }
-        end
+    return unless @passenger_request.trip.user == current_user
+
+    respond_to do |format|
+      if @passenger_request.update(passenger_request_params)
+        format.html { redirect_to(passenger_request_url(@passenger_request), notice: 'Passenger request was successfully updated.') }
+        format.json { render(:show, status: :ok, location: @passenger_request) }
+      else
+        format.html { render(:edit, status: :unprocessable_entity) }
+        format.json { render(json: @passenger_request.errors, status: :unprocessable_entity) }
       end
     end
   end

@@ -27,7 +27,7 @@ class TripsController < ApplicationController
   # GET /trips/1 or /trips/1.json
   def show
     @passenger_requests = if @trip.user == current_user
-                            @trip.passenger_requests.as_json(methods: %i[formatted_created_at],include: {
+                            @trip.passenger_requests.as_json(methods: %i[formatted_created_at], include: {
                               user: {
                                 only: %i[
                                   name last_name phone email
@@ -36,7 +36,7 @@ class TripsController < ApplicationController
                                 methods: %i[age]
                               }
                             }
-                                                            )
+                            )
                           else
                             []
                           end

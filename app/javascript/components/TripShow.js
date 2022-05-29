@@ -5,23 +5,6 @@ import { routes } from "../api";
 import { TripPassengerRequests } from "./TripPassengerRequests";
 import { TripButton } from "./TripButton";
 
-const passengerRequestsAux = [
-  {
-    name: "John Smith",
-    phone: "987766201",
-    email: "john@gmail.com",
-    comments:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-  },
-  {
-    name: "Smith Jon Jones",
-    phone: "987766201",
-    email: "john@gmail.com",
-    comments:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.",
-  },
-];
-
 const TripShow = (props) => {
   const { trip, user, passengerRequests } = props;
 

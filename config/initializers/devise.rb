@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '# config.secret_key = 'b2b1ea23e16ac76a790e9e96c9146e32cd31acd9396139bc55cce7c4658c4c15a8671c21fe6bf8b14054c23d88a0199d7430de12aac06d1d896a5e087cb7cd06'
+  # config.secret_key = 'b2b1ea23e16ac76a790e9e96c9146e32cd31acd9396139bc55cce7c4658c4c15a8671c21fe6bf8b14054c23d88a0199d7430de12aac06d1d896a5e087cb7cd06'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -28,6 +28,7 @@ Devise.setup do |config|
 
   # Configure the class responsible to send e-mails.
   config.mailer = 'CarpouDeviseMailer'
+
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 

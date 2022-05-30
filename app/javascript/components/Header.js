@@ -5,6 +5,7 @@ const Header = (props) => {
   const {
     user,
     mytrips_route,
+    my_requests_route,
     logout_route,
     root_path,
     login_route,
@@ -45,7 +46,9 @@ const Header = (props) => {
               <a className="navbar-item" data-method="get" href={mytrips_route}>
                 Mis viajes
               </a>
-
+              <a className="navbar-item" data-method="get" href={my_requests_route}>
+                Mis solicitudes
+              </a>
               <a
                 className="navbar-item"
                 data-method="delete"

@@ -18,6 +18,7 @@
         {
           user: current_user,
           mytrips_route: nil,
+          my_requests_route: nil,
           logout_route: destroy_user_session_path,
           root_path: root_path,
           login_route: new_user_session_path,
@@ -29,6 +30,7 @@
         {
           user: current_user,
           mytrips_route: trips_from_user_path(current_user.id),
+          my_requests_route: passenger_requests_from_user_path(current_user.id), 
           logout_route: destroy_user_session_path,
           root_path: root_path,
           login_route: new_user_session_path,

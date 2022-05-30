@@ -3,6 +3,11 @@
 require 'csv'
 require 'date'
 
+Place.delete_all
+User.delete_all
+Trip.delete_all
+PassengerRequest.delete_all
+
 puts 'comunas'
 CSV.foreach(Rails.root.join('lib/comunas.csv'), headers: true) do |row|
   Place.create({ name: row[1], lat: row[2], long: row[3] })

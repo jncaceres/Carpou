@@ -14,7 +14,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '95ae80c582b2786e79b8a2b316d0998a03e727ef42442f7b9a61c30b00b88549288cff25fc5bdceb4f77a0ab8acd60f5dc9acf0d5ced661078490882151f8b45'
+  # config.secret_key = '# config.secret_key = 'b2b1ea23e16ac76a790e9e96c9146e32cd31acd9396139bc55cce7c4658c4c15a8671c21fe6bf8b14054c23d88a0199d7430de12aac06d1d896a5e087cb7cd06'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -27,8 +27,7 @@ Devise.setup do |config|
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
-
+  config.mailer = 'CarpouDeviseMailer'
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
 
@@ -126,7 +125,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '8244a90bd1b6adab4a4bb5f9d9be5c5716115a79c46c0244d17c9deb034e98739755fc291142081f26fa8387d1f5377bf5b22bbf47e1605d487113499aa3da0b'
+  # config.pepper = 'e3f7e4bf54d15e9379cf2fce706f8047278da618bca966c2552979335ef5e74591121b9887301ef7671b278141c0d8e38cf3fab25912e706012903a5cbabd36e'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -244,7 +243,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

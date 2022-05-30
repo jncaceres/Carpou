@@ -2,7 +2,7 @@
 
 class PassengerRequestsController < ApplicationController
   before_action :set_passenger_request, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: %i[new create]
 
   # GET /passenger_requests or /passenger_requests.json
   def index
@@ -24,32 +24,28 @@ class PassengerRequestsController < ApplicationController
 
   # POST /passenger_requests or /passenger_requests.json
   def create
-    comment = passenger_request_params["comments"]
-    trip_id = passenger_request_params["trip_id"]
+    comment = passenger_request_params['comments']
+    trip_id = passenger_request_params['trip_id']
     trip = Trip.find_by(id: trip_id)
     if trip.nil?
-      redirect_to root_path, alert: "Un error inesperado ocurrió, el viaje al que solicitaste unirte no existe"
+      redirect_to(root_path, alert: 'Un error inesperado ocurrió, el viaje al que solicitaste unirte no existe')
       return
     elsif trip.user_id == current_user.id
-      redirect_to root_path, alert: "No puedes unirte a tu propio viaje"
+      redirect_to(root_path, alert: 'No puedes unirte a tu propio viaje')
       return
     end
 
     previous_request = PassengerRequest.where(trip_id: trip_id)
     already_requested = previous_request.find_by(user_id: current_user.id)
-    if already_requested != nil
-      redirect_to root_path, alert: "Ya has solicitado unirte a este viaje"
-      return
+    if !already_requested.nil?
+      redirect_to(root_path, alert: 'Ya has solicitado unirte a este viaje')
     elsif previous_request.length < trip.available_seats
       PassengerRequest.create(comments: comment, trip_id: trip_id, status: 0, user_id: current_user.id)
-      redirect_to root_path, alert: "Viaje creado con éxito"
-      return
+      redirect_to(root_path, alert: 'Viaje creado con éxito')
     else
-      redirect_to root_path, alert: "No quedan asientos disponibles :C"
-      return
+      redirect_to(root_path, alert: 'No quedan asientos disponibles :C')
     end
-    
-    
+    nil
   end
 
   # PATCH/PUT /passenger_requests/1 or /passenger_requests/1.json

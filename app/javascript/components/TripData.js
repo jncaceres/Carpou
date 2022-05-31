@@ -1,6 +1,5 @@
 import React from "react";
-import { TripButton } from "./TripButton";
-import { routes } from "../api";
+
 export const TripData = ({ trip = {}, showUser = true }) => {
   return (
     <><div className="columns is-multiline is-mobile">
@@ -39,8 +38,8 @@ export const TripData = ({ trip = {}, showUser = true }) => {
           <p className="subtitle">{trip.comments}</p>
         </div>
       </div>
-    </div><TripButton
-        buttonText="Editar viaje"
-        route={routes.trips.edit(trip.id)} /></>
+    </div>
+   
+   </>
   );
 };

@@ -68,10 +68,14 @@ class TripsController < ApplicationController
   # PATCH/PUT /trips/1 or /trips/1.json
   def update
     @trip = Trip.find(params[:id])
-    if @trip.update(trip_params)
-      redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente')
+    if @trip.user_id == current_user.id
+      if @trip.update(trip_params)
+        redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente')
+      else
+        redirect_to(edit_trip_path(@trip.id), notice: '¡Error al editar el viaje!')
+      end
     else
-      redirect_to(edit_trip_path(@trip.id), notice: '¡Error al editar el viaje!')
+      redirect_to(edit_trip_path(@trip.id), notice: '¡No tienes los permisos para editar este viaje!')
     end
   end
 

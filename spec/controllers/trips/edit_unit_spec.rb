@@ -30,6 +30,7 @@ RSpec.describe(TripsController) do
   describe 'put #update' do
     it 'update specific trip and redirects to #show' do
       trip_bot = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user.id)
+      sign_in :user, @user
       trip_bot.save
       put :update, params: {
         id: trip_bot.id,
@@ -54,6 +55,7 @@ RSpec.describe(TripsController) do
     it 'update specific trip and redirects to #edit because attribute is missing' do
       trip_bot = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user.id)
       trip_bot.save
+      sign_in :user, @user
       put :update, params: {
         id: trip_bot.id,
         trip: {

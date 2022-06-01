@@ -72,7 +72,11 @@ class TripsController < ApplicationController
   # @param id [Int]
   #
   # @return [Array<Place>, Trip]
-  def edit; end
+  def edit
+    @trip = @trip.as_json(include: %i[user to from])
+
+    @places = Place.all
+  end
 
   # POST /trips or /trips.json
   # Crear un Trip
@@ -146,14 +150,15 @@ class TripsController < ApplicationController
   #
   # @return [Trip]
   def update
-    respond_to do |format|
+    @trip = Trip.find(params[:id])
+    if @trip.user_id == current_user.id
       if @trip.update(trip_params)
-        format.html { redirect_to(trip_url(@trip), notice: 'Trip was successfully updated.') }
-        format.json { render(:show, status: :ok, location: @trip) }
+        redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente')
       else
-        format.html { render(:edit, status: :unprocessable_entity) }
-        format.json { render(json: @trip.errors, status: :unprocessable_entity) }
+        redirect_to(edit_trip_path(@trip.id), notice: '¡Error al editar el viaje!')
       end
+    else
+      redirect_to(edit_trip_path(@trip.id), notice: '¡No tienes los permisos para editar este viaje!')
     end
   end
 
@@ -209,8 +214,8 @@ class TripsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def trip_params
-    params.permit(:from_address, :to_address, :available_seats, :leaving_at, :price, :comments, :car_license_plate, :car_brand,
-                  :car_model, :car_color, :user_id, :from_id, :to_id
+    params.require(:trip).permit(:from_address, :to_address, :available_seats, :leaving_at, :price, :comments, :car_license_plate, :car_brand,
+                                 :car_model, :car_color, :user_id, :from_id, :to_id
     )
   end
 

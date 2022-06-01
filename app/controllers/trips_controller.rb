@@ -1,10 +1,20 @@
 # frozen_string_literal: true
 
+# Controlador de Trips
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[new create trips_from_user]
 
   # GET /trips or /trips.json
+  # Obtener una lista de trips que cumplen con ciertos parametros
+  #
+  # @param from [Int]
+  #
+  # @param to [Int]
+  #
+  # @param date [DateTime]
+  #
+  # @return [Array<Trip>]
   def index
     from_place = list_query_params[:from]
     to_place = list_query_params[:to]
@@ -24,7 +34,12 @@ class TripsController < ApplicationController
     @trips = filtered_trips.as_json(include: %i[user to from])
   end
 
-  # GET /trips/1 or /trips/1.json
+  # GET /trips/:id or /trips/:id.json
+  # Obtener un Trip
+  #
+  # @param id [Int]
+  #
+  # @return [Array<PassengerRequest>, Trip]
   def show
     @passenger_requests = if @trip.user == current_user
                             @trip.passenger_requests.as_json(methods: %i[formatted_created_at], include: {
@@ -44,11 +59,19 @@ class TripsController < ApplicationController
   end
 
   # GET /trips/new
+  # Inicializar un nuevo Trip
+  #
+  # @return [Array<Place>]
   def new
     @places = Place.all
   end
 
-  # GET /trips/1/edit
+  # GET /trips/:id/edit
+  # Obtiene un Trip para editar
+  #
+  # @param id [Int]
+  #
+  # @return [Array<Place>, Trip]
   def edit
     @trip = @trip.as_json(include: %i[user to from])
 
@@ -56,6 +79,35 @@ class TripsController < ApplicationController
   end
 
   # POST /trips or /trips.json
+  # Crear un Trip
+  #
+  # @param from_address [String]
+  #
+  # @param to_address [String]
+  #
+  # @param available_seats [Int]
+  #
+  # @param leaving_at [DateTime]
+  #
+  # @param price [Int]
+  #
+  # @param comments [String]
+  #
+  # @param car_license_plate [String]
+  #
+  # @param car_brand [String]
+  #
+  # @param car_model [String]
+  #
+  # @param car_color [String]
+  #
+  # @param user_id [Int]
+  #
+  # @param from_id [Int]
+  #
+  # @param to_id [Int]
+  #
+  # @return [Trip]
   def create
     @trip = current_user.trips.create(trip_params)
     if @trip.save
@@ -65,7 +117,38 @@ class TripsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /trips/1 or /trips/1.json
+  # PATCH/PUT /trips/:id or /trips/:id.json
+  # Editar un Trip
+  #
+  # @param id [Int]
+  #
+  # @param from_address [String]
+  #
+  # @param to_address [String]
+  #
+  # @param available_seats [Int]
+  #
+  # @param leaving_at [DateTime]
+  #
+  # @param price [Int]
+  #
+  # @param comments [String]
+  #
+  # @param car_license_plate [String]
+  #
+  # @param car_brand [String]
+  #
+  # @param car_model [String]
+  #
+  # @param car_color [String]
+  #
+  # @param user_id [Int]
+  #
+  # @param from_id [Int]
+  #
+  # @param to_id [Int]
+  #
+  # @return [Trip]
   def update
     @trip = Trip.find(params[:id])
     if @trip.user_id == current_user.id
@@ -79,7 +162,10 @@ class TripsController < ApplicationController
     end
   end
 
-  # DELETE /trips/1 or /trips/1.json
+  # DELETE /trips/:id or /trips/:id.json
+  # Eliminar un Trip
+  #
+  # @param id [Int]
   def destroy
     @trip.destroy
 
@@ -89,6 +175,12 @@ class TripsController < ApplicationController
     end
   end
 
+  # GET /users/:id/trips
+  # Obtener trips de un User
+  #
+  # @param id [Int]
+  #
+  # @return [Array<Trip>]
   def trips_from_user
     user_id = params[:id]
     if Integer(user_id, 10) != current_user.id

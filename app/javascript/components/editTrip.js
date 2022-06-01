@@ -6,7 +6,7 @@ const editTrip = (props) =>{
  
 
   return (
-      <form action={routes.trips.update()}
+      <form action={routes.trips.update(trip.id)}
       method="post"
       acceptCharset="UTF-8" 
       style={{border: "1px solid #f5efef", padding: 5,

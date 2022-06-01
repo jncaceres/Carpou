@@ -22,7 +22,7 @@ const TripCard = (props) => {
       </div>
       <div className="card-content p-0">
         <div className="media">
-          <div className="media-content">
+          <div className="media-content" style={{overflowX: 'unset'}}>
             <div className="columns is-multiline is-mobile">
               <div className="column is-half pb-0">
                 <p className="subtitle is-6">

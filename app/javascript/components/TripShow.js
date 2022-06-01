@@ -20,6 +20,7 @@ const TripShow = (props) => {
             </div>
           </div>
           <TripData trip={trip} showUser={false} />
+          <TripButton buttonText="Editar viaje" route={routes.trips.edit(trip.id)} />
           <TripPassengerRequests passengerRequests={passengerRequests} />
         </>
       ) : (

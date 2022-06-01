@@ -38,7 +38,7 @@ const LoginForm = (props) => {
             </div>
             <div className="field">
                 <div className="control">
-                  <a href={props.user_registration_path}>¿Aún no tienes cuenta? Regístrate acá</a>
+                  
                 </div>
             </div>
            
@@ -47,6 +47,7 @@ const LoginForm = (props) => {
           <div className="column is-half">
             <p className="bd-notification is-primary has-text-centered">
               <a href={forgot_password_path}>¿Haz olvidado tu contraseña?</a>
+              <a href={props.user_registration_path}>¿Aún no tienes cuenta? Regístrate acá</a>
             </p>
           </div>
         </div>

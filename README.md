@@ -54,3 +54,6 @@ GMAIL_PASSWORD: 'password'
 donde 'mail' es el mail de la organización y password su contraseña.
 
 Los mails se pueden visualizar en la ruta http://localhost:3000/rails/mailers
+
+# Yard docs
+Luego de correr `docker compose up --build` (solo para instalar la gema) se puede correr el comando `yardoc 'app/controllers/*.rb' 'app/models/*rb'` para generar la documentación de la api.

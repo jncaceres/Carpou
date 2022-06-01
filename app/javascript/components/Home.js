@@ -2,7 +2,8 @@ import React from "react";
 import TripForm from "./TripForm";
 import background from "../assets/background.jpg";
 
-const Home = () => {
+const Home = (props) => {
+  const { places } = props;
   return (
     <>
       <div
@@ -22,7 +23,7 @@ const Home = () => {
         </div>
       </div>
       <div className="section" style={{ marginTop: -120 }}>
-        <TripForm />
+        <TripForm places={places} />
       </div>
     </>
   );

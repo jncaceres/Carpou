@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  def index; end
+  # Obtiene todos los lugares (Places) para viajar.
+  #
+  # @return [Array<Place>]
+  def index
+    @places = Place.all
+  end
 end

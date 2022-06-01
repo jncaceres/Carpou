@@ -2,8 +2,10 @@ import React from "react";
 import background from "../../../assets/background.jpg";
 
 const LoginForm = (props) => {
+    const {user_session_path,  forgot_password_path} = props;
     return(
-        <form action = {props.user_session_path}
+      <>
+        <form action = {user_session_path}
         method="post"
         acceptCharset="UTF-8" 
         style={{border: "1px solid #f5efef", padding: 10,
@@ -21,12 +23,12 @@ const LoginForm = (props) => {
 
             <div className="field">
                 <div className="control">
-                    <input name="user[email]" className="input" placeholder="Email"/>
+                    <input name="user[email]" className="input" placeholder="Email" required/>
                 </div>
             </div>
             <div className="field">
                 <div className="control">
-                    <input className="input" name="user[password]" type= "password" placeholder="Contraseña"/>
+                    <input className="input" name="user[password]" type= "password" placeholder="Contraseña" required/>
                 </div>
             </div>
             <div className="field">
@@ -34,13 +36,28 @@ const LoginForm = (props) => {
                     <button className="button is-primary is-fullwidth" type='submit'>Ingresar</button>
                 </div>
             </div>
+            <div className="field">
+                <div className="control">
+                  
+                </div>
+            </div>
+           
         </form>
-
+        <div className="columns is-mobile is-centered">
+          <div className="column is-half">
+            <p className="bd-notification is-primary has-text-centered">
+              <a href={forgot_password_path}>¿Haz olvidado tu contraseña?</a>
+              <a href={props.user_registration_path}>¿Aún no tienes cuenta? Regístrate acá</a>
+            </p>
+          </div>
+        </div>
+      </>
     );
 
 };
 
 const loginIndex = (props) => {
+  const {user_session_path,  forgot_password_path, user_registration_path} = props;
     return (
         <>
         <div
@@ -60,7 +77,9 @@ const loginIndex = (props) => {
           </div>
         </div>
         <div className="section" style={{ marginTop: -120 }}>
-          <LoginForm user_session_path={props.user_session_path}/>
+        
+          <LoginForm user_session_path={user_session_path} forgot_password_path={forgot_password_path} user_registration_path= {user_registration_path}/>
+
           
         </div>
       </>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions', registrations: 'users/registrations'
   }
+  get '/users/:id/trips', to: 'trips#trips_from_user', as: 'trips_from_user'
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

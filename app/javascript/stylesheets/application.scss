@@ -4,3 +4,9 @@
 .home-banner {
   height: 45vh;
 }
+
+a {
+  &:hover {
+    background-color: white;
+  }
+}

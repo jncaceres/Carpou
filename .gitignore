@@ -40,3 +40,9 @@ yarn-debug.log*
 .env.test
 
 /coverage
+
+.DS_Store
+
+.yardoc
+
+doc

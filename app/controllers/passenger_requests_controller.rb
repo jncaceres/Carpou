@@ -63,8 +63,9 @@ class PassengerRequestsController < ApplicationController
     previous_request = PassengerRequest.where(trip_id: trip_id)
     # Look if the user has already requested to join
     already_requested = previous_request.find_by(user_id: current_user.id)
-    if !already_requested.nil?
+    unless already_requested.nil?
       redirect_to(root_path, alert: 'Ya has solicitado unirte a este viaje')
+      return
     end
 
     # Look if the trip has already accepted the limit amount of passengers
@@ -72,7 +73,7 @@ class PassengerRequestsController < ApplicationController
     # if there are available seats, create the request
     if requests_accepted.length < trip.available_seats
       PassengerRequest.create(comments: comment, trip_id: trip_id, status: 'pending', user_id: current_user.id)
-      redirect_to(root_path, alert: 'Viaje creado con éxito')
+      redirect_to(root_path, alert: 'Solicitud creada con éxito')
     # if not
     else
       redirect_to(root_path, alert: 'No quedan asientos disponibles :C')

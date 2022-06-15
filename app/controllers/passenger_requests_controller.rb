@@ -60,7 +60,7 @@ class PassengerRequestsController < ApplicationController
     if !already_requested.nil?
       redirect_to(root_path, alert: 'Ya has solicitado unirte a este viaje')
     elsif previous_request.length < trip.available_seats
-      PassengerRequest.create(comments: comment, trip_id: trip_id, status: 0, user_id: current_user.id)
+      PassengerRequest.create(comments: comment, trip_id: trip_id, status: "pending", user_id: current_user.id)
       redirect_to(root_path, alert: 'Viaje creado con éxito')
     else
       redirect_to(root_path, alert: 'No quedan asientos disponibles :C')

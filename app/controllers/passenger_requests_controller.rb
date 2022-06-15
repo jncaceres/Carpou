@@ -1,54 +1,96 @@
 # frozen_string_literal: true
 
+# Controlador de PassengerRequests
 class PassengerRequestsController < ApplicationController
   before_action :set_passenger_request, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[new create]
 
   # GET /passenger_requests or /passenger_requests.json
+  # Obtiene todos los PassengerRequests
+  #
+  # @return [Array<PassengerRequest>]
   def index
     @passenger_requests = PassengerRequest.all
   end
 
-  # GET /passenger_requests/1 or /passenger_requests/1.json
+  # GET /passenger_requests/:id or /passenger_requests/:id.json
+  # Obtiene un PassengerRequest
+  #
+  # @param id [Int]
+  # @return [PassengerRequest]
   def show; end
 
   # GET /passenger_requests/new
+  # Inicializa un PassengerRequest
+  #
+  # @return [PassengerRequest]
   def new
     trip_id = Integer(params[:trip_id], 10)
     @trip = Trip.where(id: trip_id)
     @trip = @trip.as_json(include: %i[user to from])
   end
 
-  # GET /passenger_requests/1/edit
+  # GET /passenger_requests/:id/edit
+  # Obtiene un PassengerRequest para editar
+  #
+  # @param id [Int]
+  # @return [PassengerRequest]
   def edit; end
 
   # POST /passenger_requests or /passenger_requests.json
+  # Creación de un PassengerRequest
+  #
+  # @param comments [String]
+  #
+  # @return [PassengerRequest]
   def create
     comment = passenger_request_params['comments']
     trip_id = passenger_request_params['trip_id']
+
+    # Look if the trip exists an thren if the trip is created by the same user that
+    # requests to join
     trip = Trip.find_by(id: trip_id)
+    # if it doesnt exists
     if trip.nil?
       redirect_to(root_path, alert: 'Un error inesperado ocurrió, el viaje al que solicitaste unirte no existe')
       return
+    # if exists and is created by the same user that requests to join
     elsif trip.user_id == current_user.id
       redirect_to(root_path, alert: 'No puedes unirte a tu propio viaje')
       return
     end
 
     previous_request = PassengerRequest.where(trip_id: trip_id)
+    # Look if the user has already requested to join
     already_requested = previous_request.find_by(user_id: current_user.id)
-    if !already_requested.nil?
+    unless already_requested.nil?
       redirect_to(root_path, alert: 'Ya has solicitado unirte a este viaje')
-    elsif previous_request.length < trip.available_seats
-      PassengerRequest.create(comments: comment, trip_id: trip_id, status: 0, user_id: current_user.id)
-      redirect_to(root_path, alert: 'Viaje creado con éxito')
+      return
+    end
+
+    # Look if the trip has already accepted the limit amount of passengers
+    requests_accepted = PassengerRequest.where(trip_id: trip_id, status: 'accepted')
+    # if there are available seats, create the request
+    if requests_accepted.length < trip.available_seats
+      PassengerRequest.create(comments: comment, trip_id: trip_id, status: 'pending', user_id: current_user.id)
+      redirect_to(root_path, alert: 'Solicitud creada con éxito')
+    # if not
     else
       redirect_to(root_path, alert: 'No quedan asientos disponibles :C')
     end
     nil
   end
 
-  # PATCH/PUT /passenger_requests/1 or /passenger_requests/1.json
+  # PATCH/PUT /passenger_requests/:id or /passenger_requests/:id.json
+  # Update de un PassengerRequest
+  #
+  # @param id [Int]
+  #
+  # @param comments [String]
+  #
+  # @param status [Int]
+  #
+  # @return [PassengerRequest]
   def update
     if @passenger_request.trip.user == current_user
       @passenger_request.assign_attributes(status: params[:status])
@@ -80,7 +122,10 @@ class PassengerRequestsController < ApplicationController
     end
   end
 
-  # DELETE /passenger_requests/1 or /passenger_requests/1.json
+  # DELETE /passenger_requests/:id or /passenger_requests/:id.json
+  # Eliminar un PassengerRequest
+  #
+  # @param id [Int]
   def destroy
     @passenger_request.destroy
 

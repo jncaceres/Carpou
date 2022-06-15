@@ -9,3 +9,17 @@ export const tIndex = (params) => {
 export const tShow = (id) => {
   return `/trips/${id}`;
 };
+export const tNew = () => {
+  return `/trips/new`;
+};
+
+export const tEdit = (id) => {
+  return `/trips/${id}/edit`;
+};
+
+export const tUpdate = (id) => {
+  return `/trips/${id}`;
+};
+export const tPost = () => {
+  return `/trips`;
+};

@@ -2,7 +2,7 @@ import React from "react";
 
 export const TripData = ({ trip = {}, showUser = true }) => {
   return (
-    <div className="columns is-multiline is-mobile">
+    <><div className="columns is-multiline is-mobile">
       {showUser && (
         <div className="column is-full-mobile">
           <div>
@@ -39,5 +39,7 @@ export const TripData = ({ trip = {}, showUser = true }) => {
         </div>
       </div>
     </div>
+   
+   </>
   );
 };

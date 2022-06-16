@@ -3,7 +3,7 @@
 # Controlador de PassengerRequests
 class PassengerRequestsController < ApplicationController
   before_action :set_passenger_request, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!, only: %i[new create destroy]
 
   # GET /passenger_requests or /passenger_requests.json
   # Obtiene todos los PassengerRequests

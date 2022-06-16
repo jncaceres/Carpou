@@ -127,12 +127,21 @@ class PassengerRequestsController < ApplicationController
   #
   # @param id [Int]
   def destroy
+    # can't cancel a request that doesn't belongs to you
+    if @passenger_request.user_id != current_user.id
+      redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No puedes cancelar una solicitud que no es tuya')
+      return
+    end
+
+    # if the request was accepted, notify the driver
+    if @passenger_request.status == 'aceptada'
+      # notificar a conductor
+    end
+
     @passenger_request.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(passenger_requests_url, notice: 'Passenger request was successfully destroyed.') }
-      format.json { head(:no_content) }
-    end
+    redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'Se ha cancelado la solicitud con éxito')
+    nil
   end
 
   def passenger_requests_from_user
@@ -149,7 +158,12 @@ class PassengerRequestsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_passenger_request
-    @passenger_request = PassengerRequest.find(params[:id])
+    @passenger_request = PassengerRequest.where(id: params[:id])
+    if @passenger_request.length.zero?
+      redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No existe la solicitud pedida')
+    else
+      @passenger_request = @passenger_request.first
+    end
   end
 
   # Only allow a list of trusted parameters through.

@@ -1,11 +1,22 @@
 import React from "react";
+import { routes } from "../api";
+
 
 export const MyPassengerRequestCard = ({
   passengerRequest = {},
   labelText = "",
   labelColor = "",
 }) => {
+
+  const handleClick = (e) => {
+    const answer = window.confirm("¿Estas seguro de querer eliminar esta solicitud?")
+    if (!answer) {
+      e.preventDefault()
+    }
+  }
+
   return (
+
     <div className="card">
       <div className="card-content">
         <div className="media">
@@ -28,7 +39,7 @@ export const MyPassengerRequestCard = ({
           </ul>
         </div>
 
-        <footer className="columns is-multiline is-mobile card-footer">
+        <div className="columns is-multiline is-mobile card-footer">
           <div className="card-footer-item column is-half-mobile">
             <div>
               <p className="heading">Auto</p>
@@ -53,7 +64,20 @@ export const MyPassengerRequestCard = ({
               <p className="subtitle">{passengerRequest.trip.car_model}</p>
             </div>
           </div>
+        </div>
+
+        <footer className="content">
+          <div className="columns is-multiline is-mobile">
+            <div className="column is-full-mobile">
+              <a href={routes.passenger_requests.delete(passengerRequest.id)} data-method="delete">
+                <button className="button is-danger is-fullwidth" onClick={handleClick}> 
+                  Cancelar Solicitud
+                </button>
+              </a>
+            </div>
+          </div>
         </footer>
+
       </div>
     </div>
   );

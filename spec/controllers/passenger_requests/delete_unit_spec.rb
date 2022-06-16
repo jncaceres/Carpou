@@ -19,9 +19,9 @@ RSpec.describe(PassengerRequestsController) do
     @trip_driver1.save
     @trip_driver2.save
 
-    @request_user1_driver2_pending = FactoryBot.create(:passenger_request, comments: "Some comments", user_id: @user1.id, trip_id: @trip_driver2.id, status: 0)
-    @request_user1_driver2_accepted = FactoryBot.create(:passenger_request, comments: "Some comments", user_id: @user1.id, trip_id: @trip_driver2.id, status: 1)
-    @request_user2_driver1_pending = FactoryBot.create(:passenger_request, comments: "Some comments", user_id: @user2.id, trip_id: @trip_driver1.id, status: 0)
+    @request_user1_driver2_pending = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user1.id, trip_id: @trip_driver2.id, status: 0)
+    @request_user1_driver2_accepted = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user1.id, trip_id: @trip_driver2.id, status: 1)
+    @request_user2_driver1_pending = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user2.id, trip_id: @trip_driver1.id, status: 0)
     @request_user1_driver2_pending.save
     @request_user1_driver2_accepted.save
     @request_user2_driver1_pending.save
@@ -37,20 +37,24 @@ RSpec.describe(PassengerRequestsController) do
   describe 'DELETE passenger_request/:id' do
     it 'get a 302 response if connected' do
       sign_in @user1
-      delete :destroy, params: {id: @request_user1_driver2_pending.id}
-      expect(response).to have_http_status(302)
+      delete :destroy, params: { id: @request_user1_driver2_pending.id }
+      expect(response).to(have_http_status(302))
     end
     it 'get a 302 response if not connected' do
-      delete :destroy, params: {id: @request_user1_driver2_pending.id}
-      expect(response).to have_http_status(302)
+      delete :destroy, params: { id: @request_user1_driver2_pending.id }
+      expect(response).to(have_http_status(302))
     end
     it 'a request is deleted if user is allowed' do
       sign_in @user1
-      expect { delete(:destroy, params: { id: @request_user1_driver2_pending.id})}.to(change { PassengerRequest.count }.by(-1))
+      expect { delete(:destroy, params: { id: @request_user1_driver2_pending.id }) }.to(change { PassengerRequest.count }.by(-1))
     end
     it 'a request is not deleted if user is not allowed' do
       sign_in @user1
-      expect{ delete(:destroy, params: { id: @request_user2_driver1_pending.id})}.to(change { PassengerRequest.count }.by(0))
+      expect { delete(:destroy, params: { id: @request_user2_driver1_pending.id }) }.to(change { PassengerRequest.count }.by(0))
+    end
+    it 'send an email if requeste was accepted' do
+      sign_in @user1
+      expect { delete(:destroy, params: { id: @request_user1_driver2_accepted.id }) }.to(change { ActionMailer::Base.deliveries.count }.by(1))
     end
   end
 end

@@ -7,14 +7,6 @@ export const MyPassengerRequestCard = ({
   labelText = "",
   labelColor = "",
 }) => {
-
-  const handleClick = (e) => {
-    const answer = window.confirm("¿Estas seguro de querer eliminar esta solicitud?")
-    if (!answer) {
-      e.preventDefault()
-    }
-  }
-
   return (
 
     <div className="card">
@@ -69,10 +61,8 @@ export const MyPassengerRequestCard = ({
         <footer className="content">
           <div className="columns is-multiline is-mobile">
             <div className="column is-full-mobile">
-              <a href={routes.passenger_requests.delete(passengerRequest.id)} data-method="delete">
-                <button className="button is-danger is-fullwidth" onClick={handleClick}> 
+              <a className="button is-danger is-fullwidth" href={routes.passenger_requests.delete(passengerRequest.id)} data-method="delete" data-confirm="¿Estas seguro de querer eliminar esta solicitud?">
                   Cancelar Solicitud
-                </button>
               </a>
             </div>
           </div>

@@ -141,7 +141,8 @@ class PassengerRequestsController < ApplicationController
         driver: @passenger_request.trip.user,
         origin_place: @passenger_request.trip.from,
         destination_place: @passenger_request.trip.to
-      }).request_canceled.deliver_now
+      }
+                      ).request_canceled.deliver_now
     end
 
     @passenger_request.destroy

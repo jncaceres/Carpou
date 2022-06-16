@@ -37,23 +37,20 @@ RSpec.describe(PassengerRequestsController) do
   describe 'DELETE passenger_request/:id' do
     it 'get a 302 response if connected' do
       sign_in @user1
-      delete "/passenger_requests/#{@request_user1_driver2_pending.id}"
+      delete :destroy, params: {id: @request_user1_driver2_pending.id}
       expect(response).to have_http_status(302)
     end
     it 'get a 302 response if not connected' do
-      delete "/passenger_requests/#{@request_user1_driver2_pending.id}"
+      delete :destroy, params: {id: @request_user1_driver2_pending.id}
       expect(response).to have_http_status(302)
     end
     it 'a request is deleted if user is allowed' do
       sign_in @user1
-      #delete "/passenger_requests/#{@request_user1_driver2_pending.id}"
-      #expect(response).to(change { PassengerRequest.count }.by(-1))
-      expect { delete(:destroy, params: { passenger_request: { id: @request_user1_driver2_pending.id}})}.to(change { PassengerRequest.count }.by(-1))
+      expect { delete(:destroy, params: { id: @request_user1_driver2_pending.id})}.to(change { PassengerRequest.count }.by(-1))
     end
     it 'a request is not deleted if user is not allowed' do
       sign_in @user1
-      delete "/passenger_requests/#{@request_user2_driver1_pending.id}"
-      expect(response).to(change { PassengerRequest.count }.by(0))
+      expect{ delete(:destroy, params: { id: @request_user2_driver1_pending.id})}.to(change { PassengerRequest.count }.by(0))
     end
   end
 end

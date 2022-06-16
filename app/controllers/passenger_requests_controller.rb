@@ -134,8 +134,14 @@ class PassengerRequestsController < ApplicationController
     end
 
     # if the request was accepted, notify the driver
-    if @passenger_request.status == 'aceptada'
-      # notificar a conductor
+    if @passenger_request.status == 'accepted'
+      AdminMailer.with({
+        passenger: @passenger_request.user,
+        trip: @passenger_request.trip,
+        driver: @passenger_request.trip.user,
+        origin_place: @passenger_request.trip.from,
+        destination_place: @passenger_request.trip.to
+      }).request_canceled.deliver_now
     end
 
     @passenger_request.destroy

@@ -133,6 +133,14 @@ class PassengerRequestsController < ApplicationController
       return
     end
 
+    if @passenger_request.status == 'rejected'
+      redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No puedes cancelar una solicitud que ha sido rechazada')
+      return
+    elsif @passenger_request.status == 'canceled'
+      redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No puedes cancelar una solicitud que ya ha sido cancelada')
+      return
+    end
+
     # if the request was accepted, notify the driver
     if @passenger_request.status == 'accepted'
       AdminMailer.with({
@@ -145,7 +153,7 @@ class PassengerRequestsController < ApplicationController
                       ).request_canceled.deliver_now
     end
 
-    @passenger_request.destroy
+    @passenger_request.update(status: 'canceled')
 
     redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'Se ha cancelado la solicitud con éxito')
     nil

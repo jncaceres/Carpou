@@ -19,9 +19,11 @@ RSpec.describe(PassengerRequestsController) do
     @trip_driver1.save
     @trip_driver2.save
 
-    @request_user1_driver2_pending = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user1.id, trip_id: @trip_driver2.id, status: 0)
-    @request_user1_driver2_accepted = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user1.id, trip_id: @trip_driver2.id, status: 1)
-    @request_user2_driver1_pending = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user2.id, trip_id: @trip_driver1.id, status: 0)
+    @request_user1_driver2_pending = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user1.id, trip_id: @trip_driver2.id, status: 'pending')
+    @request_user1_driver2_accepted = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user1.id, trip_id: @trip_driver2.id, status: 'accepted')
+    @request_user1_driver2_rejected = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user1.id, trip_id: @trip_driver2.id, status: 'rejected')
+    @request_user1_driver2_canceled = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user1.id, trip_id: @trip_driver2.id, status: 'canceled')
+    @request_user2_driver1_pending = FactoryBot.create(:passenger_request, comments: 'Some comments', user_id: @user2.id, trip_id: @trip_driver1.id, status: 'pending')
     @request_user1_driver2_pending.save
     @request_user1_driver2_accepted.save
     @request_user2_driver1_pending.save
@@ -44,13 +46,36 @@ RSpec.describe(PassengerRequestsController) do
       delete :destroy, params: { id: @request_user1_driver2_pending.id }
       expect(response).to(have_http_status(302))
     end
-    it 'a request is deleted if user is allowed' do
+    it 'a request is updated to canceled if user is allowed and request is pending' do
       sign_in @user1
-      expect { delete(:destroy, params: { id: @request_user1_driver2_pending.id }) }.to(change { PassengerRequest.count }.by(-1))
+      delete :destroy, params: { id: @request_user1_driver2_pending.id }
+      @request_user1_driver2_pending.reload
+      expect(@request_user1_driver2_pending.status).to(eq('canceled'))
     end
-    it 'a request is not deleted if user is not allowed' do
+    it 'a request is updated to canceled if user is allowed and request is accepted' do
       sign_in @user1
-      expect { delete(:destroy, params: { id: @request_user2_driver1_pending.id }) }.to(change { PassengerRequest.count }.by(0))
+      delete :destroy, params: { id: @request_user1_driver2_accepted.id }
+      @request_user1_driver2_accepted.reload
+      expect(@request_user1_driver2_accepted.status).to(eq('canceled'))
+    end
+    it 'a request is not updated if user is allowed and request is rejected' do
+      sign_in @user1
+      delete :destroy, params: { id: @request_user1_driver2_rejected.id }
+      @request_user1_driver2_rejected.reload
+      expect(@request_user1_driver2_rejected.status).to(eq('rejected'))
+    end
+    it 'a request is not updated if user is allowed and request is canceled' do
+      sign_in @user1
+      delete :destroy, params: { id: @request_user1_driver2_canceled.id }
+      @request_user1_driver2_canceled.reload
+      expect(@request_user1_driver2_canceled.status).to(eq('canceled'))
+    end
+    it 'a request is not updated if user is not allowed' do
+      sign_in @user1
+      original_status = @request_user2_driver1_pending.status
+      delete :destroy, params: { id: @request_user2_driver1_pending.id }
+      @request_user1_driver2_pending.reload
+      expect(@request_user2_driver1_pending.status).to(eq(original_status))
     end
     it 'send an email if requeste was accepted' do
       sign_in @user1

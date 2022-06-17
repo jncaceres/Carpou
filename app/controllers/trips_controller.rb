@@ -3,7 +3,7 @@
 # Controlador de Trips
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[new create trips_from_user]
+  before_action :authenticate_user!, only: %i[new create trips_from_user destroy]
 
   # GET /trips or /trips.json
   # Obtener una lista de trips que cumplen con ciertos parametros
@@ -167,12 +167,29 @@ class TripsController < ApplicationController
   #
   # @param id [Int]
   def destroy
-    @trip.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(trips_url, notice: 'Trip was successfully destroyed.') }
-      format.json { head(:no_content) }
+    if @trip.user_id != current_user.id
+      redirect_to(trips_from_user_path(id: current_user.id), alert: 'No puedes cancelar un viaje que no es tuyo')
+      return
     end
+
+    requests_to_mail = PassengerRequest.where(trip_id: @trip.id)
+    requests_to_mail.each do |request|
+      if request.status == 'pending' || request.status == 'accepted'
+        AdminMailer.with({
+          passenger: request.user,
+          trip: request.trip,
+          driver: request.trip.user,
+          origin_place: request.trip.from,
+          destination_place: request.trip.to
+        }
+                        ).trip_canceled.deliver_now
+      end
+      request.destroy
+    end
+
+    @trip.destroy
+    redirect_to(trips_from_user_path(id: current_user.id))
+    nil
   end
 
   # GET /users/:id/trips

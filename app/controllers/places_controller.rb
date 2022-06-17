@@ -61,7 +61,12 @@ class PlacesController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_place
-    @place = Place.find(params[:id])
+    @place = Place.where(id: params[:id])
+    if @place.length.zero?
+      redirect_to(root_path, alert: 'No existe el lugar pedido')
+    else
+      @place = @place.first
+    end
   end
 
   # Only allow a list of trusted parameters through.

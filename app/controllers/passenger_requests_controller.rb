@@ -133,10 +133,11 @@ class PassengerRequestsController < ApplicationController
       return
     end
 
-    if @passenger_request.status == 'rejected'
+    case @passenger_request.status
+    when 'rejected'
       redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No puedes cancelar una solicitud que ha sido rechazada')
       return
-    elsif @passenger_request.status == 'canceled'
+    when 'canceled'
       redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No puedes cancelar una solicitud que ya ha sido cancelada')
       return
     end

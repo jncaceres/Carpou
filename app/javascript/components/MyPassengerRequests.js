@@ -35,6 +35,7 @@ const MyPassengerRequests = (props) => {
             </div>
           )): <p>No tienes solicitudes de viaje actualmente</p>}
         </div>
+        <br/>
       </div>
     </div>
   );

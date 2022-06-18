@@ -26,12 +26,13 @@ const MyPassengerRequests = (props) => {
         </div>
         <div className="">
           {users_passenger_requests.length ? users_passenger_requests.map((passengerRequest) => (
+           <div className="block" key={passengerRequest.id}>
             <MyPassengerRequestCard 
-              passengerRequest={passengerRequest} 
-              key={passengerRequest.id} 
-              labelText={statusLabels[passengerRequest.status]}
-              labelColor={statusColors[passengerRequest.status]}
-            />
+                passengerRequest={passengerRequest} 
+                labelText={statusLabels[passengerRequest.status]}
+                labelColor={statusColors[passengerRequest.status]}
+              />
+            </div>
           )): <p>No tienes solicitudes de viaje actualmente</p>}
         </div>
       </div>

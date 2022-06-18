@@ -60,9 +60,8 @@ class PassengerRequestsController < ApplicationController
       return
     end
 
-    previous_request = PassengerRequest.where(trip_id: trip_id)
     # Look if the user has already requested to join
-    already_requested = previous_request.find_by(user_id: current_user.id)
+    already_requested = PassengerRequest.find_by(trip_id: trip_id, user_id: current_user.id)
     unless already_requested.nil?
       redirect_to(root_path, alert: 'Ya has solicitado unirte a este viaje')
       return

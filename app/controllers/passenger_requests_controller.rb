@@ -73,7 +73,6 @@ class PassengerRequestsController < ApplicationController
     if requests_accepted.length < trip.available_seats
       PassengerRequest.create(comments: comment, trip_id: trip_id, status: 'pending', user_id: current_user.id)
       redirect_to(root_path, alert: 'Solicitud creada con éxito')
-    # if not
     else
       redirect_to(root_path, alert: 'No quedan asientos disponibles :C')
     end

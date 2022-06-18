@@ -32,7 +32,7 @@ RSpec.describe(TripsController) do
       expect(controller_trip).not_to(eq(json_trip2))
     end
     it 'should redirect in case of non existing id' do
-      id = (0...8).map { rand(48..90).chr }.join
+      id = SecureRandom.hex(4)
       get :show, params: { id: id }
       expect(response).to(have_http_status(302))
     end

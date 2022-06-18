@@ -15,7 +15,7 @@ RSpec.describe(PassengerRequestsController) do
   describe 'GET show' do
     it 'should redirect in case of non existing id' do
       sign_in @user
-      id = (0...8).map { rand(48..90).chr }.join
+      id = SecureRandom.hex(4)
       get :show, params: { id: id }
       expect(response).to(have_http_status(302))
     end

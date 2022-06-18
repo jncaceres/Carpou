@@ -172,21 +172,6 @@ class TripsController < ApplicationController
       return
     end
 
-    requests_to_mail = PassengerRequest.where(trip_id: @trip.id)
-    requests_to_mail.each do |request|
-      if request.status == 'pending' || request.status == 'accepted'
-        AdminMailer.with({
-          passenger: request.user,
-          trip: request.trip,
-          driver: request.trip.user,
-          origin_place: request.trip.from,
-          destination_place: request.trip.to
-        }
-                        ).trip_canceled.deliver_now
-      end
-      request.destroy
-    end
-
     @trip.destroy
     redirect_to(trips_from_user_path(id: current_user.id))
     nil

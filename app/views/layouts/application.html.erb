@@ -11,34 +11,35 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <% if !current_user %>
-      <%= react_component("Header",
-        {
-          user: current_user,
-          mytrips_route: nil,
-          my_requests_route: nil,
-          logout_route: destroy_user_session_path,
-          root_path: root_path,
-          login_route: new_user_session_path,
-          register_route: new_user_registration_path
-        })
-      %>
-    <% else %>
-      <%= react_component("Header",
-        {
-          user: current_user,
-          mytrips_route: trips_from_user_path(current_user.id),
-          my_requests_route: passenger_requests_from_user_path(current_user.id), 
-          logout_route: destroy_user_session_path,
-          root_path: root_path,
-          login_route: new_user_session_path,
-          register_route: new_user_registration_path
-        })
-      %>
-      <% end %>
-    <%= yield %>
-
+    <div class="container is-fluid">
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <% if !current_user %>
+        <%= react_component("Header",
+          {
+            user: current_user,
+            mytrips_route: nil,
+            my_requests_route: nil,
+            logout_route: destroy_user_session_path,
+            root_path: root_path,
+            login_route: new_user_session_path,
+            register_route: new_user_registration_path
+          })
+        %>
+      <% else %>
+        <%= react_component("Header",
+          {
+            user: current_user,
+            mytrips_route: trips_from_user_path(current_user.id),
+            my_requests_route: passenger_requests_from_user_path(current_user.id), 
+            logout_route: destroy_user_session_path,
+            root_path: root_path,
+            login_route: new_user_session_path,
+            register_route: new_user_registration_path
+          })
+        %>
+        <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

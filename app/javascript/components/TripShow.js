@@ -20,6 +20,7 @@ const TripShow = (props) => {
             </div>
           </div>
           <TripData trip={trip} showUser={false} />
+          <TripButton buttonText="Editar viaje" route={routes.trips.edit(trip.id)} />
           <TripPassengerRequests passengerRequests={passengerRequests} />
         </>
       ) : (
@@ -35,7 +36,7 @@ const TripShow = (props) => {
           <TripData trip={trip} />
           <TripButton
             buttonText="Solicitar unirme al viaje"
-            route={routes.passenger_requests.new() + `?trip_id=${trip.id}`}
+            route={routes.passenger_requests.new({trip_id: trip.id})}
           />
         </>
       )}

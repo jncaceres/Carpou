@@ -1,5 +1,5 @@
-export const prNew = () => {
-  return `/passenger_requests/new`;
+export const prNew = ({trip_id}) => {
+  return `/passenger_requests/new?trip_id=${trip_id}`;
 };
 
 export const prCreate = () => {

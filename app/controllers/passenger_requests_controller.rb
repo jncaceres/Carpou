@@ -1,28 +1,48 @@
 # frozen_string_literal: true
 
+# Controlador de PassengerRequests
 class PassengerRequestsController < ApplicationController
   before_action :set_passenger_request, only: %i[show edit update destroy]
   before_action :authenticate_user!, only: %i[new create]
 
   # GET /passenger_requests or /passenger_requests.json
+  # Obtiene todos los PassengerRequests
+  #
+  # @return [Array<PassengerRequest>]
   def index
     @passenger_requests = PassengerRequest.all
   end
 
-  # GET /passenger_requests/1 or /passenger_requests/1.json
+  # GET /passenger_requests/:id or /passenger_requests/:id.json
+  # Obtiene un PassengerRequest
+  #
+  # @param id [Int]
+  # @return [PassengerRequest]
   def show; end
 
   # GET /passenger_requests/new
+  # Inicializa un PassengerRequest
+  #
+  # @return [PassengerRequest]
   def new
     trip_id = Integer(params[:trip_id], 10)
     @trip = Trip.where(id: trip_id)
     @trip = @trip.as_json(include: %i[user to from])
   end
 
-  # GET /passenger_requests/1/edit
+  # GET /passenger_requests/:id/edit
+  # Obtiene un PassengerRequest para editar
+  #
+  # @param id [Int]
+  # @return [PassengerRequest]
   def edit; end
 
   # POST /passenger_requests or /passenger_requests.json
+  # Creación de un PassengerRequest
+  #
+  # @param comments [String]
+  #
+  # @return [PassengerRequest]
   def create
     comment = passenger_request_params['comments']
     trip_id = passenger_request_params['trip_id']
@@ -48,7 +68,16 @@ class PassengerRequestsController < ApplicationController
     nil
   end
 
-  # PATCH/PUT /passenger_requests/1 or /passenger_requests/1.json
+  # PATCH/PUT /passenger_requests/:id or /passenger_requests/:id.json
+  # Update de un PassengerRequest
+  #
+  # @param id [Int]
+  #
+  # @param comments [String]
+  #
+  # @param status [Int]
+  #
+  # @return [PassengerRequest]
   def update
     if @passenger_request.trip.user == current_user
       @passenger_request.assign_attributes(status: params[:status])
@@ -80,7 +109,10 @@ class PassengerRequestsController < ApplicationController
     end
   end
 
-  # DELETE /passenger_requests/1 or /passenger_requests/1.json
+  # DELETE /passenger_requests/:id or /passenger_requests/:id.json
+  # Eliminar un PassengerRequest
+  #
+  # @param id [Int]
   def destroy
     @passenger_request.destroy
 

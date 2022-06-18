@@ -9,3 +9,7 @@ export const prCreate = () => {
 export const prShow = (id) => {
   return `/passenger_requests/${id}`;
 };
+
+export const prFromUser = (id) => {
+  return `/users/${id}/passenger_requests`;
+};

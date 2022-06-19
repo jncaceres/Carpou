@@ -1,29 +1,31 @@
 import React from "react";
-import TripForm from "./TripForm";
-import background from "../assets/background.jpg";
+import SearchTripForm from "./SearchTripForm";
+import background from "../assets/background.png";
 
 const Home = (props) => {
   const { places } = props;
   return (
     <>
-      <div
-        className="hero is-link home-banner"
-        style={{
-          backgroundImage: `url(${background})`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100% 100%",
-        }}
-      >
-        <div className="hero-body">
-          <div className="content">
-            <h1 className="title" style={{ marginTop: -20 }}>
+      <div className="columns is-centered">
+        <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-half-widescreen is-half-fullhd">
+          <div className="hero home-banner">
+            <h1 className="title" style={{ marginTop: 25 }}>
               Encuentra viajes en auto, a precio barato
             </h1>
+            <figure>
+              <img src={background} 
+              style={{
+                marginTop: -5,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                height: '25em',
+              }}/> 
+            </figure>
+          </div>
+          <div className="section" style={{marginTop: 45}}>
+            <SearchTripForm places={places} />
           </div>
         </div>
-      </div>
-      <div className="section" style={{ marginTop: -120 }}>
-        <TripForm places={places} />
       </div>
     </>
   );

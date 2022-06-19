@@ -2,7 +2,7 @@ import React from "react";
 import { MyPassengerRequestCard } from "./MyPassengerRequestCard";
 
 const MyPassengerRequests = (props) => {
-  const { users_passenger_requests } = props;
+  const { users_passenger_requests, users_from_trips } = props;
 
   const statusLabels = {
     'accepted': 'Aceptada', 
@@ -17,6 +17,9 @@ const MyPassengerRequests = (props) => {
     'cancelled': 'is-dark', 
     'pending': 'is-warning'
   }
+  const findUserFromTrip = (passengerRequest) => {
+     return users_from_trips.find((user) => user.id === passengerRequest.trip.user_id)
+  }
 
   return (
     <div className="">
@@ -28,6 +31,7 @@ const MyPassengerRequests = (props) => {
           {users_passenger_requests.length ? users_passenger_requests.map((passengerRequest) => (
            <div className="block" key={passengerRequest.id}>
             <MyPassengerRequestCard 
+                userFromTrip={findUserFromTrip(passengerRequest)}
                 passengerRequest={passengerRequest} 
                 labelText={statusLabels[passengerRequest.status]}
                 labelColor={statusColors[passengerRequest.status]}

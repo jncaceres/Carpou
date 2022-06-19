@@ -1,6 +1,7 @@
 import React from "react";
 
 export const MyPassengerRequestCard = ({
+  userFromTrip = {},
   passengerRequest = {},
   labelText = "",
   labelColor = "",
@@ -22,11 +23,27 @@ export const MyPassengerRequestCard = ({
         </div>
 
         <div className="content">
-          <ul>
-            <li>Precio: ${passengerRequest.trip.price}</li>
-            <li>Asientos disponibles: {passengerRequest.trip.available_seats}</li>
-            <li>Comentario: {passengerRequest.trip.comments}</li>
-          </ul>
+          <div className="columns">
+            <div className="column is-half">
+              <ul>
+                <li>Precio: ${passengerRequest.trip.price}</li>
+                <li>Asientos disponibles: {passengerRequest.trip.available_seats}</li>
+                <li>Comentario: {passengerRequest.trip.comments}</li>
+              </ul>
+            </div>
+            <div className="column is-half">
+              {labelText === 'Aceptada' && (
+              <div>
+                <p className="subtitle is-6">Información de Usuario</p>
+                <ul>
+                  <li>Nombre: {userFromTrip.name} {userFromTrip.last_name}</li>
+                  <li>Teléfono: {userFromTrip.phone}</li>
+                  <li>Email: {userFromTrip.email}</li>
+                </ul>
+              </div>
+              )}
+            </div>
+          </div>
         </div>
 
         <footer className="columns is-multiline is-mobile card-footer">

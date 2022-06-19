@@ -130,7 +130,7 @@ class PassengerRequestsController < ApplicationController
     # TODO: Queda pendiente reemplazar el siguiente redirect por el comentado
     # cuando se haga merge de la rama feat/passenger-request-view
     redirect_to(root_path, alert: 'No existe el lugar pedido') if @passenger_request.nil?
-    # redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No existe el lugar pedido') if @passenger_request.nil?
+    # redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No existe la solicitud pedida') if @passenger_request.nil?
   end
 
   # Only allow a list of trusted parameters through.

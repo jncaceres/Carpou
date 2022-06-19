@@ -2,7 +2,7 @@ import React from "react";
 
 export const TripData = ({ trip = {}, showUser = true }) => {
   return (
-    <><div className="columns is-multiline is-mobile">
+    <><div className="columns level is-multiline is-mobile">
       {showUser && (
         <div className="column is-full-mobile">
           <div>
@@ -12,19 +12,19 @@ export const TripData = ({ trip = {}, showUser = true }) => {
         </div>
       )}
 
-      <div className="column is-half-mobile">
+      <div className="column level-item has-text-centered is-half-mobile">
         <div>
           <p className="heading">Valor por persona</p>
           <p className="subtitle">{`$${trip.price}`}</p>
         </div>
       </div>
-      <div className="column is-half-mobile">
+      <div className="column level-item has-text-centered is-half-mobile">
         <div>
           <p className="heading">Asientos disponibles</p>
           <p className="subtitle">{`${trip.available_seats}`}</p>
         </div>
       </div>
-      <div className="column is-full-mobile">
+      <div className="column level-item has-text-centered is-full-mobile">
         <div>
           <p className="heading">Salida</p>
           <p className="subtitle">
@@ -32,7 +32,7 @@ export const TripData = ({ trip = {}, showUser = true }) => {
           </p>
         </div>
       </div>
-      <div className="column is-full-mobile">
+      <div className="column level-item has-text-centered is-full-mobile">
         <div>
           <p className="heading">Comentarios</p>
           <p className="subtitle">{trip.comments}</p>

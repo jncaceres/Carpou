@@ -75,7 +75,7 @@ export const TripPassengerRequests = (props) => {
     <div className="columns is-mobile is-multiline">
       <div className="column is-full">
         <div className="content"></div>
-        <h1 className="h1">Solicitudes pendientes</h1>
+        <h1 className="subtitle">Solicitudes pendientes</h1>
         {showNotification && (
           <div className={`notification ${notificationColor}`}>
             <button
@@ -101,7 +101,7 @@ export const TripPassengerRequests = (props) => {
       )}
       <div className="column is-full">
         <div className="content"></div>
-        <h1 className="h1">Solicitudes Respondidas</h1>
+        <h1 className="subtitle">Solicitudes Respondidas</h1>
       </div>
       {answeredRequests.length ? (
         answeredRequests.map((pr, key) => (

@@ -109,7 +109,7 @@ class TripsController < ApplicationController
   #
   # @return [Trip]
   def create
-    @trip = current_user.trips.create(trip_params)
+    @trip = Trip.create(trip_params)
     if @trip.save
       redirect_to(trip_url(@trip), notice: 'El viaje fue creado correctamente')
     else

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class AdminMailer < ApplicationMailer
+  default from: 'noreply@car-pou.tech'
+
   def welcome_email
     @user = params[:user]
     mail(to: @user.email, subject: 'Bienvenido a Carpou, ¡empieza a viajar ahora!')
@@ -39,7 +41,7 @@ class AdminMailer < ApplicationMailer
     @origin_place = params[:origin_place]
     @destination_place = params[:destination_place]
     mail(to: @driver.email,
-         subject: format('Alguien canceló su asistencia en tu viaje de %<origin_place>s a %<destination_place>',
+         subject: format('Alguien canceló su asistencia en tu viaje de %<origin_place>s a %<destination_place>s',
                          origin_place: @origin_place.name,
                          destination_place: @destination_place.name
                         )

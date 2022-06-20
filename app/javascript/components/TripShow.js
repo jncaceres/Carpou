@@ -12,7 +12,7 @@ const TripShow = (props) => {
   return (
     <>
       {user && user.id == trip.user.id ? (
-        <>
+        <div className="mx-5">
           <div className="columns is-mobile">
             <div className="column is-full-mobile">
               <div className="title mb-1">
@@ -24,9 +24,9 @@ const TripShow = (props) => {
           <TripButton buttonText="Editar viaje" route={routes.trips.edit(trip.id)} />
           <DeleteTripButton buttonText="Cancelar viaje" route={routes.trips.delete(trip.id)} />
           <TripPassengerRequests passengerRequests={passengerRequests} />
-        </>
+        </div>
       ) : (
-        <>
+        <div>
           <div className="columns is-multiline is-mobile">
             <div className="column is-full-mobile title mb-1">
               Viaje desde {`${trip.from.name} a ${trip.to.name}`}
@@ -40,7 +40,7 @@ const TripShow = (props) => {
             buttonText="Solicitar unirme al viaje"
             route={routes.passenger_requests.new({trip_id: trip.id})}
           />
-        </>
+        </div>
       )}
     </>
   );

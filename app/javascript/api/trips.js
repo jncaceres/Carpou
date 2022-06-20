@@ -28,3 +28,7 @@ export const tPost = () => {
 export const tDelete = (id) => {
   return `/trips/${id}`;
 };
+
+export const tFromUser = (id) => {
+  return `/users/${id}/trips`
+};

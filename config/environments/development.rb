@@ -2,6 +2,8 @@
 
 require 'active_support/core_ext/integer/time'
 
+Rack::MiniProfiler.config.position = 'bottom-right'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

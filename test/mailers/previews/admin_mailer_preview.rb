@@ -106,6 +106,6 @@ class AdminMailerPreview < ActionMailer::Preview
       origin_place: origin_place,
       destination_place: destination_place
     }
-  ).new_request
+                    ).new_request
   end
 end

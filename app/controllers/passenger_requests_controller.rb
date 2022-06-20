@@ -79,7 +79,7 @@ class PassengerRequestsController < ApplicationController
         origin_place: passenger_request.trip.from,
         destination_place: passenger_request.trip.to
       }
-    ).new_request.deliver_now
+                      ).new_request.deliver_now
       redirect_to(root_path, alert: 'Solicitud creada con éxito')
     else
       redirect_to(root_path, alert: 'No quedan asientos disponibles :C')

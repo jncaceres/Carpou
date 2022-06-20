@@ -163,8 +163,15 @@ class PassengerRequestsController < ApplicationController
     if Integer(user_id, 10) != current_user.id
       redirect_to(root_path)
     else
+      users_from_trips = []
       users_passenger_requests = PassengerRequest.where(user_id: user_id)
+      users_passenger_requests.each do |users_passenger_request|
+        user_from_trip_id = users_passenger_request.trip.user_id
+        user_from_trip = User.where(id: user_from_trip_id)
+        users_from_trips << user_from_trip[0]
+      end
       @users_passenger_requests = users_passenger_requests.as_json(methods: %i[formatted_created_at], include: %i[user trip])
+      @users_from_trips = users_from_trips.as_json
     end
   end
 

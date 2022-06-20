@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
   <head>
     <title>Carpou</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -11,14 +11,29 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+<div class="container is-fluid">
     <%= react_component("Header",
       {
         user: current_user
       })
     %>
+    <% if notice %>
+          <p class="notice">
+            <br/>
+            <div class="notification is-link is-light">
+              <%= notice %>
+            </div>
+          </p>
+        <% end %>
+        <% if alert %>
+          <p class="alert">
+            <br/>
+            <div class="notification is-danger is-light">
+              <%= alert %>
+            </div>
+          </p>
+        <% end %>
     <%= yield %>
-
+</div>
   </body>
 </html>

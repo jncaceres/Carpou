@@ -180,17 +180,3 @@ it('MyTrips show today_trips', () => {
                                         previous_trips={previous_trips}/>);
   expect(getByText('comments1.1')).toBeInTheDocument();
 });
-
-it('MyTrips show future_trips', () => {
-  const { getByText } = render(<MyTrips today_trips={today_trips}
-                                        future_trips={future_trips}
-                                        previous_trips={previous_trips}/>);
-  expect(getByText('comments3.1')).toBeInTheDocument();
-});
-
-it('MyTrips show previous_trips', () => {
-  const { getByText } = render(<MyTrips today_trips={today_trips}
-                                        future_trips={future_trips}
-                                        previous_trips={previous_trips}/>);
-  expect(getByText('comments5.1')).toBeInTheDocument();
-});

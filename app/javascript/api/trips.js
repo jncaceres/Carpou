@@ -23,3 +23,7 @@ export const tUpdate = (id) => {
 export const tPost = () => {
   return `/trips`;
 };
+
+export const tFromUser = (id) => {
+  return `/users/${id}/trips`
+};

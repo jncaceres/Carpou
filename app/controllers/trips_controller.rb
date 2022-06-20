@@ -209,7 +209,8 @@ class TripsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_trip
-    @trip = Trip.find(params[:id])
+    @trip = Trip.find_by(id: params[:id])
+    redirect_to(root_path, alert: 'No existe el viaje pedido') if @trip.nil?
   end
 
   # Only allow a list of trusted parameters through.

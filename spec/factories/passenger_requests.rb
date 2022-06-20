@@ -3,7 +3,8 @@
 FactoryBot.define do
   factory :passenger_request do
     comments { 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.' }
-    user { 'some-id' }
-    trip { 'some-id' }
+    user_id { 'some-id' }
+    trip_id { 'some-id' }
+    status { 'some-status' }
   end
 end

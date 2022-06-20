@@ -3,7 +3,7 @@
 # Controlador de PassengerRequests
 class PassengerRequestsController < ApplicationController
   before_action :set_passenger_request, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!, only: %i[new create destroy]
 
   # GET /passenger_requests or /passenger_requests.json
   # Obtiene todos los PassengerRequests
@@ -125,12 +125,37 @@ class PassengerRequestsController < ApplicationController
   #
   # @param id [Int]
   def destroy
-    @passenger_request.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(passenger_requests_url, notice: 'Passenger request was successfully destroyed.') }
-      format.json { head(:no_content) }
+    # can't cancel a request that doesn't belongs to you
+    if @passenger_request.user_id != current_user.id
+      redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No puedes cancelar una solicitud que no es tuya')
+      return
     end
+
+    case @passenger_request.status
+    when 'rejected'
+      redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No puedes cancelar una solicitud que ha sido rechazada')
+      return
+    when 'canceled'
+      redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No puedes cancelar una solicitud que ya ha sido cancelada')
+      return
+    end
+
+    # if the request was accepted, notify the driver
+    if @passenger_request.status == 'accepted'
+      AdminMailer.with({
+        passenger: @passenger_request.user,
+        trip: @passenger_request.trip,
+        driver: @passenger_request.trip.user,
+        origin_place: @passenger_request.trip.from,
+        destination_place: @passenger_request.trip.to
+      }
+                      ).request_canceled.deliver_now
+    end
+
+    @passenger_request.update(status: 'canceled')
+
+    redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'Se ha cancelado la solicitud con éxito')
+    nil
   end
 
   def passenger_requests_from_user
@@ -147,11 +172,12 @@ class PassengerRequestsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_passenger_request
-    @passenger_request = PassengerRequest.find_by(id: params[:id])
-    # TODO: Queda pendiente reemplazar el siguiente redirect por el comentado
-    # cuando se haga merge de la rama feat/passenger-request-view
-    redirect_to(root_path, alert: 'No existe la solicitud pedida') if @passenger_request.nil?
-    # redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No existe la solicitud pedida') if @passenger_request.nil?
+    @passenger_request = PassengerRequest.where(id: params[:id])
+    if @passenger_request.length.zero?
+      redirect_to(passenger_requests_from_user_path(id: current_user.id), alert: 'No existe la solicitud pedida')
+    else
+      @passenger_request = @passenger_request.first
+    end
   end
 
   # Only allow a list of trusted parameters through.

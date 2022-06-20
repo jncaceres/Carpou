@@ -76,6 +76,15 @@ class Trip < ApplicationRecord
   validates :from_id, presence: { message: 'Ingresar la comuna de origen' }
   validates :to_id, presence: { message: 'Ingresar la comuna de destino' }
 
+  before_destroy :destroy_requests_associated
+
+  private
+
+  def destroy_requests_associated
+    requests = PassengerRequest.where(trip_id: id)
+    requests.each(&:destroy)
+  end
+
   # retorna si es que la salida de un nuevo viaje es valida o no.
   def check_trip_leaving_at
     errors.add(:leaving_at, 'Error en la fecha del viaje') if leaving_at && (leaving_at.to_date < Date.today)

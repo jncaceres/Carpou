@@ -159,3 +159,4 @@ print "Driver Trip created successfully.\n" if driver_trip.save
 print "PR1 creado correctamente \n" if pr1.save
 print "PR2 creado correctamente \n" if pr2.save
 print 'Done'
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

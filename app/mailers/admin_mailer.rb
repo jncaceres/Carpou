@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class AdminMailer < ApplicationMailer
+
+  default from: 'noreply@car-pou.tech'
+
   def welcome_email
     @user = params[:user]
     mail(to: @user.email, subject: 'Bienvenido a Carpou, ¡empieza a viajar ahora!')

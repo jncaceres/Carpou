@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     sessions: 'users/sessions', registrations: 'users/registrations'
   }
   get '/users/:id/trips', to: 'trips#trips_from_user', as: 'trips_from_user'
+  get '/users/:id/passenger_requests', to: 'passenger_requests#passenger_requests_from_user', as: 'passenger_requests_from_user'
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

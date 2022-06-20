@@ -43,6 +43,10 @@ RSpec.describe(PassengerRequestsController) do
       sign_in @first_user
       expect { post(:create, params: { passenger_request: { comment: 'a comment', trip_id: @trip_with_seats.id } }) }.to(change { PassengerRequest.count }.by(1))
     end
+    it 'send email if request is created' do
+      sign_in @first_user
+      expect { post(:create, params: { passenger_request: { comment: 'a comment', trip_id: @trip_with_seats.id } }) }.to(change { ActionMailer::Base.deliveries.count }.by(1))
+    end
     it 'a request is not created if it has no seats' do
       sign_in @first_user
       expect { post(:create, params: { passenger_request: { comment: 'a comment', trip_id: @trip_with_noseats.id } }) }.to(change { PassengerRequest.count }.by(0))

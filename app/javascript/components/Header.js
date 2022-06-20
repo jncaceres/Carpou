@@ -42,16 +42,15 @@ const Header = (props) => {
                 </h5>
               </div>
 
-          <a className="navbar-item"  data-method="get" href={mytrips_route}>
-            Mis viajes
-          </a>
-          <a className="navbar-item"  data-method="get" href={routes.trips.new()}>
-            Crear viaje
-          </a>
-          <a className="navbar-item" data-method="get" href={my_requests_route}>
-            Mis solicitudes
-          </a>
-
+              <a className="navbar-item" data-method="get" href={mytrips_route}>
+                Mis viajes
+              </a>
+              <a className="navbar-item" data-method="get" href={my_requests_route}>
+                Mis solicitudes
+              </a>
+              <a className="navbar-item"  data-method="get" href={routes.trips.new()}>
+                Crear viaje
+              </a>
               <a
                 className="navbar-item"
                 data-method="delete"

@@ -1,22 +1,21 @@
 import React from "react";
 import { routes } from "../api";
 
-
 export const MyPassengerRequestCard = ({
   passengerRequest = {},
   labelText = "",
   labelColor = "",
 }) => {
   return (
-
-    <div className="card">
+    <div className="card is-full">
       <div className="card-content">
         <div className="media">
           <div className="media-left">              
             <span className={[`tag ${labelColor}`]}>{labelText}</span>
           </div>
           <div className="media-content">
-            <p className="title is-4">{`Viaje de ${passengerRequest.trip.from_address} a ${passengerRequest.trip.to_address}`}</p>
+            <p className="title is-4">Solicitud de viaje</p>
+            <p className="subtitle is-6">{`Sale desde ${passengerRequest.trip.from_address} a ${passengerRequest.trip.to_address}`}</p>
             <p className="subtitle is-6">
               <time dateTime="2016-1-1">{`Enviada el ${passengerRequest.formatted_created_at}`}</time>
             </p>
@@ -67,7 +66,6 @@ export const MyPassengerRequestCard = ({
             </div>
           </div>
         </footer>
-
       </div>
     </div>
   );

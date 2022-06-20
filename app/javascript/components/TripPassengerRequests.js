@@ -97,7 +97,9 @@ export const TripPassengerRequests = (props) => {
           </div>
         ))
       ) : (
-        <div className="column is-full pt-0">No tienes solicitudes pendientes</div>
+        <div className="column is-full pt-0">
+          No tienes solicitudes pendientes
+        </div>
       )}
       <div className="column is-full">
         <div className="content"></div>
@@ -115,7 +117,9 @@ export const TripPassengerRequests = (props) => {
           </div>
         ))
       ) : (
-        <div className="column is-full pt-0">Aún no has aceptado ninguna solicitud</div>
+        <div className="column is-full pt-0">
+          Aún no has aceptado ninguna solicitud
+        </div>
       )}
     </div>
   );

@@ -18,7 +18,7 @@ export const MyPassengerRequestCard = ({
               <time dateTime="2016-1-1">{`Enviada el ${passengerRequest.formatted_created_at}`}</time>
             </p>
           </div>
-          <div className="media-right">              
+          <div className="media-right">
             <span className={[`tag ${labelColor}`]}>{labelText}</span>
           </div>
         </div>
@@ -29,20 +29,24 @@ export const MyPassengerRequestCard = ({
               <p className="subtitle is-6">Información de viaje</p>
               <ul>
                 <li>Precio: ${passengerRequest.trip.price}</li>
-                <li>Asientos disponibles: {passengerRequest.trip.available_seats}</li>
+                <li>
+                  Asientos disponibles: {passengerRequest.trip.available_seats}
+                </li>
                 <li>Comentario: {passengerRequest.trip.comments}</li>
               </ul>
             </div>
             <div className="column is-half">
-              {labelText === 'Aceptada' && (
-              <div>
-                <p className="subtitle is-6">Información de Usuario</p>
-                <ul>
-                  <li>Nombre: {userFromTrip.name} {userFromTrip.last_name}</li>
-                  <li>Teléfono: {userFromTrip.phone}</li>
-                  <li>Email: {userFromTrip.email}</li>
-                </ul>
-              </div>
+              {labelText === "Aceptada" && (
+                <div>
+                  <p className="subtitle is-6">Información de Usuario</p>
+                  <ul>
+                    <li>
+                      Nombre: {userFromTrip.name} {userFromTrip.last_name}
+                    </li>
+                    <li>Teléfono: {userFromTrip.phone}</li>
+                    <li>Email: {userFromTrip.email}</li>
+                  </ul>
+                </div>
               )}
             </div>
           </div>

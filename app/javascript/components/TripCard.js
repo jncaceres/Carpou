@@ -5,10 +5,7 @@ import { routes } from "../api";
 const TripCard = (props) => {
   const { trip } = props;
   return (
-    <div
-      className="card my-2 p-4"
-      key={trip.id}
-    >
+    <div className="card my-2 p-4" key={trip.id}>
       <div className="card-image mb-3">
         <Map
           height={300}

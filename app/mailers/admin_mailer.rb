@@ -31,4 +31,31 @@ class AdminMailer < ApplicationMailer
          )
         )
   end
+
+  def request_canceled
+    @passenger = params[:passenger]
+    @trip = params[:trip]
+    @driver = params[:driver]
+    @origin_place = params[:origin_place]
+    @destination_place = params[:destination_place]
+    mail(to: @driver.email,
+         subject: format('Alguien canceló su asistencia en tu viaje de %<origin_place>s a %<destination_place>',
+                         origin_place: @origin_place.name,
+                         destination_place: @destination_place.name
+                        )
+        )
+  end
+
+  def trip_canceled
+    @passenger = params[:passenger]
+    @trip = params[:trip]
+    @driver = params[:driver]
+    @origin_place = params[:origin_place]
+    @destination_place = params[:destination_place]
+    mail(to: @passenger.email,
+         subject: format('El viaje de %<origin_place>s a %<destination_place>s ha sido cancelado', origin_place: @origin_place.name,
+                                                                                                   destination_place: @destination_place.name
+         )
+        )
+  end
 end

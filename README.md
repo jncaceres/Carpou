@@ -48,8 +48,8 @@ DATABASE_URL=postgres://user:password@db-test:5432/database
 
 Se debe crear un archivo config/local_env.yml cuyo contenido debe verse así:
 ```
-GMAIL_USERNAME: 'mail'
-GMAIL_PASSWORD: 'password'
+MAIL_USERNAME: 'mail'
+MAIL_PASSWORD: 'password'
 ```
 donde 'mail' es el mail de la organización y password su contraseña.
 

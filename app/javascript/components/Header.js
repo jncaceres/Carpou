@@ -1,14 +1,9 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { routes } from "../api";
+
 const Header = (props) => {
-  const {
-    user,
-    mytrips_route,
-    my_requests_route,
-    logout_route,
-    root_path,
-  } = props;
+  const { user } = props;
 
   const [showNav, setShowNav] = useState(false);
   return (
@@ -20,7 +15,7 @@ const Header = (props) => {
         id="navMenu"
       >
         <div className="navbar-brand">
-          <a className="navbar-item" href={root_path}>
+          <a className="navbar-item" href={routes.root.root()}>
             <img src={logo} alt="CarPou" width="112" height="28" />
           </a>
 
@@ -37,13 +32,21 @@ const Header = (props) => {
           {user ? (
             <>
             <div className="navbar-start">
-              <a className="navbar-item" data-method="get" href={mytrips_route}>
+              <a className="navbar-item" data-method="get" href={routes.trips.fromUser(user.id)}>
                 Mis viajes
               </a>
-              <a className="navbar-item" data-method="get" href={my_requests_route}>
+              <a
+                className="navbar-item"
+                data-method="get"
+                href={routes.passenger_requests.fromUser(user.id)}
+              >
                 Mis solicitudes
               </a>
-              <a className="navbar-item"  data-method="get" href={routes.trips.new()}>
+              <a
+                className="navbar-item"
+                data-method="get"
+                href={routes.trips.new()}
+              >
                 Crear viaje
               </a>
             </div>
@@ -53,7 +56,7 @@ const Header = (props) => {
                   <a 
                     className="button is-light"                 
                     data-method="delete"
-                    href={logout_route}
+                    href={routes.users.signOut()}
                   >
                     Cerrar sesión
                   </a>

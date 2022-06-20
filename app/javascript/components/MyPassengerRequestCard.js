@@ -1,4 +1,5 @@
 import React from "react";
+import { routes } from "../api";
 
 export const MyPassengerRequestCard = ({
   userFromTrip = {},
@@ -47,7 +48,7 @@ export const MyPassengerRequestCard = ({
           </div>
         </div>
 
-        <footer className="columns is-multiline is-mobile card-footer">
+        <div className="columns is-multiline is-mobile card-footer">
           <div className="card-footer-item column is-half-mobile">
             <div>
               <p className="heading">Auto</p>
@@ -63,7 +64,9 @@ export const MyPassengerRequestCard = ({
           <div className="card-footer-item column is-half-mobile">
             <div>
               <p className="heading">Patente</p>
-              <p className="subtitle">{passengerRequest.trip.car_license_plate}</p>
+              <p className="subtitle">
+                {passengerRequest.trip.car_license_plate}
+              </p>
             </div>
           </div>
           <div className="card-footer-item column is-half-mobile">
@@ -72,7 +75,24 @@ export const MyPassengerRequestCard = ({
               <p className="subtitle">{passengerRequest.trip.car_model}</p>
             </div>
           </div>
-        </footer>
+        </div>
+
+        {!["Cancelada", "Rechazada"].includes(labelText) && (
+          <footer className="content">
+            <div className="columns is-multiline is-mobile">
+              <div className="column is-full-mobile">
+                <a
+                  className="button is-danger is-fullwidth"
+                  href={routes.passenger_requests.delete(passengerRequest.id)}
+                  data-method="delete"
+                  data-confirm="¿Estas seguro de querer eliminar esta solicitud?"
+                >
+                  Cancelar Solicitud
+                </a>
+              </div>
+            </div>
+          </footer>
+        )}
       </div>
     </div>
   );

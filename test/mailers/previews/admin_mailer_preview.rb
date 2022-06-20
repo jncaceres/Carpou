@@ -48,4 +48,44 @@ class AdminMailerPreview < ActionMailer::Preview
     }
                     ).request_rejected
   end
+
+  def trip_canceled
+    passenger = User.new
+    passenger.name = 'Fake User'
+    passenger.email = 'fake@fake.com'
+    trip = OpenStruct.new({ leaving_at: 'REVISAR FORMATO', from_address: 'La Esquina', price: 10_000 })
+    driver = User.new
+    driver.name = 'Fake Drive'
+    driver.email = 'fake@fake.com'
+    origin_place = OpenStruct.new({ name: 'Mi Casa' })
+    destination_place = OpenStruct.new({ name: 'Tu Casa' })
+    AdminMailer.with({
+      passenger: passenger,
+      trip: trip,
+      driver: driver,
+      origin_place: origin_place,
+      destination_place: destination_place
+    }
+                    ).trip_canceled
+  end
+
+  def request_canceled
+    passenger = User.new
+    passenger.name = 'Fake User'
+    passenger.email = 'fake@fake.com'
+    trip = OpenStruct.new({ leaving_at: 'REVISAR FORMATO', from_address: 'La Esquina', price: 10_000 })
+    driver = User.new
+    driver.name = 'Fake Drive'
+    driver.email = 'fake@fake.com'
+    origin_place = OpenStruct.new({ name: 'Mi Casa' })
+    destination_place = OpenStruct.new({ name: 'Tu Casa' })
+    AdminMailer.with({
+      passenger: passenger,
+      trip: trip,
+      driver: driver,
+      origin_place: origin_place,
+      destination_place: destination_place
+    }
+                    ).request_canceled
+  end
 end

@@ -170,16 +170,6 @@ class PassengerRequestsController < ApplicationController
     end
   end
 
-  def passenger_requests_from_user
-    user_id = params[:id]
-    if Integer(user_id, 10) != current_user.id
-      redirect_to(root_path)
-    else
-      users_passenger_requests = PassengerRequest.where(user_id: user_id)
-      @users_passenger_requests = users_passenger_requests.as_json(methods: %i[formatted_created_at], include: %i[user trip])
-    end
-  end
-
   private
 
   # Use callbacks to share common setup or constraints between actions.

@@ -1,4 +1,5 @@
 import React from "react";
+import { routes } from "../api";
 
 export const MyPassengerRequestCard = ({
   passengerRequest = {},
@@ -29,7 +30,7 @@ export const MyPassengerRequestCard = ({
           </ul>
         </div>
 
-        <footer className="columns is-multiline is-mobile card-footer">
+        <div className="columns is-multiline is-mobile card-footer">
           <div className="card-footer-item column is-half-mobile">
             <div>
               <p className="heading">Auto</p>
@@ -52,6 +53,16 @@ export const MyPassengerRequestCard = ({
             <div>
               <p className="heading">Modelo</p>
               <p className="subtitle">{passengerRequest.trip.car_model}</p>
+            </div>
+          </div>
+        </div>
+
+        <footer className="content">
+          <div className="columns is-multiline is-mobile">
+            <div className="column is-full-mobile">
+              <a className="button is-danger is-fullwidth" href={routes.passenger_requests.delete(passengerRequest.id)} data-method="delete" data-confirm="¿Estas seguro de querer eliminar esta solicitud?">
+                  Cancelar Solicitud
+              </a>
             </div>
           </div>
         </footer>

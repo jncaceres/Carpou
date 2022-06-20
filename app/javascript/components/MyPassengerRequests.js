@@ -3,7 +3,6 @@ import { MyPassengerRequestCard } from "./MyPassengerRequestCard";
 
 const MyPassengerRequests = (props) => {
   const { users_passenger_requests } = props;
-
   const statusLabels = {
     'accepted': 'Aceptada', 
     'rejected': 'Rechazada', 

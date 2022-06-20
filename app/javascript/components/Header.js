@@ -9,7 +9,7 @@ const Header = (props) => {
   return (
     <>
       <nav
-        className="navbar"
+        className="navbar is-fixed-top has-shadow"
         role="navigation"
         aria-label="main navigation"
         id="navMenu"
@@ -31,49 +31,63 @@ const Header = (props) => {
         <div className={`navbar-menu ${showNav ? "is-active" : ""}`}>
           {user ? (
             <>
-              <div className="navbar-item">
-                <h5 className="title is-5">
-                  Bienvenido {user.name} {user.last_name}!
-                </h5>
+              <div className="navbar-start">
+                <a
+                  className="navbar-item"
+                  data-method="get"
+                  href={routes.trips.fromUser(user.id)}
+                >
+                  Mis viajes
+                </a>
+                <a
+                  className="navbar-item"
+                  data-method="get"
+                  href={routes.passenger_requests.fromUser(user.id)}
+                >
+                  Mis solicitudes
+                </a>
+                <a
+                  className="navbar-item"
+                  data-method="get"
+                  href={routes.trips.new()}
+                >
+                  Crear viaje
+                </a>
               </div>
-
-              <a
-                className="navbar-item"
-                data-method="get"
-                href={routes.trips.fromUser(user.id)}
-              >
-                Mis viajes
-              </a>
-              <a
-                className="navbar-item"
-                data-method="get"
-                href={routes.passenger_requests.fromUser(user.id)}
-              >
-                Mis solicitudes
-              </a>
-              <a
-                className="navbar-item"
-                data-method="get"
-                href={routes.trips.new()}
-              >
-                Crear viaje
-              </a>
-              <a
-                className="navbar-item"
-                data-method="delete"
-                href={routes.users.signOut()}
-              >
-                Cerrar sesión
-              </a>
+              <div className="navbar-end">
+                <div className="navbar-item">
+                  <div className="buttons">
+                    <a
+                      className="button is-light"
+                      data-method="delete"
+                      href={routes.users.signOut()}
+                    >
+                      Cerrar sesión
+                    </a>
+                  </div>
+                </div>
+              </div>
             </>
           ) : (
             <>
-              <a className="navbar-item" href={routes.users.session()}>
-                Iniciar sesión
-              </a>
-              <a className="navbar-item" href={routes.users.registration()}>
-                Registrarme
-              </a>
+              <div className="navbar-end">
+                <div className="navbar-item">
+                  <div className="buttons">
+                    <a
+                      className="button is-primary"
+                      href={routes.users.session()}
+                    >
+                      Iniciar sesión
+                    </a>
+                    <a
+                      className="button is-primary"
+                      href={routes.users.registration()}
+                    >
+                      Registrarme
+                    </a>
+                  </div>
+                </div>
+              </div>
             </>
           )}
         </div>

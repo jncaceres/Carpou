@@ -60,14 +60,6 @@ const Header = (props) => {
               </a>
               <a
                 className="navbar-item"
-                data-method="get"
-                href={routes.passenger_requests.fromUser(user.id)}
-              >
-                Mis solicitudes
-              </a>
-
-              <a
-                className="navbar-item"
                 data-method="delete"
                 href={routes.users.signOut()}
               >

@@ -6,14 +6,14 @@ const MyPassengerRequests = (props) => {
   const statusLabels = {
     'accepted': 'Aceptada', 
     'rejected': 'Rechazada', 
-    'cancelled': 'Cancelada', 
+    'canceled': 'Cancelada', 
     'pending': 'Pendiente'
   }
 
   const statusColors = {
     'accepted': 'is-success', 
     'rejected': 'is-danger', 
-    'cancelled': 'is-dark', 
+    'canceled': 'is-dark', 
     'pending': 'is-warning'
   }
 

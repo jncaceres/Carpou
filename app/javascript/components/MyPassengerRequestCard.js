@@ -10,7 +10,7 @@ export const MyPassengerRequestCard = ({
     <div className="card is-full">
       <div className="card-content">
         <div className="media">
-          <div className="media-left">              
+          <div className="media-left">
             <span className={[`tag ${labelColor}`]}>{labelText}</span>
           </div>
           <div className="media-content">
@@ -25,7 +25,9 @@ export const MyPassengerRequestCard = ({
         <div className="content">
           <ul>
             <li>Precio: ${passengerRequest.trip.price}</li>
-            <li>Asientos disponibles: {passengerRequest.trip.available_seats}</li>
+            <li>
+              Asientos disponibles: {passengerRequest.trip.available_seats}
+            </li>
             <li>Comentario: {passengerRequest.trip.comments}</li>
           </ul>
         </div>
@@ -46,7 +48,9 @@ export const MyPassengerRequestCard = ({
           <div className="card-footer-item column is-full-mobile">
             <div>
               <p className="heading">Patente</p>
-              <p className="subtitle">{passengerRequest.trip.car_license_plate}</p>
+              <p className="subtitle">
+                {passengerRequest.trip.car_license_plate}
+              </p>
             </div>
           </div>
           <div className="card-footer-item column is-full-mobile">
@@ -57,15 +61,22 @@ export const MyPassengerRequestCard = ({
           </div>
         </div>
 
-        <footer className="content">
-          <div className="columns is-multiline is-mobile">
-            <div className="column is-full-mobile">
-              <a className="button is-danger is-fullwidth" href={routes.passenger_requests.delete(passengerRequest.id)} data-method="delete" data-confirm="¿Estas seguro de querer eliminar esta solicitud?">
+        {!["Cancelada", "Rechazada"].includes(labelText) && (
+          <footer className="content">
+            <div className="columns is-multiline is-mobile">
+              <div className="column is-full-mobile">
+                <a
+                  className="button is-danger is-fullwidth"
+                  href={routes.passenger_requests.delete(passengerRequest.id)}
+                  data-method="delete"
+                  data-confirm="¿Estas seguro de querer eliminar esta solicitud?"
+                >
                   Cancelar Solicitud
-              </a>
+                </a>
+              </div>
             </div>
-          </div>
-        </footer>
+          </footer>
+        )}
       </div>
     </div>
   );

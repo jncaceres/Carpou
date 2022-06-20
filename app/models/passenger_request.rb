@@ -28,6 +28,31 @@ class PassengerRequest < ApplicationRecord
     canceled: 3
   }
 
+  before_destroy :notify_affected_passengers
+
+  def notify_affected_passengers
+    case status
+    when 'pending'
+      AdminMailer.with({
+        passenger: user,
+        trip: trip,
+        driver: trip.user,
+        origin_place: trip.from,
+        destination_place: trip.to
+      }
+                      ).trip_canceled.deliver_now
+    when 'accepted'
+      AdminMailer.with({
+        passenger: user,
+        trip: trip,
+        driver: trip.user,
+        origin_place: trip.from,
+        destination_place: trip.to
+      }
+                      ).trip_canceled.deliver_now
+    end
+  end
+
   # Retorna la fecha formateada de la siguiente forma d/m/Y H:M
   #
   # @return [String] Fecha formateada

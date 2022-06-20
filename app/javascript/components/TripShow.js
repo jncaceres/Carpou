@@ -4,6 +4,7 @@ import { TripMap } from "./TripMap";
 import { routes } from "../api";
 import { TripPassengerRequests } from "./TripPassengerRequests";
 import { TripButton } from "./TripButton";
+import { DeleteTripButton } from "./DeleteTripButton";
 
 const TripShow = (props) => {
   const { trip, user, passengerRequests } = props;
@@ -21,6 +22,7 @@ const TripShow = (props) => {
           </div>
           <TripData trip={trip} showUser={false} />
           <TripButton buttonText="Editar viaje" route={routes.trips.edit(trip.id)} />
+          <DeleteTripButton buttonText="Cancelar viaje" route={routes.trips.delete(trip.id)} />
           <TripPassengerRequests passengerRequests={passengerRequests} />
         </div>
       ) : (

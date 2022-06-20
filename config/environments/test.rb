@@ -40,6 +40,8 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.preview_path = "#{Rails.root}/test/mailers/previews"
+
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 

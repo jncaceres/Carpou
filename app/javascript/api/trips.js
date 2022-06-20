@@ -20,8 +20,13 @@ export const tEdit = (id) => {
 export const tUpdate = (id) => {
   return `/trips/${id}`;
 };
+
 export const tPost = () => {
   return `/trips`;
+};
+
+export const tDelete = (id) => {
+  return `/trips/${id}`;
 };
 
 export const tFromUser = (id) => {

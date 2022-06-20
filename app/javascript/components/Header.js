@@ -3,9 +3,7 @@ import logo from "../assets/logo.png";
 import { routes } from "../api";
 
 const Header = (props) => {
-  const {
-    user
-  } = props;
+  const { user } = props;
 
   const [showNav, setShowNav] = useState(false);
   return (
@@ -39,16 +37,27 @@ const Header = (props) => {
                 </h5>
               </div>
 
-          <a className="navbar-item"  data-method="get" href={routes.trips.fromUser(user.id)}>
-            Mis viajes
-          </a>
-          <a className="navbar-item"  data-method="get" href={routes.trips.new()}>
-            Crear viaje
-          </a>
-          <a className="navbar-item" data-method="get" href={routes.passenger_requests.fromUser(user.id)}>
-            Mis solicitudes
-          </a>
-
+              <a
+                className="navbar-item"
+                data-method="get"
+                href={routes.trips.fromUser(user.id)}
+              >
+                Mis viajes
+              </a>
+              <a
+                className="navbar-item"
+                data-method="get"
+                href={routes.passenger_requests.fromUser(user.id)}
+              >
+                Mis solicitudes
+              </a>
+              <a
+                className="navbar-item"
+                data-method="get"
+                href={routes.trips.new()}
+              >
+                Crear viaje
+              </a>
               <a
                 className="navbar-item"
                 data-method="delete"

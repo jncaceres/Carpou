@@ -5,11 +5,12 @@ const TripForm = (props) => {
 
     const { user,  places, trip } = props;
     return (
-        <form action = {trip ? routes.trips.update(trip.id) : routes.trips.post()}
+        <form action={trip ? routes.trips.update(trip.id) : routes.trips.post()}
             method="post"
             acceptCharset="UTF-8" 
             style={{border: "1px solid #f5efef", padding: 20,
             borderRadius: 10, backgroundColor: "#f5efef"}}>
+              { trip && <input type="hidden" name="_method" value="put" />}
           <div className="field">
             <div className="control">
                 <input 
@@ -83,8 +84,8 @@ const TripForm = (props) => {
               </div>
             </div>
           </div>
+          <label className="label">Información del auto: </label>
           <div className="field is-horizontal">
-            <label className="label">Información del auto</label>
             <div className="field-body">
               <div className="field is-expanded">
                 <div className="control">

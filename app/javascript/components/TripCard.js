@@ -6,7 +6,7 @@ const TripCard = (props) => {
   const { trip } = props;
   return (
     <div
-      className="card column is-one-third-desktop is-half-tablet is-three-quarters-mobile is-mobile my-2 p-4"
+      className="card my-2 p-4"
       key={trip.id}
     >
       <div className="card-image mb-3">

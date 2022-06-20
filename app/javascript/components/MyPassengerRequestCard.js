@@ -10,9 +10,6 @@ export const MyPassengerRequestCard = ({
     <div className="card is-full">
       <div className="card-content">
         <div className="media">
-          <div className="media-left">              
-            <span className={[`tag ${labelColor}`]}>{labelText}</span>
-          </div>
           <div className="media-content">
             <p className="title is-4">Solicitud de viaje</p>
             <p className="subtitle is-6">{`Sale desde ${passengerRequest.trip.from_address} a ${passengerRequest.trip.to_address}`}</p>
@@ -20,11 +17,15 @@ export const MyPassengerRequestCard = ({
               <time dateTime="2016-1-1">{`Enviada el ${passengerRequest.formatted_created_at}`}</time>
             </p>
           </div>
+          <div className="media-right">              
+            <span className={[`tag ${labelColor}`]}>{labelText}</span>
+          </div>
         </div>
 
         <div className="content">
           <div className="columns">
             <div className="column is-half">
+              <p className="subtitle is-6">Información de viaje</p>
               <ul>
                 <li>Precio: ${passengerRequest.trip.price}</li>
                 <li>Asientos disponibles: {passengerRequest.trip.available_seats}</li>
@@ -59,13 +60,13 @@ export const MyPassengerRequestCard = ({
               <p className="subtitle">{`${passengerRequest.trip.car_color}`}</p>
             </div>
           </div>
-          <div className="card-footer-item column is-full-mobile">
+          <div className="card-footer-item column is-half-mobile">
             <div>
               <p className="heading">Patente</p>
               <p className="subtitle">{passengerRequest.trip.car_license_plate}</p>
             </div>
           </div>
-          <div className="card-footer-item column is-full-mobile">
+          <div className="card-footer-item column is-half-mobile">
             <div>
               <p className="heading">Modelo</p>
               <p className="subtitle">{passengerRequest.trip.car_model}</p>

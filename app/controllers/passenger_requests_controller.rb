@@ -71,7 +71,15 @@ class PassengerRequestsController < ApplicationController
     requests_accepted = PassengerRequest.where(trip_id: trip_id, status: 'accepted')
     # if there are available seats, create the request
     if requests_accepted.length < trip.available_seats
-      PassengerRequest.create(comments: comment, trip_id: trip_id, status: 'pending', user_id: current_user.id)
+      passenger_request = PassengerRequest.create(comments: comment, trip_id: trip_id, status: 'pending', user_id: current_user.id)
+      AdminMailer.with({
+        passenger: passenger_request.user,
+        trip: passenger_request.trip,
+        driver: passenger_request.trip.user,
+        origin_place: passenger_request.trip.from,
+        destination_place: passenger_request.trip.to
+      }
+    ).new_request.deliver_now
       redirect_to(root_path, alert: 'Solicitud creada con éxito')
     else
       redirect_to(root_path, alert: 'No quedan asientos disponibles :C')

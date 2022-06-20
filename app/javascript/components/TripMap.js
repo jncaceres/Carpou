@@ -2,11 +2,11 @@ import React from "react";
 import { Map, Marker, ZoomControl } from "pigeon-maps";
 
 export const TripMap = (props) => {
-  const { trip } = props;
+  const { trip, height } = props;
   return (
     <>
       <Map
-        height={200}
+        height={height ? height : 200}
         defaultCenter={[trip.from.lat, trip.from.long]}
         defaultZoom={7}
       >

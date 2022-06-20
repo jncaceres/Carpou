@@ -35,19 +35,21 @@ const TripShow = (props) => {
         </>
       ) : (
         <>
-          <div className="columns is-multiline is-mobile">
-            <div className="column is-full-mobile title mb-1">
-              Viaje desde {`${trip.from.name} a ${trip.to.name}`}
+          <div className="columns is-multiline is-centered">
+            <div className="column has-text-centered is-full-mobile is-full-tablet is-full-desktop is-three-quarters-widescreen is-two-thirds-fullhd mb-1">
+              <h1 className="title block">Viaje desde {`${trip.from.name} a ${trip.to.name}`}</h1>
+              <TripMap trip={trip} height={350} />
             </div>
-            <div className="column is-full-mobile">
-              <TripMap trip={trip} />
+            <div className="column is-full-mobile is-full-tablet is-full-desktop is-three-quarters-widescreen is-two-thirds-fullhd">
+              <TripData trip={trip} />
+              <div className="block">
+                <TripButton
+                  buttonText="Solicitar unirme al viaje"
+                  route={routes.passenger_requests.new({trip_id: trip.id})}
+                />
+              </div>
             </div>
-          </div>
-          <TripData trip={trip} />
-          <TripButton
-            buttonText="Solicitar unirme al viaje"
-            route={routes.passenger_requests.new({trip_id: trip.id})}
-          />
+          </div>  
         </>
       )}
     </div>

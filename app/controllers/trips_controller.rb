@@ -3,7 +3,7 @@
 # Controlador de Trips
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[new create trips_from_user]
+  before_action :authenticate_user!, only: %i[new create trips_from_user destroy]
 
   # GET /trips or /trips.json
   # Obtener una lista de trips que cumplen con ciertos parametros
@@ -167,12 +167,14 @@ class TripsController < ApplicationController
   #
   # @param id [Int]
   def destroy
-    @trip.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(trips_url, notice: 'Trip was successfully destroyed.') }
-      format.json { head(:no_content) }
+    if @trip.user_id != current_user.id
+      redirect_to(trips_from_user_path(id: current_user.id), alert: 'No puedes cancelar un viaje que no es tuyo')
+      return
     end
+
+    @trip.destroy
+    redirect_to(trips_from_user_path(id: current_user.id))
+    nil
   end
 
   # GET /users/:id/trips
@@ -209,7 +211,8 @@ class TripsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_trip
-    @trip = Trip.find(params[:id])
+    @trip = Trip.find_by(id: params[:id])
+    redirect_to(root_path, alert: 'No existe el viaje pedido') if @trip.nil?
   end
 
   # Only allow a list of trusted parameters through.

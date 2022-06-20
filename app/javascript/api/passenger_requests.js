@@ -13,3 +13,6 @@ export const prShow = (id) => {
 export const prDelete = (id) => {
   return `/passenger_requests/${id}`;
 };
+export const prFromUser = (id) => {
+  return `/users/${id}/passenger_requests`;
+};

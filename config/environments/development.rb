@@ -2,6 +2,8 @@
 
 require 'active_support/core_ext/integer/time'
 
+Rack::MiniProfiler.config.position = 'bottom-right'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -87,11 +89,11 @@ Rails.application.configure do
     port: 3000
     }
   config.action_mailer.smtp_settings = {
-    :address => "smtp.gmail.com",
+    :address => "smtp.mailgun.org",
     :port => 587,
-    :domain => 'gmail',
-    :user_name => ENV["GMAIL_USERNAME"],
-    :password => ENV["GMAIL_PASSWORD"],
+    :domain => 'car-pou.tech.mailgun.org',
+    :user_name => ENV["MAIL_USERNAME"],
+    :password => ENV["MAIL_PASSWORD"],
     :authentication => 'plain',
     :enable_starttls_auto => true,
     :openssl_verify_mode => 'none' 

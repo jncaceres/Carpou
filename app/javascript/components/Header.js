@@ -47,7 +47,7 @@ const Header = (props) => {
               <a
                 className="navbar-item"
                 data-method="get"
-                href={my_requests_route}
+                href={routes.passenger_requests.fromUser(user.id)}
               >
                 Mis solicitudes
               </a>

@@ -32,33 +32,34 @@ class PassengerRequest < ApplicationRecord
   before_destroy :notify_affected_passengers
 
   def send_notification_after_status_change
-    if saved_change_to_attribute?(:status)
-      mail_params = {
-        passenger: user,
-        trip: trip,
-        driver: trip.user,
-        origin_place: trip.from,
-        destination_place: trip.to
-      }
-      if status == 'accepted'
-        AdminMailer.with(mail_params).request_accepted.deliver_now
-      elsif status == 'rejected'
-        AdminMailer.with(mail_params).request_rejected.deliver_now
-      end
+    return unless saved_change_to_attribute?(:status)
+
+    mail_params = {
+      passenger: user,
+      trip: trip,
+      driver: trip.user,
+      origin_place: trip.from,
+      destination_place: trip.to
+    }
+    case status
+    when 'accepted'
+      AdminMailer.with(mail_params).request_accepted.deliver_now
+    when 'rejected'
+      AdminMailer.with(mail_params).request_rejected.deliver_now
     end
   end
 
   def notify_affected_passengers
-    if status == 'pending' || status == 'accepted'
-      AdminMailer.with({
-        passenger: user,
-        trip: trip,
-        driver: trip.user,
-        origin_place: trip.from,
-        destination_place: trip.to
-      }
-                      ).trip_canceled.deliver_now
-    end
+    return unless status == 'pending' || status == 'accepted'
+
+    AdminMailer.with({
+      passenger: user,
+      trip: trip,
+      driver: trip.user,
+      origin_place: trip.from,
+      destination_place: trip.to
+    }
+                    ).trip_canceled.deliver_now
   end
 
   # Retorna la fecha formateada de la siguiente forma d/m/Y H:M

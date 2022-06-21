@@ -28,20 +28,28 @@ class PassengerRequest < ApplicationRecord
     canceled: 3
   }
 
+  after_update :send_notification_after_status_change
   before_destroy :notify_affected_passengers
 
-  def notify_affected_passengers
-    case status
-    when 'pending'
-      AdminMailer.with({
+  def send_notification_after_status_change
+    if saved_change_to_attribute?(:status)
+      mail_params = {
         passenger: user,
         trip: trip,
         driver: trip.user,
         origin_place: trip.from,
         destination_place: trip.to
       }
-                      ).trip_canceled.deliver_now
-    when 'accepted'
+      if status == 'accepted'
+        AdminMailer.with(mail_params).request_accepted.deliver_now
+      elsif status == 'rejected'
+        AdminMailer.with(mail_params).request_rejected.deliver_now
+      end
+    end
+  end
+
+  def notify_affected_passengers
+    if status == 'pending' || status == 'accepted'
       AdminMailer.with({
         passenger: user,
         trip: trip,

@@ -5,18 +5,24 @@ const TripForm = (props) => {
     const date = () => {
       const months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
       let today = new Date();
+      let min;
+      if(today.getMinutes()<10) min= '0'+today.getMinutes()
+      else min = today.getMinutes();
+      let hour;
+      if(today.getHours()<10) hour= '0'+today.getHours()
+      else hour = today.getHours();
       let today_format = today.getFullYear() + '-' + months[today.getMonth()] + '-' + 
-      today.getDate()+'T'+ today.getHours()+':'+ today.getMinutes();
+      today.getDate()+'T'+ hour+':'+ min;
       return today_format;
 
     }
     const [inputValues, setInputValues] = useState({
-      authenticity_token: document.getElementsByName("csrf-token")[0].getAttribute("content"),
+      
       trip: {
         from_id: trip ? trip.from_id : 1,
         to_id: trip ? trip.to_id : 2,
         from_address: trip ? trip.from_address : '',
-        to_adrress: trip ? trip.to_adrress : '',
+        to_address: trip ? trip.to_address : '',
         available_seats: trip ? trip.available_seats : '',
         leaving_at: trip ? trip.leaving_at : '',
         price: trip ? trip.price : '',
@@ -44,22 +50,27 @@ const TripForm = (props) => {
       let error = validation;
       let check = valid;
       if (inputValues.trip.from_address!='' && !inputValues.trip.from_address.match(/\d+/g)){
-        error.from_address = 'Ingresar una direccion válida'
+        error.from_address = 'Ingresar una direccion válida';
+        check.from_address = false;
         
         
       } else{
         check.from_address = true;
         error.from_address = ''
       }
-      if (inputValues.trip.to_address!='' && !inputValues.trip.to_adrress.match(/\d+/g)){
-        error.to_address = 'Ingresar una direccion válida'
+      if (inputValues.trip.to_address!='' && !inputValues.trip.to_address.match(/\d+/g)){
+        error.to_address = 'Ingresar una direccion válida';
+        check.to_address = false;
+      
    
       } else{
         check.to_address = true;
         error.to_address = '';
       } 
       if(inputValues.trip.price!='' && parseInt(inputValues.trip.price) > 500000){
-        error.price = 'El monto no puede superar los $500.000'
+        error.price = 'El monto no puede superar los $500.000';
+        check.price = false;
+
       }else{
         error.price = '';
         check.price = true;
@@ -72,7 +83,6 @@ const TripForm = (props) => {
       const { name, value } = e.target;
        setInputValues(
         (prevState) =>({
-          authenticity_token: prevState.authenticity_token,
           trip :{
             ...prevState.trip,
             [name]: value
@@ -80,29 +90,42 @@ const TripForm = (props) => {
         }));
       }
     const sendData = (data) =>{
+      
       fetch(trip ? routes.trips.update(trip.id) : routes.trips.post(),{
-        method:trip ? "PUT" : "POST",
-        body: {params: data}
-      })
+        method: trip ? "PUT" : "POST",
+        headers: {
+          'X-CSRF-Token':document.getElementsByName("csrf-token")[0].getAttribute("content")
+        },
+        body: data
+      }).then((response) => {
+        //window.location.href = response.url;
+      }).catch(err => console.log(err))
   
     }  
     const handleSubmit = (e) => {
       e.preventDefault();
       if(valid.from_address && valid.to_address && valid.price){
-        console.log("ACa");
-        sendData.then((response) => {
-          if (response.redirected) {
-            window.location.href = response.url;
-          }
-        });
+        sendData(inputValues);
+   
       }
     }
 
     return (
         <form 
+            onSubmit={(e) => handleSubmit(e)}
             acceptCharset="UTF-8" 
             style={{border: "1px solid #f5efef", padding: 20,
             borderRadius: 10, backgroundColor: "#f5efef"}}>
+            <div className="field">
+            <div className="control">
+                <input 
+                    type="hidden" 
+                    name="authenticity_token" 
+                    value={document.getElementsByName("csrf-token")[0].getAttribute("content")}
+                    autoComplete="off">
+                </input>
+            </div>      
+          </div>
           <div className="field is-horizontal">
             <div className="field-body">
               <div className="field is-expanded">
@@ -160,7 +183,7 @@ const TripForm = (props) => {
                   placeholder='Dirección de destino' 
                   onChange={handleChange}
                   onBlur={checkValidation}
-                  defaultValue={inputValues.trip.to_adrress} required/>
+                  defaultValue={inputValues.trip.to_address} required/>
                 </div>
                 {!valid.to_address? <p>{validation.to_address}</p> : null}
               </div>
@@ -175,6 +198,7 @@ const TripForm = (props) => {
                   placeholder='Número de asientos disponibles' 
                   onChange={handleChange}
                   max='50'
+                  min='1'
                   defaultValue={inputValues.trip.available_seats} required/>
                 </div>
               </div>
@@ -256,10 +280,10 @@ const TripForm = (props) => {
           <div className="field">
            <div className="control">
              <button className="button is-primary is-fullwidth" 
-             onSubmit={handleSubmit}
              type='submit'>{trip ? 'Editar viaje' : 'Crear viaje'}</button>
            </div>           
           </div>
+
       </form>
     )
 

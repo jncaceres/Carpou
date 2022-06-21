@@ -58,7 +58,7 @@
 
 class Trip < ApplicationRecord
   belongs_to :user
-  has_many :passenger_requests
+  has_many :passenger_requests, dependent: :destroy
   has_many :users, through: :passenger_requests
   belongs_to :to, class_name: 'Place', foreign_key: 'to_id'
   belongs_to :from, class_name: 'Place', foreign_key: 'from_id'
@@ -76,14 +76,7 @@ class Trip < ApplicationRecord
   validates :from_id, presence: { message: 'Ingresar la comuna de origen' }
   validates :to_id, presence: { message: 'Ingresar la comuna de destino' }
 
-  before_destroy :destroy_requests_associated
-
   private
-
-  def destroy_requests_associated
-    requests = PassengerRequest.where(trip_id: id)
-    requests.each(&:destroy)
-  end
 
   # retorna si es que la salida de un nuevo viaje es valida o no.
   def check_trip_leaving_at

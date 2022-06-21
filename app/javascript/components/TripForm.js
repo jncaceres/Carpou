@@ -98,7 +98,7 @@ const TripForm = (props) => {
         },
         body: data
       }).then((response) => {
-        //window.location.href = response.url;
+        window.location.href = response.url;
       }).catch(err => console.log(err))
   
     }  

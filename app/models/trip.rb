@@ -76,6 +76,10 @@ class Trip < ApplicationRecord
   validates :from_id, presence: { message: 'Ingresar la comuna de origen' }
   validates :to_id, presence: { message: 'Ingresar la comuna de destino' }
 
+  def should_show_trip(checked, date)
+    ((!checked && leaving_at.to_date == Date.parse(date)) || (checked && leaving_at.to_date >= Date.parse(date)))
+  end
+
   private
 
   # retorna si es que la salida de un nuevo viaje es valida o no.

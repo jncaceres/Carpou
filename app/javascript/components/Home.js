@@ -8,7 +8,7 @@ const Home = (props) => {
     <>
       <div className="columns is-centered">
         <div className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-half-widescreen is-half-fullhd">
-          <div className="hero home-banner">
+          <div className="hero home-banner has-text-centered">
             <h1 className="title" style={{ marginTop: 25 }}>
               Encuentra viajes en auto, a precio barato
             </h1>

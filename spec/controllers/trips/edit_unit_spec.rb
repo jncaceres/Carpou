@@ -38,7 +38,7 @@ RSpec.describe(TripsController) do
           from_address: 'address1 #2',
           to_address: 'address2',
           available_seats: 5,
-          leaving_at: '2022-06-20T20:00',
+          leaving_at: DateTime.now + 3.days,
           price: 2000,
           comments: 'comments',
           car_license_plate: 'AA-5656',
@@ -62,6 +62,30 @@ RSpec.describe(TripsController) do
           from_address: 'address1',
           to_address: '',
           available_seats: 5,
+          price: 2000,
+          comments: 'comments',
+          car_license_plate: 'AA-5656',
+          car_brand: 'Volvo',
+          car_model: 'XC60',
+          car_color: 'rojo',
+          user_id: @user.id,
+          from_id: @from.id,
+          to_id: @to.id
+        }
+      }
+      expect(response).to(redirect_to(edit_trip_path(trip_bot.id)))
+    end
+    it 'updates specific trip and redirects to #edit because date is old' do
+      trip_bot = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @user.id)
+      sign_in(@user, scope: :user)
+      trip_bot.save
+      put :update, params: {
+        id: trip_bot.id,
+        trip: {
+          from_address: 'address1 #2',
+          to_address: 'address2',
+          available_seats: 5,
+          leaving_at: DateTime.now - 3.days,
           price: 2000,
           comments: 'comments',
           car_license_plate: 'AA-5656',

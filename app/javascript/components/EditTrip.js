@@ -13,11 +13,8 @@ const EditTrip = (props) => {
 
     <div className="field">
         <div className="control">
-          <a href={routes.trips.show(trip.id)}>
-            <button className="button is-primary is-fullwidth" type="submit">
-              Cancelar
-            </button>
-          </a>
+          <a href={routes.trips.show(trip.id)}> Cancelar</a>
+          
         </div>
       </div>
     <TripForm user={user} places={places} trip={trip} />

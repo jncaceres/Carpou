@@ -2,20 +2,17 @@ import React, { useState } from "react";
 import { routes } from "../api";
 const TripForm = (props) => {
     const { user,  places, trip } = props;
-    const date = () => {
+    const date = (date = new Date()) => {
       const months = ['01','02','03','04','05','06','07','08','09','10','11','12'];
-      let today = new Date();
-      let min;
-      if(today.getMinutes()<10) min= '0'+today.getMinutes()
-      else min = today.getMinutes();
-      let hour;
-      if(today.getHours()<10) hour= '0'+today.getHours()
-      else hour = today.getHours();
+      let today = new Date (date);
+      let min = today.getMinutes()<10 ? '0'+today.getMinutes() : today.getMinutes();
+      let hour = today.getHours()<10 ? '0'+today.getHours() : today.getHours();
+      let day = today.getDate()<10 ? '0'+today.getDate() : today.getDate();
       let today_format = today.getFullYear() + '-' + months[today.getMonth()] + '-' + 
-      today.getDate()+'T'+ hour+':'+ min;
+      day+'T'+ hour+':'+ min;
       return today_format;
-
     }
+    
     const [inputValues, setInputValues] = useState({
       
         "trip[from_id]": trip ? trip.from_id : 1,
@@ -23,7 +20,7 @@ const TripForm = (props) => {
         "trip[from_address]": trip ? trip.from_address : '',
         "trip[to_address]": trip ? trip.to_address : '',
         "trip[available_seats]": trip ? trip.available_seats : '',
-        "trip[leaving_at]": trip ? trip.leaving_at : '',
+        "trip[leaving_at]": trip ? date(trip.leaving_at) : '',
         "trip[price]": trip ? trip.price : '',
         "trip[comments]": trip ? trip.comments : '',
         "trip[car_license_plate]": trip ? trip.car_license_plate : '',
@@ -39,9 +36,9 @@ const TripForm = (props) => {
 
     })
     const [valid, setValid] = useState({
-      from_address: false,
-      to_address: false,
-      price: false
+      from_address: trip? true: false,
+      to_address: trip? true: false,
+      price: trip? true: false
     });
 
     const checkValidation = () => {
@@ -50,8 +47,6 @@ const TripForm = (props) => {
       if (inputValues["trip[from_address]"]!='' && !inputValues["trip[from_address]"].match(/\d+/g)){
         error.from_address = 'Ingresar una direccion válida';
         check.from_address = false;
-        
-        
       } else{
         check.from_address = true;
         error.from_address = ''
@@ -59,8 +54,6 @@ const TripForm = (props) => {
       if (inputValues["trip[to_address]"]!='' && !inputValues["trip[to_address]"].match(/\d+/g)){
         error.to_address = 'Ingresar una direccion válida';
         check.to_address = false;
-      
-   
       } else{
         check.to_address = true;
         error.to_address = '';
@@ -91,14 +84,13 @@ const TripForm = (props) => {
       
       fetch(trip ? routes.trips.update(trip.id) : routes.trips.post(),{
         method: trip ? "PUT" : "POST",
-        headers: {
-          'X-CSRF-Token':document.getElementsByName("csrf-token")[0].getAttribute("content")
-        },
         body: new FormData(document.getElementById('create-trip-form'))
       }).then((response) => {
-        window.location.href = response.url;
-      }).catch(err => console.log(err))
-  
+        if (response.redirected) {
+          window.location.href = response.url;
+        }
+      }).catch(err => {
+        console.log(err)})
     }  
     const handleSubmit = (e) => {
       e.preventDefault();
@@ -130,8 +122,8 @@ const TripForm = (props) => {
                 <div className="control">
                   <label>Viajo desde...</label>
                 <select className="input" name='trip[from_id]'
+                placeholder="Viajo desde..."
                 onChange={handleChange}
-                
                  defaultValue={inputValues['trip[from_id]']}>
                   {places.map((place) => (
                     <option 
@@ -147,7 +139,8 @@ const TripForm = (props) => {
                 <label>Viajo hacia...</label>
                 <select className="input" name = 'trip[to_id]' 
                 onChange={handleChange}
-                defaultValue={inputValues['trip[to_id]' ]}>
+                placeholder="Viajo hacia..."
+                defaultValue={inputValues['trip[to_id]']}>
                     {places.map((place) => (
                         <option 
                             key={place.id} 
@@ -167,7 +160,7 @@ const TripForm = (props) => {
                   type='text' 
                   name='trip[from_address]' 
                   placeholder='Dirección de origen' 
-                  defaultValue={inputValues.from_address}
+                  defaultValue={inputValues['trip[from_address]']}
                   onChange={handleChange}
                   onBlur={checkValidation}
                   required/>
@@ -181,7 +174,7 @@ const TripForm = (props) => {
                   placeholder='Dirección de destino' 
                   onChange={handleChange}
                   onBlur={checkValidation}
-                  defaultValue={inputValues.to_address} required/>
+                  defaultValue={inputValues['trip[to_address]']} required/>
                 </div>
                 {!valid.to_address? <p>{validation.to_address}</p> : null}
               </div>
@@ -197,7 +190,7 @@ const TripForm = (props) => {
                   onChange={handleChange}
                   max='50'
                   min='1'
-                  defaultValue={inputValues.available_seats} required/>
+                  defaultValue={inputValues['trip[available_seats]']} required/>
                 </div>
               </div>
               <div className="field is-expanded">
@@ -208,7 +201,7 @@ const TripForm = (props) => {
                   onChange={handleChange}
                   onBlur={checkValidation}
                   max="500000"
-                  defaultValue={inputValues.price} required/>
+                  defaultValue={inputValues['trip[price]']} required/>
                 </div>
                 {!valid.price? <p>{validation.price}</p> : null}
               </div>
@@ -235,7 +228,7 @@ const TripForm = (props) => {
                   type='text' name='trip[car_license_plate]' 
                   placeholder='Patente' 
                   onChange={handleChange}
-                  defaultValue={inputValues.car_license_plate} required/>
+                  defaultValue={inputValues['trip[car_license_plate]']} required/>
                 </div>
               </div>
               <div className="field is-expanded">
@@ -244,7 +237,7 @@ const TripForm = (props) => {
                   type='text' name='trip[car_brand]' 
                   placeholder='Marca del auto' 
                   onChange={handleChange}
-                  defaultValue={inputValues.car_brand} required/>
+                  defaultValue={inputValues['trip[car_brand]']} required/>
                 </div>
               </div>
               <div className="field is-expanded">
@@ -253,7 +246,7 @@ const TripForm = (props) => {
                   type='text' name='trip[car_model]' 
                   placeholder='Modelo del auto' 
                   onChange={handleChange}
-                  defaultValue={inputValues.car_model} required/>
+                  defaultValue={inputValues['trip[car_model]']} required/>
                 </div>
               </div>
               <div className="field is-expanded">
@@ -262,7 +255,7 @@ const TripForm = (props) => {
                   type='text' name='trip[car_color]'
                   placeholder='Color del auto' 
                   onChange={handleChange}
-                  defaultValue={inputValues.car_color} required/>
+                  defaultValue={inputValues['trip[car_color]']} required/>
                 </div>
               </div>
             </div>
@@ -273,7 +266,7 @@ const TripForm = (props) => {
               type='text' name='trip[comments]' 
               placeholder='Comentario' 
               onChange={handleChange}
-              defaultValue={inputValues.comments}/>
+              defaultValue={inputValues['trip[comments]']}/>
             </div>
           </div>
           <div className="field">

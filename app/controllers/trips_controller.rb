@@ -153,12 +153,12 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     if @trip.user_id == current_user.id
       if @trip.update(trip_params)
-        redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente')
+        redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente', status: :see_other)
       else
-        redirect_to(edit_trip_path(@trip.id), notice: '¡Error al editar el viaje!')
+        redirect_to(edit_trip_path(@trip.id), notice: '¡Error al editar el viaje!', status: :see_other)
       end
     else
-      redirect_to(edit_trip_path(@trip.id), notice: '¡No tienes los permisos para editar este viaje!')
+      redirect_to(edit_trip_path(@trip.id), notice: '¡No tienes los permisos para editar este viaje!', status: :see_other)
     end
   end
 
@@ -168,12 +168,12 @@ class TripsController < ApplicationController
   # @param id [Int]
   def destroy
     if @trip.user_id != current_user.id
-      redirect_to(trips_from_user_path(id: current_user.id), alert: 'No puedes cancelar un viaje que no es tuyo')
+      redirect_to(trips_from_user_path(id: current_user.id), alert: 'No puedes cancelar un viaje que no es tuyo', status: :see_other)
       return
     end
 
     @trip.destroy
-    redirect_to(trips_from_user_path(id: current_user.id))
+    redirect_to(trips_from_user_path(id: current_user.id), status: :see_other)
     nil
   end
 

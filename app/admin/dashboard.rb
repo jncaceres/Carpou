@@ -6,7 +6,7 @@ ActiveAdmin.register_page('Dashboard') do
   content title: proc { I18n.t('active_admin.dashboard') } do
     div class: 'blank_slate_container', id: 'dashboard_default_message' do
       span class: 'blank_slate' do
-        span I18n.t('active_admin.dashboard_welcome.welcome')
+        span 'Bienvenid@!'
         # small I18n.t('active_admin.dashboard_welcome.call_to_action')
       end
     end
@@ -15,18 +15,24 @@ ActiveAdmin.register_page('Dashboard') do
     #
     columns do
       column do
-        panel 'Recent Places' do
+        panel 'Viajes creados recientemente' do
           ul do
-            Place.last(5).map do |place|
-              li link_to(place.name, admin_place_path(place))
+            Trip.last(15).map do |trip|
+              li link_to("#{trip.from.name} a #{trip.to.name} por #{trip.user.email}", admin_trip_path(trip))
             end
           end
         end
       end
 
       column do
-        panel 'Info' do
-          para 'Welcome to ActiveAdmin.'
+        panel 'Solicitudes de viaje recientes' do
+          ul do
+            PassengerRequest.last(15).map do |pr|
+              li link_to("#{pr.user.email} solicita viaje de #{pr.trip.from.name} a #{pr.trip.to.name} por #{pr.trip.user.email}",
+                         admin_passenger_request_path(pr)
+                        )
+            end
+          end
         end
       end
     end

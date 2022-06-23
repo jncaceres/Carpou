@@ -103,6 +103,7 @@ const TripForm = (props) => {
       ...prevState,
       [name]: value,
     }));
+
   };
   const sendData = () => {
     fetch(trip ? routes.trips.update(trip.id) : routes.trips.post(), {
@@ -122,6 +123,36 @@ const TripForm = (props) => {
     e.preventDefault();
     if (valid.from_address && valid.to_address && valid.price) {
       sendData();
+    } if(!valid.from_address){
+      setInputValues((prevState) => ({
+        ...prevState,
+        ['trip[from_address]']: ''
+      }));
+      setValidation((prev)=>({
+        ...prev,
+        from_address: "",
+
+      }))
+    }  if(!valid.to_address){
+      setInputValues((prevState) => ({
+        ...prevState,
+        ['trip[to_address]']: '',
+      }));
+      setValidation((prev)=>({
+        ...prev,
+        to_address: "",
+
+      }))
+    }if(!valid.price){
+      setInputValues((prevState) => ({
+        ...prevState,
+        ['trip[price]']: '',
+      }));
+      setValidation((prev)=>({
+        ...prev,
+        price: "",
+
+      }))
     }
   };
 
@@ -198,7 +229,8 @@ const TripForm = (props) => {
                 type="text"
                 name="trip[from_address]"
                 placeholder="Dirección de origen"
-                defaultValue={inputValues["trip[from_address]"]}
+      
+                value = {inputValues["trip[from_address]"]}
                 onChange={handleChange}
                 onBlur={checkValidation}
                 required
@@ -215,7 +247,7 @@ const TripForm = (props) => {
                 placeholder="Dirección de destino"
                 onChange={handleChange}
                 onBlur={checkValidation}
-                defaultValue={inputValues["trip[to_address]"]}
+                value={inputValues["trip[to_address]"]}
                 required
               />
             </div>
@@ -235,7 +267,7 @@ const TripForm = (props) => {
                 onChange={handleChange}
                 max="50"
                 min="1"
-                defaultValue={inputValues["trip[available_seats]"]}
+                value={inputValues["trip[available_seats]"]}
                 required
               />
             </div>
@@ -250,7 +282,7 @@ const TripForm = (props) => {
                 onChange={handleChange}
                 onBlur={checkValidation}
                 max="500000"
-                defaultValue={inputValues["trip[price]"]}
+                value={inputValues["trip[price]"]}
                 required
               />
             </div>
@@ -283,7 +315,7 @@ const TripForm = (props) => {
                 name="trip[car_license_plate]"
                 placeholder="Patente"
                 onChange={handleChange}
-                defaultValue={inputValues["trip[car_license_plate]"]}
+                value={inputValues["trip[car_license_plate]"]}
                 required
               />
             </div>
@@ -296,7 +328,7 @@ const TripForm = (props) => {
                 name="trip[car_brand]"
                 placeholder="Marca del auto"
                 onChange={handleChange}
-                defaultValue={inputValues["trip[car_brand]"]}
+                value={inputValues["trip[car_brand]"]}
                 required
               />
             </div>
@@ -309,7 +341,7 @@ const TripForm = (props) => {
                 name="trip[car_model]"
                 placeholder="Modelo del auto"
                 onChange={handleChange}
-                defaultValue={inputValues["trip[car_model]"]}
+                value={inputValues["trip[car_model]"]}
                 required
               />
             </div>
@@ -322,7 +354,7 @@ const TripForm = (props) => {
                 name="trip[car_color]"
                 placeholder="Color del auto"
                 onChange={handleChange}
-                defaultValue={inputValues["trip[car_color]"]}
+                value={inputValues["trip[car_color]"]}
                 required
               />
             </div>
@@ -337,7 +369,7 @@ const TripForm = (props) => {
             name="trip[comments]"
             placeholder="Comentario"
             onChange={handleChange}
-            defaultValue={inputValues["trip[comments]"]}
+            value={inputValues["trip[comments]"]}
           />
         </div>
       </div>

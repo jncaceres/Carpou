@@ -15,7 +15,6 @@ ActiveAdmin.register(User) do
     column :phone
     column :gender
     column :birthdate
-    column :admin
     column :email
     actions
   end

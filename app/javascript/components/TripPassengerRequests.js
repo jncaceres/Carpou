@@ -55,7 +55,7 @@ export const TripPassengerRequests = (props) => {
         "X-CSRF-Token": csrf,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ status: "canceled" }),
+      body: JSON.stringify({ status: "rejected" }),
     }).then(() => {
       setNotificationText("Solicitud rechazada exitosamente.");
       setNotificationColor("is-info");
@@ -64,7 +64,7 @@ export const TripPassengerRequests = (props) => {
         pendingRequests.filter((pr) => pr.id != passengerRequest.id)
       );
       setAnsweredRequests([
-        { ...passengerRequest, status: "canceled" },
+        { ...passengerRequest, status: "rejected" },
         ...answeredRequests,
       ]);
       scrollToTop();
@@ -111,7 +111,7 @@ export const TripPassengerRequests = (props) => {
             <TripPassengerRequestCard
               passengerRequest={pr}
               showButtons={false}
-              labelText={pr.status == "accepted" ? "Aceptada" : "Cancelada"}
+              labelText={pr.status == "accepted" ? "Aceptada" : "Rechazada"}
               labelColor={pr.status == "accepted" ? "is-success" : "is-danger"}
             />
           </div>

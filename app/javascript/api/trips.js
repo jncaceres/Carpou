@@ -1,6 +1,6 @@
 export const tIndex = (params) => {
   if (params) {
-    return `/trips?from=${params.from}&to=${params.to}&date=${params.date}`;
+    return `/trips?from=${params.from}&to=${params.to}&date=${params.date}&checked=${params.checked}`;
   } else {
     return `/trips`;
   }

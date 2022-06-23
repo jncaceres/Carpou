@@ -11,6 +11,7 @@ const SearchTripForm = (props) => {
   const [from, setFrom] = useState(options[0]);
   const [to, setTo] = useState(options[options.length - 1]);
   const [date, setDate] = useState(new Date().toLocaleDateString("en-CA"));
+  const [checked, setChecked] = useState(false);
 
   const handleFromChange = (e) => {
     setFrom(e);
@@ -24,7 +25,16 @@ const SearchTripForm = (props) => {
     setDate(e.target.value);
   };
 
-  const tripParams = { from: from.value, to: to.value, date: date };
+  const handleCheckedChange = () => {
+    setChecked(!checked);
+  };
+
+  const tripParams = {
+    from: from.value,
+    to: to.value,
+    date: date,
+    checked: checked,
+  };
 
   return (
     <div
@@ -73,6 +83,18 @@ const SearchTripForm = (props) => {
             onChange={handleDateChange}
           />
         </div>
+      </div>
+      <div className="field">
+        <label className="checkbox">
+          <input
+            type="checkbox"
+            checked={checked}
+            onChange={handleCheckedChange}
+          />
+          <span className="ml-2">
+            Buscar viajes posteriores a la fecha indicada
+          </span>
+        </label>
       </div>
       <div className="field">
         <div className="control">

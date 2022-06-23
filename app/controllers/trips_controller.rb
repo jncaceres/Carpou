@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 # Controlador de Trips
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
@@ -21,9 +23,10 @@ class TripsController < ApplicationController
     date = list_query_params[:date]
     filtered_trips = []
     if from_place && to_place && date
+      checked = JSON.parse(list_query_params[:checked])
       obtained_trips = Trip.where(from_id: from_place, to_id: to_place)
       obtained_trips.each do |trip|
-        filtered_trips.push(trip) if trip.leaving_at.to_date == Date.parse(date)
+        filtered_trips.push(trip) if trip.should_show_trip(checked, date)
       end
     else
       obtained_trips = Trip.all
@@ -223,6 +226,6 @@ class TripsController < ApplicationController
   end
 
   def list_query_params
-    params.permit(:from, :to, :date)
+    params.permit(:from, :to, :date, :checked)
   end
 end

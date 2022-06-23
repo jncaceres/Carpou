@@ -106,9 +106,14 @@ const TripForm = (props) => {
 
   };
   const sendData = () => {
+    let data = new FormData(document.getElementById("create-trip-form"));
+    data.append("authenticity_token",document
+    .getElementsByName("csrf-token")[0]
+    .getAttribute("content"));
+    data.append("trip[user_id]", user.id);
     fetch(trip ? routes.trips.update(trip.id) : routes.trips.post(), {
       method: trip ? "PUT" : "POST",
-      body: new FormData(document.getElementById("create-trip-form")),
+      body: data,
     })
       .then((response) => {
         if (response.redirected) {
@@ -172,18 +177,7 @@ const TripForm = (props) => {
         backgroundColor: "#f5efef",
       }}
     >
-      <div className="field">
-        <div className="control">
-          <input
-            type="hidden"
-            name="authenticity_token"
-            value={document
-              .getElementsByName("csrf-token")[0]
-              .getAttribute("content")}
-            autoComplete="off"
-          ></input>
-        </div>
-      </div>
+      
       <div className="field is-horizontal">
         <div className="field-body">
           <div className="field is-expanded">
@@ -377,11 +371,7 @@ const TripForm = (props) => {
           />
         </div>
       </div>
-      <div className="field">
-        <div className="control">
-          <input type="hidden" name="trip[user_id]" value={user.id}></input>
-        </div>
-      </div>
+     
       <div className="field">
         <div className="control">
           <button className="button is-primary is-fullwidth" type="submit">

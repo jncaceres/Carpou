@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { routes } from "../api";
 const TripForm = (props) => {
   const { user, places, trip } = props;
@@ -62,8 +62,8 @@ const TripForm = (props) => {
   });
 
   const checkValidation = () => {
-    let error = validation;
-    let check = valid;
+    let error = {...validation};
+    let check = {...valid};
     if (
       inputValues["trip[from_address]"] != "" &&
       !inputValues["trip[from_address]"].match(/\d+/g)
@@ -155,6 +155,10 @@ const TripForm = (props) => {
       }))
     }
   };
+
+  useEffect(() => {
+    checkValidation();
+  }, [inputValues])
 
   return (
     <form

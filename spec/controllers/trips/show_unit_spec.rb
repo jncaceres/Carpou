@@ -24,8 +24,8 @@ RSpec.describe(TripsController) do
       second_trip = FactoryBot.create(:trip, from_id: @from.id, to_id: @to.id, user_id: @second_user.id)
       first_trip.save
       second_trip.save
-      json_trip = first_trip.as_json(include: %i[user to from])
-      json_trip2 = second_trip.as_json(include: %i[user to from])
+      json_trip = first_trip.as_json(include: %i[user to from users])
+      json_trip2 = second_trip.as_json(include: %i[user to from users])
       get :show, params: { id: first_trip.id }
       controller_trip = controller.view_assigns['trip']
       expect(controller_trip).to(eq(json_trip))

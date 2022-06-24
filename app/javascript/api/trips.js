@@ -1,6 +1,6 @@
 export const tIndex = (params) => {
   if (params) {
-    return `/trips?from=${params.from}&to=${params.to}&date=${params.date}`;
+    return `/trips?from=${params.from}&to=${params.to}&date=${params.date}&checked=${params.checked}`;
   } else {
     return `/trips`;
   }
@@ -20,6 +20,15 @@ export const tEdit = (id) => {
 export const tUpdate = (id) => {
   return `/trips/${id}`;
 };
+
 export const tPost = () => {
   return `/trips`;
+};
+
+export const tDelete = (id) => {
+  return `/trips/${id}`;
+};
+
+export const tFromUser = (id) => {
+  return `/users/${id}/trips`
 };

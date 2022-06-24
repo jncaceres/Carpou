@@ -47,8 +47,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable
 
-  has_many :trips
-  has_many :passenger_requests
+  has_many :trips, dependent: :destroy
+  has_many :passenger_requests, dependent: :destroy
   has_many :trips, through: :passenger_requests
   # Se obtiene la edad del usuario
   #

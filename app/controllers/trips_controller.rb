@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
+require 'json'
+
 # Controlador de Trips
 class TripsController < ApplicationController
   before_action :set_trip, only: %i[show edit update destroy]
-  before_action :authenticate_user!, only: %i[new create trips_from_user]
+  before_action :authenticate_user!, only: %i[new create trips_from_user destroy]
 
   # GET /trips or /trips.json
   # Obtener una lista de trips que cumplen con ciertos parametros
@@ -21,9 +23,10 @@ class TripsController < ApplicationController
     date = list_query_params[:date]
     filtered_trips = []
     if from_place && to_place && date
+      checked = JSON.parse(list_query_params[:checked])
       obtained_trips = Trip.where(from_id: from_place, to_id: to_place)
       obtained_trips.each do |trip|
-        filtered_trips.push(trip) if trip.leaving_at.to_date == Date.parse(date)
+        filtered_trips.push(trip) if trip.should_show_trip(checked, date)
       end
     else
       obtained_trips = Trip.all
@@ -55,7 +58,7 @@ class TripsController < ApplicationController
                           else
                             []
                           end
-    @trip = @trip.as_json(include: %i[user to from])
+    @trip = @trip.as_json(include: %i[user to from users])
   end
 
   # GET /trips/new
@@ -109,7 +112,7 @@ class TripsController < ApplicationController
   #
   # @return [Trip]
   def create
-    @trip = current_user.trips.create(trip_params)
+    @trip = Trip.create(trip_params)
     if @trip.save
       redirect_to(trip_url(@trip), notice: 'El viaje fue creado correctamente')
     else
@@ -153,12 +156,12 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     if @trip.user_id == current_user.id
       if @trip.update(trip_params)
-        redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente')
+        redirect_to(trip_url(@trip), notice: 'El viaje fue editado correctamente', status: :see_other)
       else
-        redirect_to(edit_trip_path(@trip.id), notice: '¡Error al editar el viaje!')
+        redirect_to(edit_trip_path(@trip.id), notice: '¡Error al editar el viaje!', status: :see_other)
       end
     else
-      redirect_to(edit_trip_path(@trip.id), notice: '¡No tienes los permisos para editar este viaje!')
+      redirect_to(edit_trip_path(@trip.id), notice: '¡No tienes los permisos para editar este viaje!', status: :see_other)
     end
   end
 
@@ -167,12 +170,14 @@ class TripsController < ApplicationController
   #
   # @param id [Int]
   def destroy
-    @trip.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(trips_url, notice: 'Trip was successfully destroyed.') }
-      format.json { head(:no_content) }
+    if @trip.user_id != current_user.id
+      redirect_to(trips_from_user_path(id: current_user.id), alert: 'No puedes cancelar un viaje que no es tuyo', status: :see_other)
+      return
     end
+
+    @trip.destroy
+    redirect_to(trips_from_user_path(id: current_user.id), status: :see_other)
+    nil
   end
 
   # GET /users/:id/trips
@@ -209,7 +214,8 @@ class TripsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_trip
-    @trip = Trip.find(params[:id])
+    @trip = Trip.find_by(id: params[:id])
+    redirect_to(root_path, alert: 'No existe el viaje pedido') if @trip.nil?
   end
 
   # Only allow a list of trusted parameters through.
@@ -220,6 +226,6 @@ class TripsController < ApplicationController
   end
 
   def list_query_params
-    params.permit(:from, :to, :date)
+    params.permit(:from, :to, :date, :checked)
   end
 end

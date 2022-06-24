@@ -5,10 +5,7 @@ import { routes } from "../api";
 const TripCard = (props) => {
   const { trip } = props;
   return (
-    <div
-      className="card column is-one-third-desktop is-half-tablet is-three-quarters-mobile is-mobile my-2 p-4"
-      key={trip.id}
-    >
+    <div className="card my-2 p-4" key={trip.id}>
       <div className="card-image mb-3">
         <Map
           height={300}
@@ -22,7 +19,7 @@ const TripCard = (props) => {
       </div>
       <div className="card-content p-0">
         <div className="media">
-          <div className="media-content" style={{overflowX: 'unset'}}>
+          <div className="media-content" style={{ overflowX: "unset" }}>
             <div className="columns is-multiline is-mobile">
               <div className="column is-half pb-0">
                 <p className="subtitle is-6">
@@ -43,7 +40,13 @@ const TripCard = (props) => {
               <div className="column is-half pb-0">
                 <p className="subtitle is-6">
                   <strong>Salida:</strong>{" "}
-                  {new Date(trip.leaving_at).toLocaleString("es-CL")}
+                  {new Date(trip.leaving_at).toLocaleString("es-CL", {
+                    year: "numeric",
+                    day: "numeric",
+                    month: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
                 </p>
               </div>
             </div>

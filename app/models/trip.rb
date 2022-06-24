@@ -58,7 +58,7 @@
 
 class Trip < ApplicationRecord
   belongs_to :user
-  has_many :passenger_requests
+  has_many :passenger_requests, dependent: :destroy
   has_many :users, through: :passenger_requests
   belongs_to :to, class_name: 'Place', foreign_key: 'to_id'
   belongs_to :from, class_name: 'Place', foreign_key: 'from_id'
@@ -75,6 +75,12 @@ class Trip < ApplicationRecord
   validates :car_model, presence: { message: 'Ingresar el modelo del auto' }
   validates :from_id, presence: { message: 'Ingresar la comuna de origen' }
   validates :to_id, presence: { message: 'Ingresar la comuna de destino' }
+
+  def should_show_trip(checked, date)
+    ((!checked && leaving_at.to_date == Date.parse(date)) || (checked && leaving_at.to_date >= Date.parse(date)))
+  end
+
+  private
 
   # retorna si es que la salida de un nuevo viaje es valida o no.
   def check_trip_leaving_at

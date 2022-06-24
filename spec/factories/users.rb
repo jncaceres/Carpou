@@ -6,7 +6,7 @@ FactoryBot.define do
     last_name { 'Some LastName' }
     email { "#{('AAAAA'..'ZZZZZ').to_a.sample}#{rand(100...900)}@yopmail.com" }
     rut { '1111111-1' }
-    phone { '12345678' }
+    phone { '19336168157' }
     birthdate { '2000-02-02' }
     password { 'password' }
     confirmed_at { '2000-02-02' }

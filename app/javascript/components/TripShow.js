@@ -9,6 +9,8 @@ import { DeleteTripButton } from "./DeleteTripButton";
 const TripShow = (props) => {
   const { trip, user, passengerRequests } = props;
 
+  const usersInTripIds = trip.users.map((user) => user.id);
+
   return (
     <div className="container">
       <br />
@@ -46,12 +48,14 @@ const TripShow = (props) => {
             </div>
             <div className="column is-full-mobile is-full-tablet is-full-desktop is-three-quarters-widescreen is-two-thirds-fullhd">
               <TripData trip={trip} />
-              <div className="block">
-                <TripButton
-                  buttonText="Solicitar unirme al viaje"
-                  route={routes.passenger_requests.new({ trip_id: trip.id })}
-                />
-              </div>
+              {!usersInTripIds.includes(user.id) && (
+                <div className="block">
+                  <TripButton
+                    buttonText="Solicitar unirme al viaje"
+                    route={routes.passenger_requests.new({ trip_id: trip.id })}
+                  />
+                </div>
+              )}
             </div>
           </div>
         </>

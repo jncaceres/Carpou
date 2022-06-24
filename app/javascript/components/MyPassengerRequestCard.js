@@ -28,7 +28,13 @@ export const MyPassengerRequestCard = ({
             <div className="column is-half">
               <p className="subtitle is-6">Información de viaje</p>
               <ul>
-                <li>Precio: ${passengerRequest.trip.price}</li>
+                <li>
+                  Precio:{" "}
+                  {`${passengerRequest.trip.price.toLocaleString("es-CL", {
+                    style: "currency",
+                    currency: "CLP",
+                  })}`}
+                </li>
                 <li>
                   Asientos disponibles: {passengerRequest.trip.available_seats}
                 </li>
@@ -84,6 +90,14 @@ export const MyPassengerRequestCard = ({
         {!["Cancelada", "Rechazada"].includes(labelText) && (
           <footer className="content">
             <div className="columns is-multiline is-mobile">
+              <div className="column is-full-mobile">
+                <a
+                  className="button is-success is-fullwidth"
+                  href={routes.trips.show(passengerRequest.trip.id)}
+                >
+                  Ver viaje
+                </a>
+              </div>
               <div className="column is-full-mobile">
                 <a
                   className="button is-danger is-fullwidth"

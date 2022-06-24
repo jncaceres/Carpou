@@ -14,26 +14,29 @@ CSV.foreach(Rails.root.join('lib/comunas.csv'), headers: true) do |row|
 end
 
 puts 'users'
+i = 1
 CSV.foreach(Rails.root.join('lib/users.csv'), headers: true, col_sep: ';') do |row|
   birthday_year = Integer(row[4].split('-')[0])
   birthday_month = Integer(row[4].split('-')[1])
   birthday_day = Integer(row[4].split('-')[2])
+  rut = "#{row[1][0, row[1].length - 2]}-#{row[1][-1]}"
   User.create({
     name: row[0],
     last_name: row[2],
-    rut: row[1],
-    phone: row[7].gsub('-', ''),
+    rut: rut,
+    phone: '19336168157',
     gender: row[13],
     birthdate: DateTime.new(birthday_year,
                             birthday_month,
                             birthday_day
                            ),
     admin: row[11],
-    email: row[9],
+    email: "passenger#{i}@yopmail.com",
     password: row[10],
     confirmed_at: DateTime.now
   }
              )
+  i += 1
 end
 
 puts 'trips'

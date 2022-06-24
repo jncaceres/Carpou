@@ -50,6 +50,12 @@ class User < ApplicationRecord
   has_many :trips, dependent: :destroy
   has_many :passenger_requests, dependent: :destroy
   has_many :trips, through: :passenger_requests
+
+  validates :rut, format: { with: /[0-9]+[-|‐]{1}[0-9kK]{1}/ }
+  validates :phone, format: { with: /(\+?56)?(\s?)(0?9)(\s?)[9876543]\d{7}/ }
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validate :must_be_adult
+
   # Se obtiene la edad del usuario
   #
   # @return [Int] Edad del usuario
@@ -62,5 +68,9 @@ class User < ApplicationRecord
            (birthdate.month >= today.month && birthdate.day > today.day)
 
     out
+  end
+
+  def must_be_adult
+    errors.add(:birthdate, 'No puede ser menor a 18 años') if age < 18
   end
 end

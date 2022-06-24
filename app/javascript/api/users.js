@@ -10,3 +10,8 @@
   export const uSignOut = () => {
     return `/users/sign_out`;
   }
+
+  export const uRegisterPost = () =>{
+    return `/users`
+  }
+

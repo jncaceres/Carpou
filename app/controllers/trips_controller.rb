@@ -58,7 +58,7 @@ class TripsController < ApplicationController
                           else
                             []
                           end
-    @trip = @trip.as_json(include: %i[user to from])
+    @trip = @trip.as_json(include: %i[user to from users])
   end
 
   # GET /trips/new

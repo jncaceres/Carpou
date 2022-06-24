@@ -227,7 +227,6 @@ const TripForm = (props) => {
                 type="text"
                 name="trip[from_address]"
                 placeholder="Dirección de origen"
-      
                 value = {inputValues["trip[from_address]"]}
                 onChange={handleChange}
                 onBlur={checkValidation}
